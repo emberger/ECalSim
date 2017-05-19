@@ -71,7 +71,7 @@ void B4cCalorimeterSD::Initialize(G4HCofThisEvent* hce)
   hce->AddHitsCollection( hcID, fHitsCollection ); 
 
 if(this->GetName()=="GapSD"){
-
+	//create Hits
 	//Calculate number of collection cells, add additional ones for each layer and another one for total accounting
 
   G4int nofEntries=GetInst().GetfNofLayers() * (GetInst().GetnofTilesX() * GetInst().GetnofTilesY()) + GetInst().GetfNofLayers() + 1;
