@@ -34,10 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4a/cmake_install.cmake")
-  include("/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4b/cmake_install.cmake")
   include("/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/cmake_install.cmake")
-  include("/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4d/cmake_install.cmake")
 
 endif()
 

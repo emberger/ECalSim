@@ -53,10 +53,7 @@ CMAKE_BINARY_DIR = /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-
 # Include the progress variables for this target.
 include CMakeFiles/B4.dir/progress.make
 
-CMakeFiles/B4: B4a/exampleB4a
-CMakeFiles/B4: B4b/exampleB4b
 CMakeFiles/B4: B4c/exampleB4c
-CMakeFiles/B4: B4d/exampleB4d
 
 
 B4: CMakeFiles/B4

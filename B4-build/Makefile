@@ -168,32 +168,6 @@ B4/fast:
 .PHONY : B4/fast
 
 #=============================================================================
-# Target rules for targets named exampleB4a
-
-# Build rule for target.
-exampleB4a: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 exampleB4a
-.PHONY : exampleB4a
-
-# fast build rule for target.
-exampleB4a/fast:
-	$(MAKE) -f B4a/CMakeFiles/exampleB4a.dir/build.make B4a/CMakeFiles/exampleB4a.dir/build
-.PHONY : exampleB4a/fast
-
-#=============================================================================
-# Target rules for targets named exampleB4b
-
-# Build rule for target.
-exampleB4b: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 exampleB4b
-.PHONY : exampleB4b
-
-# fast build rule for target.
-exampleB4b/fast:
-	$(MAKE) -f B4b/CMakeFiles/exampleB4b.dir/build.make B4b/CMakeFiles/exampleB4b.dir/build
-.PHONY : exampleB4b/fast
-
-#=============================================================================
 # Target rules for targets named exampleB4c
 
 # Build rule for target.
@@ -205,19 +179,6 @@ exampleB4c: cmake_check_build_system
 exampleB4c/fast:
 	$(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/build
 .PHONY : exampleB4c/fast
-
-#=============================================================================
-# Target rules for targets named exampleB4d
-
-# Build rule for target.
-exampleB4d: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 exampleB4d
-.PHONY : exampleB4d
-
-# fast build rule for target.
-exampleB4d/fast:
-	$(MAKE) -f B4d/CMakeFiles/exampleB4d.dir/build.make B4d/CMakeFiles/exampleB4d.dir/build
-.PHONY : exampleB4d/fast
 
 # Help Target
 help:
@@ -232,10 +193,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... B4"
-	@echo "... exampleB4a"
-	@echo "... exampleB4b"
 	@echo "... exampleB4c"
-	@echo "... exampleB4d"
 .PHONY : help
 
 

@@ -70,26 +70,26 @@ void B4cCalorimeterSD::Initialize(G4HCofThisEvent* hce)
     = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
   hce->AddHitsCollection( hcID, fHitsCollection ); 
 
-if(this->GetName()=="GapSD"){
-	//create Hits
-	//Calculate number of collection cells, add additional ones for each layer and another one for total accounting
-
-  G4int nofEntries=GetInst().GetfNofLayers() * (GetInst().GetnofTilesX() * GetInst().GetnofTilesY()) + GetInst().GetfNofLayers() + 1;
-
-
-  for (G4int i=0; i<nofEntries; i++ ) {
-    fHitsCollection->insert(new B4cCalorHit());
-  }
-}
-
-else{
-	// Create hits
-	  // fNofCells for cells + one more for total sums
-
-	for (G4int i=0; i<fNofCells+1; i++ ) {
-	    fHitsCollection->insert(new B4cCalorHit());
-	}
-}
+//if(this->GetName()=="GapSD"){
+//	//create Hits
+//	//Calculate number of collection cells, add additional ones for each layer and another one for total accounting
+//
+//  G4int nofEntries=GetInst().GetfNofLayers() * (GetInst().GetnofTilesX() * GetInst().GetnofTilesY()) + GetInst().GetfNofLayers() + 1;
+//
+//
+//  for (G4int i=0; i<nofEntries; i++ ) {
+//    fHitsCollection->insert(new B4cCalorHit());
+//  }
+//}
+//
+//else{
+//	// Create hits
+//	  // fNofCells for cells + one more for total sums
+//
+//	for (G4int i=0; i<fNofCells+1; i++ ) {
+//	    fHitsCollection->insert(new B4cCalorHit());
+//	}
+//}
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
