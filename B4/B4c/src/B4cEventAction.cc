@@ -83,7 +83,7 @@ void B4cEventAction::PrintEventStatistics(
 {
   // print event statistics
   G4cout
-     << "   Absorber: total energy: " 
+     << "(Not implemented)   Absorber: total energy: "
      << std::setw(7) << G4BestUnit(absoEdep, "Energy")
      << "       total track length: " 
      << std::setw(7) << G4BestUnit(absoTrackLength, "Length")
@@ -105,19 +105,21 @@ void B4cEventAction::BeginOfEventAction(const G4Event* /*event*/)
 void B4cEventAction::EndOfEventAction(const G4Event* event)
 {  
   // Get hits collections IDs (only once)
-  if ( fAbsHCID == -1 ) {
-    fAbsHCID 
-      = G4SDManager::GetSDMpointer()->GetCollectionID("AbsorberHitsCollection");
+  if ( fGapHCID == -1 ) {
+//    fAbsHCID
+//      = G4SDManager::GetSDMpointer()->GetCollectionID("AbsorberHitsCollection");
     fGapHCID 
       = G4SDManager::GetSDMpointer()->GetCollectionID("GapHitsCollection");
   }
 
   // Get hits collections
-  auto absoHC = GetHitsCollection(fAbsHCID, event);
+//  auto absoHC = GetHitsCollection(fAbsHCID, event);
   auto gapHC = GetHitsCollection(fGapHCID, event);
+//  G4cout<<absoHC->entries()<<G4endl;
+  G4cout<<gapHC->entries()<<G4endl;
 
   // Get hit with total values
-  auto absoHit = (*absoHC)[absoHC->entries()-1];
+//  auto absoHit = (*absoHC)[absoHC->entries()-1];
   auto gapHit = (*gapHC)[gapHC->entries()-1];
  
   // Print per event (modulo n)
@@ -128,7 +130,7 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
     G4cout << "---> End of event: " << eventID << G4endl;     
 
     PrintEventStatistics(
-      absoHit->GetEdep(), absoHit->GetTrackLength(),
+      0, 0,
       gapHit->GetEdep(), gapHit->GetTrackLength());
   }  
   
@@ -139,15 +141,15 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
   auto analysisManager = G4AnalysisManager::Instance();
  
   // fill histograms
-  analysisManager->FillH1(0, absoHit->GetEdep());
+  //analysisManager->FillH1(0, absoHit->GetEdep());
   analysisManager->FillH1(1, gapHit->GetEdep());
-  analysisManager->FillH1(2, absoHit->GetTrackLength());
+ // analysisManager->FillH1(2, absoHit->GetTrackLength());
   analysisManager->FillH1(3, gapHit->GetTrackLength());
   
   // fill ntuple
-  analysisManager->FillNtupleDColumn(0, absoHit->GetEdep());
+  //analysisManager->FillNtupleDColumn(0, absoHit->GetEdep());
   analysisManager->FillNtupleDColumn(1, gapHit->GetEdep());
-  analysisManager->FillNtupleDColumn(2, absoHit->GetTrackLength());
+  //analysisManager->FillNtupleDColumn(2, absoHit->GetTrackLength());
   analysisManager->FillNtupleDColumn(3, gapHit->GetTrackLength());
   analysisManager->AddNtupleRow();  
 }  

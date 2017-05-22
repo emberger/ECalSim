@@ -53,7 +53,9 @@ class B4cCalorimeterSD : public G4VSensitiveDetector
   public:
     B4cCalorimeterSD(const G4String& name, 
                      const G4String& hitsCollectionName, 
-                     G4int nofCells);
+                     G4int nofCells,
+					 G4double tilesPerLayer,
+					 G4double cellsPerStrip);
     virtual ~B4cCalorimeterSD();
   
     // methods from base class
@@ -64,6 +66,8 @@ class B4cCalorimeterSD : public G4VSensitiveDetector
   private:
     B4cCalorHitsCollection* fHitsCollection;
     G4int  fNofCells;
+    G4double StilesPerLayer;
+    G4double ScellsPerStrip;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

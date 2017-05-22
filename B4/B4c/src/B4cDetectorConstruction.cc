@@ -103,6 +103,20 @@ void B4cDetectorConstruction::DefineMaterials()
   auto nistManager = G4NistManager::Instance();
   nistManager->FindOrBuildMaterial("G4_Pb");
   
+  // PEN Material
+  G4double Pdensity ;
+  Pdensity=1.36*g/cm3 ;
+
+
+  G4double ncomponents=3;
+
+
+  G4Material* pen=new G4Material("pen",Pdensity,ncomponents);
+
+  pen -> AddElement(nistManager->FindOrBuildElement(6),14);
+  pen -> AddElement(nistManager->FindOrBuildElement(1),10);
+  pen -> AddElement(nistManager->FindOrBuildElement(8),4);
+
   // Liquid argon material
   G4double a;  // mass of a mole;
   G4double z;  // z=mean number of protons;  
@@ -124,13 +138,13 @@ G4VPhysicalVolume* B4cDetectorConstruction::DefineVolumes()
 {
   // Geometry parameters
 
-  auto worldSizeXY = 1.2 * GetInst().GetcalorSizeXY();
-  auto worldSizeZ  = 1.2 * GetInst().GetcalorThickness();
+ // auto worldSizeXY = 1.2 * GetInst().GetcalorSizeXY();
+  //auto worldSizeZ  = 1.2 * GetInst().GetcalorThickness();
   
   // Get materials
   auto defaultMaterial = G4Material::GetMaterial("Galactic");
   auto absorberMaterial = G4Material::GetMaterial("G4_Pb");
-  auto gapMaterial = G4Material::GetMaterial("liquidArgon");
+  auto gapMaterial = G4Material::GetMaterial("pen");
   
   if ( ! defaultMaterial || ! absorberMaterial || ! gapMaterial ) {
     G4ExceptionDescription msg;
@@ -144,7 +158,7 @@ G4VPhysicalVolume* B4cDetectorConstruction::DefineVolumes()
   //
   auto worldS
     = new G4Box("World",           // its name
-                 worldSizeXY/2, worldSizeXY/2, worldSizeZ/2); // its size
+                 GetInst().GetWorldSizeXY()/2, GetInst().GetWorldSizeXY()/2, GetInst().GetWorldSizeZ()/2); // its size
 
   auto worldLV
     = new G4LogicalVolume(
@@ -284,18 +298,18 @@ G4VPhysicalVolume* B4cDetectorConstruction::DefineVolumes()
 
 void B4cDetectorConstruction::ConstructSDandField()
 {
-  // G4SDManager::GetSDMpointer()->SetVerboseLevel(1);
+   G4SDManager::GetSDMpointer()->SetVerboseLevel(2);
 
   // 
   // Sensitive detectors
   //
-  auto absoSD
-    = new B4cCalorimeterSD("AbsorberSD", "AbsorberHitsCollection", GetInst().GetfNofLayers());
-  G4SDManager::GetSDMpointer()->AddNewDetector(absoSD);
-  SetSensitiveDetector("AbsoLV",absoSD);
+//  auto absoSD
+//    = new B4cCalorimeterSD("AbsorberSD", "AbsorberHitsCollection", GetInst().GetfNofLayers(), GetInst().GettilesPerLayer(), GetInst().GetnofTilesX());
+//  G4SDManager::GetSDMpointer()->AddNewDetector(absoSD);
+//  SetSensitiveDetector("AbsoLV",absoSD);
 
   auto gapSD
-    = new B4cCalorimeterSD("GapSD", "GapHitsCollection", GetInst().GetfNofLayers());
+    = new B4cCalorimeterSD("GapSD", "GapHitsCollection", GetInst().GetfNofLayers(), GetInst().GettilesPerLayer(), GetInst().GetnofTilesX());
   G4SDManager::GetSDMpointer()->AddNewDetector(gapSD);
   SetSensitiveDetector("GapLV",gapSD);
   gapSD -> SetROgeometry(ROGeom);

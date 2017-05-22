@@ -45,11 +45,16 @@ public:
 	void SetcalorSizeXY(G4double cs);
 	G4double GetcalorSizeXY();
 
+	void SetWorldMult(G4double wm);
+
 	G4double GetnofTilesX();
 	G4double GetnofTilesY();
 	G4double GetlayerThickness();
 	G4double GetcalorThickness();
 	G4double GettilesPerLayer();
+	G4double GetWorldSizeXY();
+	G4double GetWorldSizeZ();
+	//G4double GetGunPos();
 
 private:
 
@@ -68,7 +73,11 @@ private:
 	G4double calorSizeXY;
 	G4double calorThickness;
 
-protected:
+	G4double WorldSizeXY;
+	G4double WorldSizeZ;
+	G4double WorldMult;
+
+	G4double GunPos;
 
 	DetParams(){}
 	DetParams(const DetParams& other){}

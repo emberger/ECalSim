@@ -14,6 +14,9 @@
 		calorThickness=fNofLayers*layerThickness;
 
 		tilesPerLayer=nofTilesX*nofTilesY;
+
+		WorldSizeXY=2.0 * calorSizeXY;
+		WorldSizeZ=WorldMult * calorThickness;
 	}
 
 	void DetParams::SetfNofLayers(G4double nla){
@@ -52,6 +55,10 @@
 
 	G4double DetParams::GetcalorSizeXY(){return calorSizeXY;}
 
+	void DetParams::SetWorldMult(G4double wm){
+	WorldMult=wm;
+	}
+
 
 
 	G4double DetParams::GetnofTilesX(){return nofTilesX;}
@@ -59,6 +66,8 @@
 	G4double DetParams::GetlayerThickness(){return layerThickness;}
 	G4double DetParams::GetcalorThickness(){return calorThickness;}
 	G4double DetParams::GettilesPerLayer(){return tilesPerLayer;}
+	G4double DetParams::GetWorldSizeXY(){return WorldSizeXY;}
+	G4double DetParams::GetWorldSizeZ(){return WorldSizeZ;}
 
 
 

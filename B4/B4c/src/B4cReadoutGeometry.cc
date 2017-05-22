@@ -25,7 +25,7 @@ MyRO::MyRO():G4VReadOutGeometry(){}
 MyRO::MyRO(G4String aString):G4VReadOutGeometry(aString){
 
 
-	//this->Build();
+
 }
 
 MyRO::~MyRO(){}
@@ -37,36 +37,36 @@ MyRO::~MyRO(){}
 G4VPhysicalVolume* MyRO::Build(){
 
 	  // Geometry parameters
-		GetInst().SetfNofLayers(10);
-		GetInst().SetcalorSizeXY(100); 	// in mm
+		GetInst().SetfNofLayers(50);
+		GetInst().SetcalorSizeXY(1000); 	// in mm
 		GetInst().SettileLenX(10);		// in mm
 		GetInst().SettileLenY(10);		// in mm
-		GetInst().SetabsoThickness(10);	// in mm
-		GetInst().SetgapThickness(5);		// in mm
-
+		GetInst().SetabsoThickness(1.8);	// in mm
+		GetInst().SetgapThickness(10);		// in mm
+		GetInst().SetWorldMult(5.);
 		GetInst().InitDet();				// dont forget!!!
 
 
-//	G4cout<<"insideBuild"<<G4endl;
 
-	 	 auto ROworldSizeXY = 1.2 * GetInst().GetcalorSizeXY();
-	 	  auto ROworldSizeZ  = 1.2 * GetInst().GetcalorThickness();
 
-	 //	  std::cout<<ROworldSizeXY<<std::endl;
+//	 	 auto ROworldSizeXY = 1.2 * GetInst().GetcalorSizeXY();
+//	 	  auto ROworldSizeZ  = 1.2 * GetInst().GetcalorThickness();
+
+
 
 	 	  // A dummy material is used to fill the volumes of the readout geometry.
 	 	  // ( It will be allowed to set a NULL pointer in volumes of such virtual
 	 	  // division in future, since this material is irrelevant for tracking.)
 	 	  G4Material * dummyMat  = new G4Material("dummyMat", 1., 1.*g/mole, 1.*g/cm3);
 
-	 	  std::cout<<ROworldSizeXY<<ROworldSizeZ<<std::endl;
+
 
 	 	  //Build Readout World
 
 	 	  auto ROWorldS = new G4Box("ROWorld",
-	 			  	  	  	  	  	  ROworldSizeXY/2,
-	 								  ROworldSizeXY/2,
-	 								  ROworldSizeZ/2);
+	 			  	  	  	  	  	  GetInst().GetWorldSizeXY()/2,
+									  GetInst().GetWorldSizeXY()/2,
+									  GetInst().GetWorldSizeZ()/2);
 
 	 	  auto ROWorldLog = new G4LogicalVolume(ROWorldS,
 	 			  	  	  	  	  	  	  	  	  dummyMat,
@@ -189,7 +189,7 @@ G4VPhysicalVolume* MyRO::Build(){
 
 
 	  auto dummy
-	      = new B4cCalorimeterSD("dummy", "dummyCollection", 0);
+	      = new B4cCalorimeterSD("dummy", "dummyCollection", 0,0,0);
 
 	  CellLV->SetSensitiveDetector(dummy);
 

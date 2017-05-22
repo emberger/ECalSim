@@ -43,10 +43,14 @@
 B4cCalorimeterSD::B4cCalorimeterSD(
                             const G4String& name, 
                             const G4String& hitsCollectionName,
-                            G4int nofCells)
+                            G4int nofCells,
+							G4double tilesPerLayer,
+							G4double cellsPerStrip)
  : G4VSensitiveDetector(name),
    fHitsCollection(nullptr),
-   fNofCells(nofCells)
+   fNofCells(nofCells),
+   StilesPerLayer(tilesPerLayer),
+   ScellsPerStrip(cellsPerStrip)
 {
   collectionName.insert(hitsCollectionName);
 }
@@ -70,19 +74,19 @@ void B4cCalorimeterSD::Initialize(G4HCofThisEvent* hce)
     = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
   hce->AddHitsCollection( hcID, fHitsCollection ); 
 
-//if(this->GetName()=="GapSD"){
-//	//create Hits
-//	//Calculate number of collection cells, add additional ones for each layer and another one for total accounting
-//
-//  G4int nofEntries=GetInst().GetfNofLayers() * (GetInst().GetnofTilesX() * GetInst().GetnofTilesY()) + GetInst().GetfNofLayers() + 1;
-//
-//
-//  for (G4int i=0; i<nofEntries; i++ ) {
-//    fHitsCollection->insert(new B4cCalorHit());
-//  }
-//}
-//
-//else{
+if(this->GetName()=="GapSD"){
+	//create Hits
+	//Calculate number of collection cells, add additional ones for each layer and another one for total accounting
+
+  G4int nofEnt=GetInst().GetfNofLayers() * (GetInst().GetnofTilesX() * GetInst().GetnofTilesY()) + GetInst().GetfNofLayers() + 1;
+
+
+  for (G4int i=0; i<nofEnt; i++ ) {
+    fHitsCollection->insert(new B4cCalorHit());
+  }
+}
+
+//if (this->GetName()="AbsorberSD"){
 //	// Create hits
 //	  // fNofCells for cells + one more for total sums
 //
@@ -90,6 +94,9 @@ void B4cCalorimeterSD::Initialize(G4HCofThisEvent* hce)
 //	    fHitsCollection->insert(new B4cCalorHit());
 //	}
 //}
+//G4int no=hce->GetNumberOfCollections();
+//if(no==2)
+std::cout<<hce->GetHC(0)->GetSize()<<std::endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -97,18 +104,6 @@ void B4cCalorimeterSD::Initialize(G4HCofThisEvent* hce)
 G4bool B4cCalorimeterSD::ProcessHits(G4Step* step, 
                                      G4TouchableHistory* ROhist)
 {  
-
-
-//	if(this->GetName()=="GapSD"){
-//		auto tmp=this->GetROgeometry();
-//		auto tmp2= tmp ->CheckROVolume(step, ROhist);
-//
-//		G4cout<<this->GetROgeometry()-> GetROWorld()<<"\t"<<this->GetROgeometry()-> GetName()<<"\t"<< this->isActive() <<G4endl;
-//		G4cout <<tmp2<<G4endl;
-//		G4cout<<ROhist<<G4endl;
-//	}
-
-
   // energy deposit
   auto edep = step->GetTotalEnergyDeposit();
   
@@ -128,47 +123,35 @@ G4bool B4cCalorimeterSD::ProcessHits(G4Step* step,
 //  G4cout<<layerNumber<<G4endl;
 
 
-  if(this->GetName()=="GapSD"){
-//
-//  //Get copynumbers to specify cell
-//
+
+  //  //Get copynumbers to specify cell
+  //
   auto Cell=ROhist->GetReplicaNumber();
-  auto CellV=ROhist-> GetVolume()->GetName();
+  //  auto CellV=ROhist-> GetVolume()->GetName();
 
   auto Strip=ROhist->GetReplicaNumber(1);
-  auto StripV=ROhist-> GetVolume(1)->GetName();
-
-  auto Gap=ROhist->GetReplicaNumber(2);
-  auto GapV=ROhist-> GetVolume(2)->GetName();
+  //  auto StripV=ROhist-> GetVolume(1)->GetName();
 
   auto Layer=ROhist->GetReplicaNumber(3);
-  auto LayerV=ROhist-> GetVolume(3)->GetName();
+  //  auto LayerV=ROhist-> GetVolume(3)->GetName();
 
 
   //Calculate CellID
 
-  G4int ROCellID=Layer*GetInt.GettilesPerLayer()
+  G4int ROCellID=(Layer)*StilesPerLayer+(Strip)*ScellsPerStrip+Cell;
+  G4int ROLayerID=fNofCells*StilesPerLayer+Layer;
 
-
-//  auto stageFour=ROhist->GetReplicaNumber(4);
-//  auto volumeFour=ROhist-> GetVolume(4)->GetName();
-//
-//  auto stageFive=ROhist->GetReplicaNumber(5);
-//  auto volumeFive=ROhist-> GetVolume(5)->GetName();
-
-  //G4cout<<stageNull<<volumeNull<<"\t"<<stageOne<<volumeOne<<"\t"<<stageTwo<<volumeTwo<<"\t"<<stageThree<<volumeThree<<"\t"<</*stageFour<<stageFive<<*/G4endl;
-
- }
-
-
-  // Get hit accounting data for this cell
-  auto hit = (*fHitsCollection)[layerNumber];
+  auto hit=(*fHitsCollection)[ROCellID];
   if ( ! hit ) {
-    G4ExceptionDescription msg;
-    msg << "Cannot access hit " << layerNumber; 
-    G4Exception("B4cCalorimeterSD::ProcessHits()",
-      "MyCode0004", FatalException, msg);
-  }         
+	  G4ExceptionDescription msg;
+	  msg << "Cannot access Gap hit " << layerNumber;
+	  G4Exception("B4cCalorimeterSD::ProcessHits()",
+			  "MyCode0004", FatalException, msg);
+  }
+
+
+auto hitLayer=(*fHitsCollection)[ROLayerID];
+
 
   // Get hit for total accounting
   auto hitTotal 
@@ -176,6 +159,7 @@ G4bool B4cCalorimeterSD::ProcessHits(G4Step* step,
   
   // Add values
   hit->Add(edep, stepLength);
+  hitLayer->Add(edep,stepLength);
   hitTotal->Add(edep, stepLength); 
       
   return true;
@@ -185,7 +169,7 @@ G4bool B4cCalorimeterSD::ProcessHits(G4Step* step,
 
 void B4cCalorimeterSD::EndOfEvent(G4HCofThisEvent*)
 {
-  if ( verboseLevel>1 ) { 
+  if ( verboseLevel>1 ) {
      auto nofHits = fHitsCollection->entries();
      G4cout
        << G4endl 
