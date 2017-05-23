@@ -39,6 +39,10 @@
 #include "G4HCofThisEvent.hh"
 #include "G4UnitsTable.hh"
 
+#include "TH1.h"
+#include "TNtuple.h"
+#include "TTree.h"
+
 #include "Randomize.hh"
 #include <iomanip>
 
@@ -121,7 +125,30 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
   // Get hit with total values
 //  auto absoHit = (*absoHC)[absoHC->entries()-1];
   auto gapHit = (*gapHC)[gapHC->entries()-1];
- 
+
+ // G4int nIsTouch=0;
+ // G4int nNoTouch=0;
+  G4double eGes=0;
+  for (int i=0; i<gapHC->entries();i++){
+
+	  auto hit=(*gapHC)[i];
+	  if (hit -> GetTouch()==true && hit->GetCellInfo()==true){
+		  G4cout<<"X:"<<hit->GetX()<<"Y:"<<hit->GetY()<<"Z:"<<hit->GetZ()<<"E:"<<hit->GetEdep()<<"Touched?:"<<hit->GetTouch()<<G4endl;
+		  eGes+=hit->GetEdep();
+		  //nIsTouch++;
+		  }
+	  //if (hit -> GetTouch()==false){nNoTouch++;}
+  }
+  G4cout<<eGes<<G4endl;
+  //G4cout<<"Touched hits:"<<nIsTouch<<"\t Not Touched Hits:"<<nNoTouch<<G4endl;
+
+  for(int i=gapHC->entries()-51;i<gapHC->entries();i++){
+	  auto hit= (*gapHC)[i];
+	 G4cout<<"Z:"<<hit->GetZ()<<"\t"<<hit->GetTouch()<<hit->GetEdep()<<G4endl;
+  }
+
+
+
   // Print per event (modulo n)
   //
   auto eventID = event->GetEventID();
@@ -151,7 +178,26 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
   analysisManager->FillNtupleDColumn(1, gapHit->GetEdep());
   //analysisManager->FillNtupleDColumn(2, absoHit->GetTrackLength());
   analysisManager->FillNtupleDColumn(3, gapHit->GetTrackLength());
-  analysisManager->AddNtupleRow();  
+  analysisManager->AddNtupleRow();
+
+
+   //Create ROOT Ntuple
+  TNtuple * n=new TNtuple("n", "n", "x:y:z:E");
+
+  for(int i=0; i<gapHC->entries(); i++){
+	  auto hit=(*gapHC)[i];
+	  if (hit->GetTouch()==true && hit->GetCellInfo()==true){
+		  n->Fill(hit->GetX(),hit->GetY(),hit->GetZ(),hit->GetEdep());
+	  }
+
+  }
+
+  n->Draw("x:y:z:E");
+  n->Show();
+  n->Print("all");
+
+
+
 }  
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

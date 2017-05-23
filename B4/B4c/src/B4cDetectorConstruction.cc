@@ -117,12 +117,12 @@ void B4cDetectorConstruction::DefineMaterials()
   pen -> AddElement(nistManager->FindOrBuildElement(1),10);
   pen -> AddElement(nistManager->FindOrBuildElement(8),4);
 
-  // Liquid argon material
+//  // Liquid argon material
   G4double a;  // mass of a mole;
-  G4double z;  // z=mean number of protons;  
-  G4double density; 
-  new G4Material("liquidArgon", z=18., a= 39.95*g/mole, density= 1.390*g/cm3);
-         // The argon by NIST Manager is a gas with a different density
+  G4double z;  // z=mean number of protons;
+  G4double density;
+//  new G4Material("liquidArgon", z=18., a= 39.95*g/mole, density= 1.390*g/cm3);
+//         // The argon by NIST Manager is a gas with a different density
 
   // Vacuum
   new G4Material("Galactic", z=1., a=1.01*g/mole,density= universe_mean_density,

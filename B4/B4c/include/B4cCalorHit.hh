@@ -64,13 +64,32 @@ class B4cCalorHit : public G4VHit
     // methods to handle data
     void Add(G4double de, G4double dl);
 
+    void SetTouch();
+    void SetCellInfo();
+    void SetX(G4int x);
+    void SetY(G4int y);
+    void SetZ(G4int z);
+
     // get methods
     G4double GetEdep() const;
     G4double GetTrackLength() const;
-      
+    G4bool GetTouch();
+    G4bool GetCellInfo();
+
+    G4int GetX();
+    G4int GetY();
+    G4int GetZ();
+
+
   private:
     G4double fEdep;        ///< Energy deposit in the sensitive volume
     G4double fTrackLength; ///< Track length in the  sensitive volume
+    G4bool fTouched;
+    G4bool fCellInfo;
+    G4int Xpos;
+    G4int Ypos;
+    G4int Zpos;
+
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -111,6 +130,30 @@ inline G4double B4cCalorHit::GetEdep() const {
 inline G4double B4cCalorHit::GetTrackLength() const { 
   return fTrackLength; 
 }
+
+inline G4bool B4cCalorHit::GetTouch(){
+	return fTouched;
+}
+
+inline void B4cCalorHit::SetTouch(){
+	fTouched=true;
+}
+
+inline void B4cCalorHit::SetCellInfo(){
+	fCellInfo=true;
+}
+
+inline G4bool B4cCalorHit::GetCellInfo(){
+	return fCellInfo;
+}
+
+inline void B4cCalorHit::SetX(G4int x){Xpos=x;}
+inline void B4cCalorHit::SetY(G4int y){Ypos=y;}
+inline void B4cCalorHit::SetZ(G4int z){Zpos=z;}
+
+inline G4int B4cCalorHit::GetX(){return Xpos;}
+inline G4int B4cCalorHit::GetY(){return Ypos;}
+inline G4int B4cCalorHit::GetZ(){return Zpos;}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

@@ -44,7 +44,9 @@ G4ThreadLocal G4Allocator<B4cCalorHit>* B4cCalorHitAllocator = 0;
 B4cCalorHit::B4cCalorHit()
  : G4VHit(),
    fEdep(0.),
-   fTrackLength(0.)
+   fTrackLength(0.),
+fTouched(false),
+fCellInfo(false)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -88,5 +90,9 @@ void B4cCalorHit::Print()
      << std::setw(7) << G4BestUnit( fTrackLength,"Length")
      << G4endl;
 }
+
+
+
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

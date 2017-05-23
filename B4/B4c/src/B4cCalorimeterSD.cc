@@ -159,8 +159,21 @@ auto hitLayer=(*fHitsCollection)[ROLayerID];
   
   // Add values
   hit->Add(edep, stepLength);
+  hit->SetX(Cell);
+  hit->SetY(Strip);
+  hit->SetZ(Layer);
+  if(hit->GetTouch()==false){
+	  hit->SetTouch();
+  	  hit->SetCellInfo();
+  }
   hitLayer->Add(edep,stepLength);
-  hitTotal->Add(edep, stepLength); 
+  hitLayer->SetZ(Layer);
+  if(hitLayer->GetTouch()==false)
+  	  hitLayer->SetTouch();
+
+  hitTotal->Add(edep, stepLength);
+  if(hitTotal->GetTouch()==false)
+  	  hitTotal->SetTouch();
       
   return true;
 }
