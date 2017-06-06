@@ -39,8 +39,8 @@ G4VPhysicalVolume* MyRO::Build(){
 	  // Geometry parameters
 		GetInst().SetfNofLayers(50);
 		GetInst().SetcalorSizeXY(1000); 	// in mm
-		GetInst().SettileLenX(5);		// in mm
-		GetInst().SettileLenY(5);		// in mm
+		GetInst().SettileLenX(5);			// in mm
+		GetInst().SettileLenY(5);			// in mm
 		GetInst().SetabsoThickness(1.8);	// in mm
 		GetInst().SetgapThickness(10);		// in mm
 		GetInst().SetWorldMult(5.);

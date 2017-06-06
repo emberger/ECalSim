@@ -36,6 +36,16 @@
 #include "B4cCalorHit.hh"
 
 #include "globals.hh"
+#include "B4ROOTEvent.hh"
+#include "TH1.h"
+#include "TNtuple.h"
+#include "TTree.h"
+#include "TObject.h"
+#include "TClonesArray.h"
+#include "TRefArray.h"
+#include "TRef.h"
+#include "TMath.h"
+#include "TFile.h"
 
 /// Event action class
 ///
@@ -49,6 +59,8 @@ public:
   B4cEventAction();
   virtual ~B4cEventAction();
 
+  B4ROOTEvent* CalEvent();
+  void SetStepHit(G4double x, G4double y, G4double z, G4double eDep);
   virtual void  BeginOfEventAction(const G4Event* event);
   virtual void    EndOfEventAction(const G4Event* event);
     
@@ -62,6 +74,9 @@ private:
   // data members                   
   G4int  fAbsHCID;
   G4int  fGapHCID;
+  TTree * eventTree;
+  TFile * rootFile=0;
+  B4ROOTEvent * calEvent;
 };
                      
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

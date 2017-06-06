@@ -223,6 +223,33 @@ src/B4PrimaryGeneratorAction.cc.s:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.s
 .PHONY : src/B4PrimaryGeneratorAction.cc.s
 
+src/B4ROOTEvent.o: src/B4ROOTEvent.cc.o
+
+.PHONY : src/B4ROOTEvent.o
+
+# target to build an object file
+src/B4ROOTEvent.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o
+.PHONY : src/B4ROOTEvent.cc.o
+
+src/B4ROOTEvent.i: src/B4ROOTEvent.cc.i
+
+.PHONY : src/B4ROOTEvent.i
+
+# target to preprocess a source file
+src/B4ROOTEvent.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.i
+.PHONY : src/B4ROOTEvent.cc.i
+
+src/B4ROOTEvent.s: src/B4ROOTEvent.cc.s
+
+.PHONY : src/B4ROOTEvent.s
+
+# target to generate assembly for a file
+src/B4ROOTEvent.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.s
+.PHONY : src/B4ROOTEvent.cc.s
+
 src/B4RunAction.o: src/B4RunAction.cc.o
 
 .PHONY : src/B4RunAction.o
@@ -466,6 +493,33 @@ src/B4cReadoutGeometry.cc.s:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.s
 .PHONY : src/B4cReadoutGeometry.cc.s
 
+src/RootClasses_dict.o: src/RootClasses_dict.cc.o
+
+.PHONY : src/RootClasses_dict.o
+
+# target to build an object file
+src/RootClasses_dict.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o
+.PHONY : src/RootClasses_dict.cc.o
+
+src/RootClasses_dict.i: src/RootClasses_dict.cc.i
+
+.PHONY : src/RootClasses_dict.i
+
+# target to preprocess a source file
+src/RootClasses_dict.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.i
+.PHONY : src/RootClasses_dict.cc.i
+
+src/RootClasses_dict.s: src/RootClasses_dict.cc.s
+
+.PHONY : src/RootClasses_dict.s
+
+# target to generate assembly for a file
+src/RootClasses_dict.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.s
+.PHONY : src/RootClasses_dict.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -485,6 +539,9 @@ help:
 	@echo "... src/B4PrimaryGeneratorAction.o"
 	@echo "... src/B4PrimaryGeneratorAction.i"
 	@echo "... src/B4PrimaryGeneratorAction.s"
+	@echo "... src/B4ROOTEvent.o"
+	@echo "... src/B4ROOTEvent.i"
+	@echo "... src/B4ROOTEvent.s"
 	@echo "... src/B4RunAction.o"
 	@echo "... src/B4RunAction.i"
 	@echo "... src/B4RunAction.s"
@@ -512,6 +569,9 @@ help:
 	@echo "... src/B4cReadoutGeometry.o"
 	@echo "... src/B4cReadoutGeometry.i"
 	@echo "... src/B4cReadoutGeometry.s"
+	@echo "... src/RootClasses_dict.o"
+	@echo "... src/RootClasses_dict.i"
+	@echo "... src/RootClasses_dict.s"
 .PHONY : help
 
 

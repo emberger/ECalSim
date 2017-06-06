@@ -157,24 +157,31 @@ auto hitLayer=(*fHitsCollection)[ROLayerID];
   auto hitTotal 
     = (*fHitsCollection)[fHitsCollection->entries()-1];
   
-  // Add values
+  // Add values to cell information
   hit->Add(edep, stepLength);
-  hit->SetX(Cell);
-  hit->SetY(Strip);
-  hit->SetZ(Layer);
   if(hit->GetTouch()==false){
 	  hit->SetTouch();
   	  hit->SetCellInfo();
+  	  hit->SetX(Cell);
+  	  hit->SetY(Strip);
+  	  hit->SetZ(Layer);
   }
+  //Add energydeposition for layered accounting
   hitLayer->Add(edep,stepLength);
-  hitLayer->SetZ(Layer);
-  if(hitLayer->GetTouch()==false)
+  if(hitLayer->GetTouch()==false){
   	  hitLayer->SetTouch();
-
+  	  hitLayer->SetZ(Layer);
+  	  hitLayer->SetX(0.);	//Set X and Y to zero to prevent random coordinates
+  	  hitLayer->SetY(0.);	//
+  }
+  //Add energydepositon for total accounting
   hitTotal->Add(edep, stepLength);
-  if(hitTotal->GetTouch()==false)
+  if(hitTotal->GetTouch()==false){
+	  hitLayer->SetZ(0.);	//
+	  hitLayer->SetX(0.);	//Set X, Y, Z to zero to prevent random coordinates
+	  hitLayer->SetY(0.);	//
   	  hitTotal->SetTouch();
-      
+  }
   return true;
 }
 

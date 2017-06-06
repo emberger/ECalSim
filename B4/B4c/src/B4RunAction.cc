@@ -83,6 +83,8 @@ B4RunAction::~B4RunAction()
   delete G4AnalysisManager::Instance();  
 }
 
+
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void B4RunAction::BeginOfRunAction(const G4Run* /*run*/)

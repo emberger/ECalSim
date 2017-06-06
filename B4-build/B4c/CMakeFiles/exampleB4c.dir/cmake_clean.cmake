@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/exampleB4c.dir/exampleB4c.cc.o"
   "CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.o"
+  "CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o"
   "CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o"
   "CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o"
   "CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o"
@@ -10,6 +11,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o"
   "CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o"
   "CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o"
+  "CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o"
   "exampleB4c.pdb"
   "exampleB4c"
 )

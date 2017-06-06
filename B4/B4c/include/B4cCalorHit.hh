@@ -83,12 +83,14 @@ class B4cCalorHit : public G4VHit
 
   private:
     G4double fEdep;        ///< Energy deposit in the sensitive volume
-    G4double fTrackLength; ///< Track length in the  sensitive volume
-    G4bool fTouched;
-    G4bool fCellInfo;
-    G4int Xpos;
-    G4int Ypos;
-    G4int Zpos;
+    G4double fTrackLength;///< Track length in the  sensitive volume
+
+    G4bool fTouched;	// Bool to select interesting cells
+    G4bool fCellInfo;	// Bool to distinguish cell info from layered info and total accounting
+
+    G4int Xpos;	//
+    G4int Ypos;	// Coordinates to identify Calorimeter Cell
+    G4int Zpos;	//
 
 };
 

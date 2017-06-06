@@ -105,9 +105,33 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.o.provides: B4c/CM
 B4c/CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.o.provides.build: B4c/CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.o
 
 
+B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
+B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4ROOTEvent.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o"
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4ROOTEvent.cc
+
+B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.i"
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4ROOTEvent.cc > CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.i
+
+B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.s"
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4ROOTEvent.cc -o CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.s
+
+B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o.requires:
+
+.PHONY : B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o.requires
+
+B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o.provides: B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o.requires
+	$(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o.provides.build
+.PHONY : B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o.provides
+
+B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o.provides.build: B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o
+
+
 B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
 B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4RunAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4RunAction.cc
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.i: cmake_force
@@ -131,7 +155,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o.provides.build: B4c/CMakeFile
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
 B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cActionInitialization.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cActionInitialization.cc
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.i: cmake_force
@@ -155,7 +179,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o.provides.build: B
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
 B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cCalorHit.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cCalorHit.cc
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.i: cmake_force
@@ -179,7 +203,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o.provides.build: B4c/CMakeFile
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorimeterSD.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
 B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorimeterSD.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cCalorimeterSD.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorimeterSD.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorimeterSD.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/B4cCalorimeterSD.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cCalorimeterSD.cc
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorimeterSD.cc.i: cmake_force
@@ -203,7 +227,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorimeterSD.cc.o.provides.build: B4c/CMak
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cDetParams.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
 B4c/CMakeFiles/exampleB4c.dir/src/B4cDetParams.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDetParams.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cDetParams.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cDetParams.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/B4cDetParams.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDetParams.cc
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cDetParams.cc.i: cmake_force
@@ -227,7 +251,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cDetParams.cc.o.provides.build: B4c/CMakeFil
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
 B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDetectorConstruction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDetectorConstruction.cc
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.i: cmake_force
@@ -251,7 +275,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.o.provides.build: B
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
 B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDummySD.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDummySD.cc
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.i: cmake_force
@@ -275,7 +299,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o.provides.build: B4c/CMakeFiles
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
 B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cEventAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cEventAction.cc
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.i: cmake_force
@@ -299,7 +323,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o.provides.build: B4c/CMakeF
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
 B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cReadoutGeometry.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cReadoutGeometry.cc
 
 B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.i: cmake_force
@@ -321,10 +345,35 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o.provides: B4c/CMakeFil
 B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o.provides.build: B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o
 
 
+B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o: B4c/CMakeFiles/exampleB4c.dir/flags.make
+B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o"
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.cc
+
+B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.i"
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.cc > CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.i
+
+B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.s"
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.cc -o CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.s
+
+B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o.requires:
+
+.PHONY : B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o.requires
+
+B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o.provides: B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o.requires
+	$(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o.provides.build
+.PHONY : B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o.provides
+
+B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o.provides.build: B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o
+
+
 # Object files for target exampleB4c
 exampleB4c_OBJECTS = \
 "CMakeFiles/exampleB4c.dir/exampleB4c.cc.o" \
 "CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.o" \
+"CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o" \
 "CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o" \
 "CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o" \
 "CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o" \
@@ -333,13 +382,15 @@ exampleB4c_OBJECTS = \
 "CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.o" \
 "CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o" \
 "CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o" \
-"CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o"
+"CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o" \
+"CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o"
 
 # External object files for target exampleB4c
 exampleB4c_EXTERNAL_OBJECTS =
 
 B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/exampleB4c.cc.o
 B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.o
+B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o
 B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o
 B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o
 B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o
@@ -349,6 +400,7 @@ B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.o
 B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o
 B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o
 B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o
+B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o
 B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/build.make
 B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4Tree.so
 B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4GMocren.so
@@ -395,7 +447,7 @@ B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG
 B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4global.so
 B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4clhep.so
 B4c/exampleB4c: B4c/CMakeFiles/exampleB4c.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable exampleB4c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable exampleB4c"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/exampleB4c.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -405,6 +457,7 @@ B4c/CMakeFiles/exampleB4c.dir/build: B4c/exampleB4c
 
 B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/exampleB4c.cc.o.requires
 B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.o.requires
+B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o.requires
 B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o.requires
 B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o.requires
 B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o.requires
@@ -414,6 +467,7 @@ B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/src/B4cDet
 B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o.requires
 B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o.requires
 B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o.requires
+B4c/CMakeFiles/exampleB4c.dir/requires: B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o.requires
 
 .PHONY : B4c/CMakeFiles/exampleB4c.dir/requires
 
