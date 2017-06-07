@@ -33,7 +33,15 @@
 
 #include "G4UserRunAction.hh"
 #include "globals.hh"
-
+#include "TH1.h"
+#include "TNtuple.h"
+#include "TTree.h"
+#include "TObject.h"
+#include "TClonesArray.h"
+#include "TRefArray.h"
+#include "TRef.h"
+#include "TMath.h"
+#include "TFile.h"
 
 class G4Run;
 
@@ -67,6 +75,7 @@ class B4RunAction : public G4UserRunAction
 
   private:
 
+    TFile* rootFile=0;
 
 };
 

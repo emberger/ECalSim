@@ -66,15 +66,15 @@ B4ROOTEvent* B4cEventAction::CalEvent()
 {
 	// check that the rootFile is open, if not, open it! Also create the tree and everything else with it
 
-	if (!rootFile)
+	if (!eventTree)
 	{
 		std::cout << "Attempting to open ROOT file " << "ECalEventTree" << std::endl;
-		rootFile = new TFile("ECalEventTree.root", "RECREATE");
+		//rootFile = new TFile("ECalEventTree.root", "RECREATE");
 		eventTree = new TTree("eventTree", "B4ROOT Event Tree");
 		calEvent = new B4ROOTEvent();
 		eventTree->Branch("EventBranch", "B4ROOTEvent", &calEvent);
 		eventTree->SetAutoSave(1.99e9);
-		rootFile->SetCompressionLevel(9);
+//		rootFile->SetCompressionLevel(9);
 	}
 	return calEvent;
 }
@@ -223,14 +223,14 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
 
 	}
 
-	if (rootFile)
-		{
+	//if (rootFile)
+	//	{
 			eventTree->Fill();
 			calEvent->Clear();
-			//eventTree->Fill();
-		}
+
+	//	}
 	//if(event->GetEventID()==G4RunManager::GetCurrentRun()->GetNumberOfEventToBeProcessed()){
-	rootFile->Write();
+	//rootFile->Write();
 	//rootFile->Close();
 	std::cout<<"Event done"<<std::endl;
 	//}

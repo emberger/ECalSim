@@ -36,6 +36,8 @@
 #include "G4UnitsTable.hh"
 #include "G4SystemOfUnits.hh"
 
+
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 B4RunAction::B4RunAction()
@@ -89,6 +91,8 @@ B4RunAction::~B4RunAction()
 
 void B4RunAction::BeginOfRunAction(const G4Run* /*run*/)
 { 
+
+	rootFile = new TFile("ECalEventTree.root", "RECREATE");
   //inform the runManager to save random number seed
   //G4RunManager::GetRunManager()->SetRandomNumberStore(true);
   
@@ -142,6 +146,9 @@ void B4RunAction::EndOfRunAction(const G4Run* /*run*/)
   //
   analysisManager->Write();
   analysisManager->CloseFile();
+
+  rootFile->Write();
+  rootFile->Close();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

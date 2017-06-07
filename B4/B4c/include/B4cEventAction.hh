@@ -74,7 +74,7 @@ private:
   // data members                   
   G4int  fAbsHCID;
   G4int  fGapHCID;
-  TTree * eventTree;
+  TTree * eventTree=0;
   TFile * rootFile=0;
   B4ROOTEvent * calEvent;
 };
