@@ -169,6 +169,48 @@ exampleB4c/fast:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/build
 .PHONY : exampleB4c/fast
 
+# Convenience name for target.
+B4c/CMakeFiles/RootLib.dir/rule:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f CMakeFiles/Makefile2 B4c/CMakeFiles/RootLib.dir/rule
+.PHONY : B4c/CMakeFiles/RootLib.dir/rule
+
+# Convenience name for target.
+RootLib: B4c/CMakeFiles/RootLib.dir/rule
+
+.PHONY : RootLib
+
+# fast build rule for target.
+RootLib/fast:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/build
+.PHONY : RootLib/fast
+
+RootClasses_dict.o: RootClasses_dict.cxx.o
+
+.PHONY : RootClasses_dict.o
+
+# target to build an object file
+RootClasses_dict.cxx.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/RootClasses_dict.cxx.o
+.PHONY : RootClasses_dict.cxx.o
+
+RootClasses_dict.i: RootClasses_dict.cxx.i
+
+.PHONY : RootClasses_dict.i
+
+# target to preprocess a source file
+RootClasses_dict.cxx.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/RootClasses_dict.cxx.i
+.PHONY : RootClasses_dict.cxx.i
+
+RootClasses_dict.s: RootClasses_dict.cxx.s
+
+.PHONY : RootClasses_dict.s
+
+# target to generate assembly for a file
+RootClasses_dict.cxx.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/RootClasses_dict.cxx.s
+.PHONY : RootClasses_dict.cxx.s
+
 exampleB4c.o: exampleB4c.cc.o
 
 .PHONY : exampleB4c.o
@@ -230,6 +272,7 @@ src/B4ROOTEvent.o: src/B4ROOTEvent.cc.o
 # target to build an object file
 src/B4ROOTEvent.cc.o:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/src/B4ROOTEvent.cc.o
 .PHONY : src/B4ROOTEvent.cc.o
 
 src/B4ROOTEvent.i: src/B4ROOTEvent.cc.i
@@ -239,6 +282,7 @@ src/B4ROOTEvent.i: src/B4ROOTEvent.cc.i
 # target to preprocess a source file
 src/B4ROOTEvent.cc.i:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/src/B4ROOTEvent.cc.i
 .PHONY : src/B4ROOTEvent.cc.i
 
 src/B4ROOTEvent.s: src/B4ROOTEvent.cc.s
@@ -248,6 +292,7 @@ src/B4ROOTEvent.s: src/B4ROOTEvent.cc.s
 # target to generate assembly for a file
 src/B4ROOTEvent.cc.s:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/src/B4ROOTEvent.cc.s
 .PHONY : src/B4ROOTEvent.cc.s
 
 src/B4RunAction.o: src/B4RunAction.cc.o
@@ -533,6 +578,10 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... exampleB4c"
+	@echo "... RootLib"
+	@echo "... RootClasses_dict.o"
+	@echo "... RootClasses_dict.i"
+	@echo "... RootClasses_dict.s"
 	@echo "... exampleB4c.o"
 	@echo "... exampleB4c.i"
 	@echo "... exampleB4c.s"

@@ -72,4 +72,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/B4.dir/DependInfo.cmake"
   "B4c/CMakeFiles/exampleB4c.dir/DependInfo.cmake"
+  "B4c/CMakeFiles/RootLib.dir/DependInfo.cmake"
   )

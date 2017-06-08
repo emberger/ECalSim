@@ -27,7 +27,7 @@ B4ROOTEvent::~B4ROOTEvent() {
 }
 
 void B4ROOTEvent::Clear(const Option_t*) {
-	std::cout << "Clearing TPi0Event..." << std::endl;
+	std::cout << "Clearing Event..." << std::endl;
 	m_EventNo = 0;
 	m_GapEnergy = 0;
 	m_NHits=0;

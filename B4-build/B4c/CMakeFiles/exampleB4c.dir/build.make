@@ -416,6 +416,7 @@ B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG
 B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4readout.so
 B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4physicslists.so
 B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4parmodels.so
+B4c/exampleB4c: B4c/libRootLib.so
 B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4FR.so
 B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4vis_management.so
 B4c/exampleB4c: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4modeling.so

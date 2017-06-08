@@ -1,12 +1,9 @@
 # $Id: CMakeLists.txt 100923 2016-11-03 10:50:34Z gcosmo $
 
 #----------------------------------------------------------------------------
-# Setup the project
-#
+# SetupB4ROOTEvent#
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 project(B4c)
-
-
 
 
 
@@ -41,10 +38,10 @@ set(CMAKE_MODULE_PATH $ENV{ROOTSYS}/etc/cmake)
 find_package(ROOT REQUIRED)
 include_directories(${ROOT_INCLUDE_DIR})
 
-#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-#ROOT_GENERATE_DICTIONARY(RootClasses_dict TGemCalEvent.hh LINKDEF LinkDef.h)
-
-
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+root_generate_dictionary(RootClasses_dict B4ROOTEvent.hh LINKDEF LinkDef.h)
+add_library(RootLib SHARED src/B4ROOTEvent.cc RootClasses_dict)
 
 #include(${ROOT_USE_FILE})
 
@@ -82,7 +79,7 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #
 add_executable(exampleB4c exampleB4c.cc ${sources} ${headers})
 #target_link_libraries(exampleB4c ${Geant4_LIBRARIES})
-target_link_libraries(exampleB4c ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
+target_link_libraries(exampleB4c ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} RootLib)
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
 # build B4c. This is so that we can run the executable directly because it
@@ -109,4 +106,6 @@ endforeach()
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
+install(FILES inc/B4ROOTEvent.hh DESTINATION include)
+install(TARGETS RootLib LIBRARY DESTINATION lib)
 install(TARGETS exampleB4c DESTINATION bin)

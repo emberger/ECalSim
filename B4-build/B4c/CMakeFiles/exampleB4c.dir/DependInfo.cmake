@@ -43,8 +43,9 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/opt/root/5.34/include"
-  "/remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4"
   "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include"
+  "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c"
+  "/remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4"
   "/usr/include/qt5"
   "/usr/include/qt5/QtWidgets"
   "/usr/include/qt5/QtGui"
@@ -56,6 +57,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/CMakeFiles/RootLib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
