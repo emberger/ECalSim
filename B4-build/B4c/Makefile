@@ -538,6 +538,33 @@ src/B4cReadoutGeometry.cc.s:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.s
 .PHONY : src/B4cReadoutGeometry.cc.s
 
+src/ROOTAnalysis.o: src/ROOTAnalysis.cc.o
+
+.PHONY : src/ROOTAnalysis.o
+
+# target to build an object file
+src/ROOTAnalysis.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o
+.PHONY : src/ROOTAnalysis.cc.o
+
+src/ROOTAnalysis.i: src/ROOTAnalysis.cc.i
+
+.PHONY : src/ROOTAnalysis.i
+
+# target to preprocess a source file
+src/ROOTAnalysis.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.i
+.PHONY : src/ROOTAnalysis.cc.i
+
+src/ROOTAnalysis.s: src/ROOTAnalysis.cc.s
+
+.PHONY : src/ROOTAnalysis.s
+
+# target to generate assembly for a file
+src/ROOTAnalysis.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.s
+.PHONY : src/ROOTAnalysis.cc.s
+
 src/RootClasses_dict.o: src/RootClasses_dict.cc.o
 
 .PHONY : src/RootClasses_dict.o
@@ -618,6 +645,9 @@ help:
 	@echo "... src/B4cReadoutGeometry.o"
 	@echo "... src/B4cReadoutGeometry.i"
 	@echo "... src/B4cReadoutGeometry.s"
+	@echo "... src/ROOTAnalysis.o"
+	@echo "... src/ROOTAnalysis.i"
+	@echo "... src/ROOTAnalysis.s"
 	@echo "... src/RootClasses_dict.o"
 	@echo "... src/RootClasses_dict.i"
 	@echo "... src/RootClasses_dict.s"

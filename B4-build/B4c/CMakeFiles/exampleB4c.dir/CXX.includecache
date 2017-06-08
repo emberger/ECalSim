@@ -160,6 +160,14 @@ G4VReadOutGeometry.hh
 globals.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/globals.hh
 
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/ROOTAnalysis.hh
+B4ROOTEvent.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4ROOTEvent.hh
+TTree.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TTree.h
+TChain.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TChain.h
+
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/RootClasses_dict.hh
 stddef.h
 -
@@ -375,6 +383,10 @@ iostream
 -
 B4cDetParams.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDetParams.hh
+
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/ROOTAnalysis.cc
+ROOTAnalysis.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/ROOTAnalysis.hh
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.cc
 RConfig.h
@@ -597,6 +609,10 @@ TObject.h
 /opt/root/5.34/include/TObject.h
 typeinfo
 -
+
+/opt/root/5.34/include/TChain.h
+TTree.h
+/opt/root/5.34/include/TTree.h
 
 /opt/root/5.34/include/TClass.h
 TDictionary.h

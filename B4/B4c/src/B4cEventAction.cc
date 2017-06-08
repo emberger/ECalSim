@@ -24,7 +24,7 @@
 // ********************************************************************
 //
 // $Id: B4cEventAction.cc 100946 2016-11-03 11:28:08Z gcosmo $
-// 
+//
 /// \file B4cEventAction.cc
 /// \brief Implementation of the B4cEventAction class
 
@@ -96,7 +96,7 @@ void B4cEventAction::SetStepHit(G4double x, G4double y, G4double z, G4double eDe
 
 
 
-B4cCalorHitsCollection* 
+B4cCalorHitsCollection*
 B4cEventAction::GetHitsCollection(G4int hcID,
 		const G4Event* event) const
 {
@@ -112,7 +112,7 @@ B4cEventAction::GetHitsCollection(G4int hcID,
 	}
 
 	return hitsCollection;
-}    
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -142,7 +142,7 @@ void B4cEventAction::BeginOfEventAction(const G4Event* /*event*/)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void B4cEventAction::EndOfEventAction(const G4Event* event)
-{  
+{
 	// Get hits collections IDs (only once)
 	if ( fGapHCID == -1 ) {
 		fGapHCID
@@ -233,8 +233,9 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
 	//rootFile->Write();
 	//rootFile->Close();
 	std::cout<<"Event done"<<std::endl;
+  std::cout<<"Tree has now "<<eventTree->GetEntries()<<" entries"<<std::endl;
 	//}
 
-}  
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
