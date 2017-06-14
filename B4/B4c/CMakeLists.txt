@@ -78,8 +78,11 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 # Add the executable, and link it to the Geant4 libraries
 #
 add_executable(exampleB4c exampleB4c.cc ${sources} ${headers})
+add_executable(Analysis AnalysisMain.cc ${sources} ${headers})
 #target_link_libraries(exampleB4c ${Geant4_LIBRARIES})
 target_link_libraries(exampleB4c ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} RootLib)
+target_link_libraries(Analysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} RootLib)
+
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
 # build B4c. This is so that we can run the executable directly because it
@@ -88,6 +91,8 @@ target_link_libraries(exampleB4c ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} RootLib)
 set(EXAMPLEB4C_SCRIPTS
   exampleB4c.out
   exampleB4.in
+  Analysis.in
+  Analysis.out
   gui.mac
   init_vis.mac
   run1.mac
@@ -109,3 +114,4 @@ endforeach()
 install(FILES inc/B4ROOTEvent.hh DESTINATION include)
 install(TARGETS RootLib LIBRARY DESTINATION lib)
 install(TARGETS exampleB4c DESTINATION bin)
+install(TARGETS Analysis DESTINATION bin)

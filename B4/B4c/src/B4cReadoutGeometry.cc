@@ -36,7 +36,7 @@ MyRO::~MyRO(){}
 
 G4VPhysicalVolume* MyRO::Build(){
 
-	  // Geometry parameters
+	  // Geometry parameters also for Detector Construction
 		GetInst().SetfNofLayers(50);
 		GetInst().SetcalorSizeXY(1000); 	// in mm
 		GetInst().SettileLenX(5);			// in mm

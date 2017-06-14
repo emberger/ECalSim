@@ -41,7 +41,7 @@
 
 
 #include <string>
-
+#include "B4cDetParams.hh"
 #include "Randomize.hh"
 #include <iomanip>
 
@@ -72,6 +72,11 @@ B4ROOTEvent* B4cEventAction::CalEvent()
 		//rootFile = new TFile("ECalEventTree.root", "RECREATE");
 		eventTree = new TTree("eventTree", "B4ROOT Event Tree");
 		calEvent = new B4ROOTEvent();
+    calEvent->SetTilesX(GetInst().GetnofTilesX());
+    std::cout<<"TilesX: "<<GetInst().GetnofTilesX()<<std::endl;
+    std::cout<<"TilesX: "<<calEvent->TilesX()<<std::endl;
+    calEvent->SetTilesY(GetInst().GetnofTilesY());
+    calEvent->SetLayers(GetInst().GetfNofLayers());
 		eventTree->Branch("EventBranch", "B4ROOTEvent", &calEvent);
 		eventTree->SetAutoSave(1.99e9);
 //		rootFile->SetCompressionLevel(9);
@@ -234,6 +239,7 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
 	//rootFile->Close();
 	std::cout<<"Event done"<<std::endl;
   std::cout<<"Tree has now "<<eventTree->GetEntries()<<" entries"<<std::endl;
+  //eventTree->Print();
 	//}
 
 }

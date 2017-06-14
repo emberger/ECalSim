@@ -43,12 +43,17 @@ public:
 };
 
 
+
+
 class B4ROOTEvent : public TObject {
 
 private:
 	Int_t m_EventNo;
 	Double_t m_GapEnergy;
 	Int_t m_NHits;
+	Int_t m_TilesX;
+	Int_t m_TilesY;
+	Int_t m_Layers;
 	TClonesArray *m_Hits; //->
 	static TClonesArray *aHits;
 
@@ -63,6 +68,9 @@ public:
 	//Getters
 	Int_t EventNo() const {return m_EventNo;}
 	Double_t GapEnergy() const {return m_GapEnergy;}
+	Int_t TilesX(){return m_TilesX;}
+	Int_t TilesY(){return m_TilesY;}
+	Int_t Layers(){return m_Layers;}
 
 	Int_t NHits() const {return m_NHits;}
 	TClonesArray* Hits() const {return m_Hits;}
@@ -71,6 +79,9 @@ public:
 	//Setters
 	void SetEventNo(Int_t evN) {m_EventNo = evN;}
 	void SetGapEnergy(Double_t en) {m_GapEnergy = en;}
+	void SetTilesX(Int_t nx){m_TilesX=nx;}
+	void SetTilesY(Int_t ny){m_TilesY=ny;}
+	void SetLayers(Int_t nl){m_Layers=nl;}
 
 
 	B4ROOTHit* AddHit(B4ROOTHit& cand);
@@ -78,4 +89,3 @@ public:
 	ClassDef(B4ROOTEvent,1)
 };
 #endif
-

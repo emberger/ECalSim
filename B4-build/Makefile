@@ -168,6 +168,19 @@ B4/fast:
 .PHONY : B4/fast
 
 #=============================================================================
+# Target rules for targets named Analysis
+
+# Build rule for target.
+Analysis: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Analysis
+.PHONY : Analysis
+
+# fast build rule for target.
+Analysis/fast:
+	$(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/build
+.PHONY : Analysis/fast
+
+#=============================================================================
 # Target rules for targets named exampleB4c
 
 # Build rule for target.
@@ -206,6 +219,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... B4"
+	@echo "... Analysis"
 	@echo "... exampleB4c"
 	@echo "... RootLib"
 .PHONY : help

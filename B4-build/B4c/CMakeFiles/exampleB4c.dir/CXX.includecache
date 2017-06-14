@@ -167,6 +167,18 @@ TTree.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TTree.h
 TChain.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TChain.h
+TCanvas.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TCanvas.h
+TGraph.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TGraph.h
+TH1I.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TH1I.h
+TH2I.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TH2I.h
+TColor.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TColor.h
+TH3D.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TH3D.h
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/RootClasses_dict.hh
 stddef.h
@@ -343,6 +355,8 @@ G4UnitsTable.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/G4UnitsTable.hh
 string
 -
+B4cDetParams.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDetParams.hh
 Randomize.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/Randomize.hh
 iomanip
@@ -414,6 +428,8 @@ TFileMergeInfo.h
 new
 -
 
+/opt/root/5.34/include/Buttons.h
+
 /opt/root/5.34/include/DllImport.h
 
 /opt/root/5.34/include/ESTLType.h
@@ -473,6 +489,10 @@ G__ci_fproto.h
 /opt/root/5.34/include/G__ci_fproto.h
 
 /opt/root/5.34/include/G__ci_fproto.h
+
+/opt/root/5.34/include/GuiTypes.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
 
 /opt/root/5.34/include/Property.h
 
@@ -562,11 +582,25 @@ TArray.h
 TArray.h
 /opt/root/5.34/include/TArray.h
 
+/opt/root/5.34/include/TAtt3D.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
+
 /opt/root/5.34/include/TAttAxis.h
 Rtypes.h
 /opt/root/5.34/include/Rtypes.h
 Riosfwd.h
 /opt/root/5.34/include/Riosfwd.h
+
+/opt/root/5.34/include/TAttBBox2D.h
+GuiTypes.h
+/opt/root/5.34/include/GuiTypes.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
+
+/opt/root/5.34/include/TAttCanvas.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
 
 /opt/root/5.34/include/TAttFill.h
 Rtypes.h
@@ -581,6 +615,16 @@ Riosfwd.h
 /opt/root/5.34/include/Riosfwd.h
 
 /opt/root/5.34/include/TAttMarker.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
+Riosfwd.h
+/opt/root/5.34/include/Riosfwd.h
+
+/opt/root/5.34/include/TAttPad.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
+
+/opt/root/5.34/include/TAttText.h
 Rtypes.h
 /opt/root/5.34/include/Rtypes.h
 Riosfwd.h
@@ -609,6 +653,22 @@ TObject.h
 /opt/root/5.34/include/TObject.h
 typeinfo
 -
+
+/opt/root/5.34/include/TCanvas.h
+TPad.h
+/opt/root/5.34/include/TPad.h
+TAttCanvas.h
+/opt/root/5.34/include/TAttCanvas.h
+TVirtualX.h
+/opt/root/5.34/include/TVirtualX.h
+TString.h
+/opt/root/5.34/include/TString.h
+TCanvasImp.h
+/opt/root/5.34/include/TCanvasImp.h
+
+/opt/root/5.34/include/TCanvasImp.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
 
 /opt/root/5.34/include/TChain.h
 TTree.h
@@ -643,6 +703,12 @@ TIterator.h
 /opt/root/5.34/include/TIterator.h
 TString.h
 /opt/root/5.34/include/TString.h
+
+/opt/root/5.34/include/TColor.h
+TNamed.h
+/opt/root/5.34/include/TNamed.h
+TArrayI.h
+/opt/root/5.34/include/TArrayI.h
 
 /opt/root/5.34/include/TDataType.h
 TDictionary.h
@@ -706,6 +772,22 @@ vector
 TSchemaHelper.h
 /opt/root/5.34/include/TSchemaHelper.h
 
+/opt/root/5.34/include/TGraph.h
+TNamed.h
+/opt/root/5.34/include/TNamed.h
+TAttLine.h
+/opt/root/5.34/include/TAttLine.h
+TAttFill.h
+/opt/root/5.34/include/TAttFill.h
+TAttMarker.h
+/opt/root/5.34/include/TAttMarker.h
+TVectorFfwd.h
+/opt/root/5.34/include/TVectorFfwd.h
+TVectorDfwd.h
+/opt/root/5.34/include/TVectorDfwd.h
+TFitResultPtr.h
+/opt/root/5.34/include/TFitResultPtr.h
+
 /opt/root/5.34/include/TH1.h
 TAxis.h
 /opt/root/5.34/include/TAxis.h
@@ -735,6 +817,32 @@ float.h
 -
 TFitResultPtr.h
 /opt/root/5.34/include/TFitResultPtr.h
+
+/opt/root/5.34/include/TH1I.h
+TH1.h
+/opt/root/5.34/include/TH1.h
+
+/opt/root/5.34/include/TH2.h
+TH1.h
+/opt/root/5.34/include/TH1.h
+TMatrixFBasefwd.h
+/opt/root/5.34/include/TMatrixFBasefwd.h
+TMatrixDBasefwd.h
+/opt/root/5.34/include/TMatrixDBasefwd.h
+
+/opt/root/5.34/include/TH2I.h
+TH2.h
+/opt/root/5.34/include/TH2.h
+
+/opt/root/5.34/include/TH3.h
+TH1.h
+/opt/root/5.34/include/TH1.h
+TAtt3D.h
+/opt/root/5.34/include/TAtt3D.h
+
+/opt/root/5.34/include/TH3D.h
+TH3.h
+/opt/root/5.34/include/TH3.h
 
 /opt/root/5.34/include/THashTable.h
 TCollection.h
@@ -798,6 +906,14 @@ cstdlib
 cmath
 -
 
+/opt/root/5.34/include/TMatrixDBasefwd.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
+
+/opt/root/5.34/include/TMatrixFBasefwd.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
+
 /opt/root/5.34/include/TMemberInspector.h
 Rtypes.h
 /opt/root/5.34/include/Rtypes.h
@@ -838,11 +954,31 @@ stdarg.h
 TBuffer.h
 /opt/root/5.34/include/TBuffer.h
 
+/opt/root/5.34/include/TPad.h
+TVirtualPad.h
+/opt/root/5.34/include/TVirtualPad.h
+TAttBBox2D.h
+/opt/root/5.34/include/TAttBBox2D.h
+GuiTypes.h
+/opt/root/5.34/include/GuiTypes.h
+
 /opt/root/5.34/include/TProcessID.h
 TNamed.h
 /opt/root/5.34/include/TNamed.h
 TObjArray.h
 /opt/root/5.34/include/TObjArray.h
+
+/opt/root/5.34/include/TQClass.h
+TQObject.h
+/opt/root/5.34/include/TQObject.h
+TClass.h
+/opt/root/5.34/include/TClass.h
+
+/opt/root/5.34/include/TQObject.h
+TString.h
+/opt/root/5.34/include/TString.h
+TQClass.h
+/opt/root/5.34/include/TQClass.h
 
 /opt/root/5.34/include/TRef.h
 TObject.h
@@ -936,9 +1072,39 @@ RVersion.h
 TObject.h
 /opt/root/5.34/include/TObject.h
 
+/opt/root/5.34/include/TVirtualPad.h
+TAttPad.h
+/opt/root/5.34/include/TAttPad.h
+TVirtualX.h
+/opt/root/5.34/include/TVirtualX.h
+TString.h
+/opt/root/5.34/include/TString.h
+Buttons.h
+/opt/root/5.34/include/Buttons.h
+TQObject.h
+/opt/root/5.34/include/TQObject.h
+
 /opt/root/5.34/include/TVirtualTreePlayer.h
 TObject.h
 /opt/root/5.34/include/TObject.h
+
+/opt/root/5.34/include/TVirtualX.h
+utility
+-
+vector
+-
+TNamed.h
+/opt/root/5.34/include/TNamed.h
+TAttLine.h
+/opt/root/5.34/include/TAttLine.h
+TAttFill.h
+/opt/root/5.34/include/TAttFill.h
+TAttText.h
+/opt/root/5.34/include/TAttText.h
+TAttMarker.h
+/opt/root/5.34/include/TAttMarker.h
+GuiTypes.h
+/opt/root/5.34/include/GuiTypes.h
 
 /opt/root/5.34/include/ThreadLocalStorage.h
 RConfig.h

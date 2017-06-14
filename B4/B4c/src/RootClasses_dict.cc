@@ -14,7 +14,7 @@
 
 // Since CINT ignores the std namespace, we need to do so in this file.
 namespace std {} using namespace std;
-#include "RootClasses_dict.h"
+#include "RootClasses_dict.hh"
 
 #include "TClass.h"
 #include "TBuffer.h"

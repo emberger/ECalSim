@@ -1,0 +1,23 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/Analysis.dir/AnalysisMain.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4PrimaryGeneratorAction.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4ROOTEvent.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4RunAction.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4cActionInitialization.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4cCalorHit.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4cCalorimeterSD.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4cDetParams.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4cDetectorConstruction.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4cDummySD.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4cEventAction.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.o"
+  "CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o"
+  "CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o"
+  "Analysis.pdb"
+  "Analysis"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/Analysis.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
