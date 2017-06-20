@@ -10,7 +10,7 @@ TROOTAnalysis::TROOTAnalysis(TChain* ch){
 TROOTAnalysis::~TROOTAnalysis(){}
 
 
-void TROOTAnalysis::plotEvent(Int_t pev){
+void TROOTAnalysis::plotEvent(Int_t pev){     //plot 3DHisto of selected event
 
   B4ROOTEvent * event = new B4ROOTEvent();
   //std::cout << "Event" << '\n';
@@ -24,7 +24,7 @@ void TROOTAnalysis::plotEvent(Int_t pev){
     return;
   }
 
-  TH3D * h = new TH3D("X","ECalEvent",100,50,150,100,50,150,50,0,50);
+  TH3D * h = new TH3D("ECalEvent","ECalEvent",200,0,200,200,0,200,50,0,50);
 
   //for(Int_t i=0;i<nent; i++){
 
@@ -52,34 +52,115 @@ void TROOTAnalysis::plotEvent(Int_t pev){
   h->Draw("BOX");
 }
 
-void TROOTAnalysis::GetCOG(Int_t maxlayer, Int_t cev){
+void TROOTAnalysis::GetCOG(Int_t maxlayer, Int_t cev){            //Get vector of (X,Y) tuples containing layerwise center of gravity
   B4ROOTEvent * Cevent = new B4ROOTEvent();
   EcalTree->SetBranchAddress("EventBranch", &Cevent);
+  //Int_t nent = EcalTree->GetEntries();
+
+  // EcalTree->GetEntry(cev);
+  //
+  // Int_t cnh=Cevent->NHits();
+  // Double_t maxDep=0;
+  //
+  //
+  //
+  // std::tuple<Int_t,Int_t,Double_t, Int_t> seedTiles;
+  //
+  // for(Int_t i=0;i<maxlayer;i++){
+  //
+  //   for(Int_t j=0;j<cnh;j++){
+  //     if(Cevent->Hit(j)->Z()==i){
+  //       std::cout<<"X: "<<Cevent->Hit(j)->X()<<" Y: "<<Cevent->Hit(j)->Y()<<" Z: "<<Cevent->Hit(j)->Z()<<" HitNr: "<<j<<std::endl;
+  //       if(Cevent->Hit(j)->EnergyDeposit()>maxDep){
+  //         maxDep=Cevent->Hit(j)->EnergyDeposit();
+  //         seedTiles=std::make_tuple(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(),maxDep, j);
+  //
+  //       }
+  //     }
+  //   }
+  //   std::cout<<"X "<<std::get<0>(seedTiles)<<" Y: "<<std::get<1>(seedTiles)<<" E: "<<std::get<2>(seedTiles)<<" J: "<<std::get<3>(seedTiles)<<std::endl;
+  //   maxDep=0;
+  //   seedTiles=std::make_tuple(0,0,0,0);
+
+  TH2D * h1 = new TH2D("h1", "h1", 200,0,200,200,0,200);
+  TH2D * h2 = new TH2D("h2", "h2", 200,0,200,200,0,200);
 
   EcalTree->GetEntry(cev);
-
-  Int_t cnh=Cevent->NHits();
-  Double_t maxDep=0;
-  std::pair<Int_t,Int_t> maxTile;
+  Int_t cnh = Cevent->NHits();
+  Double_t integSum=0;
+  Double_t integral;
 
   for(Int_t i=0;i<maxlayer;i++){
+    for(Int_t j =0;j<cnh;j++){
+      if(Cevent->Hit(j)->Z()==i)
+        h1->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(), Cevent->Hit(j)->EnergyDeposit());
 
-    for(Int_t j=0;j<cnh;j++){
-      if(Cevent->Hit(j)->Z()==i){
-        if(Cevent->Hit(j)->EnergyDeposit()>maxDep){
-          maxDep=Cevent->Hit(j)->EnergyDeposit();
-          maxTile=std::make_pair(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y());
+    }
+    integral=h1->Integral();
+    Int_t maxbin=h1->GetMaximumBin();
+    Double_t maxdep=h1->GetBinContent(maxbin);
+    Int_t binx, biny, binz;
+    h1->GetBinXYZ(maxbin, binx, biny, binz);
 
+
+    std::cout<<"Maximum at "<<maxdep<<"MeV"<<" : "<<binx<<":"<<biny<<std::endl;
+    std::cout<<"Integral: "<<integral<<std::endl;
+
+
+    //Do spiral for clustering only if energy in Layer
+    if(integral>0){
+      Int_t xdir=1;       // intergers for direction
+      Int_t ydir=0;
+      Int_t buf;
+      Int_t stepstodo=1;      // how many steps to go before rotation
+      Int_t stepsctr=0;   // number of steps since last rotation
+
+      Int_t currX=binx;  // starting the spiral on the histogram maximum
+      Int_t currY=biny;
+
+      Double_t esum=0;
+      Double_t curre=0;
+      esum+=maxdep;
+      h2->SetBinContent(currX, currY, maxdep);
+      h1->SetBinContent(binx, biny, 0);
+      Int_t ctr=0;
+
+      while(esum<integral*0.8 && currX<binx+20){          //do spiral until desired energyfraction is reached
+          currX+=xdir;
+          currY+=ydir;
+          std::cout<<"X: "<<currX<<"Y: "<<currY<<std::endl;
+          curre=h1->GetBinContent(currX, currY);
+          std::cout<<"curre"<<curre<<std::endl;
+          h2->SetBinContent(currX, currY, curre);
+          h1->SetBinContent(currX, currY, 0);
+          esum+=curre;
+          std::cout<<(esum/integral)*100<<" % of layer energy"<<std::endl;
+          stepsctr++;
+          if(stepsctr==stepstodo){
+            stepsctr=0;
+            buf=xdir;         //rotate 90 deg
+            xdir= -ydir;
+            ydir=buf;
+
+            if(ydir==0){      //incremant steps at every iteration along x
+              stepstodo++;
+            }
+          }
+          ctr++;
         }
       }
-    }
-    std::cout<<maxDep<<" : "<<maxTile.first<<maxTile.second<<std::endl;
-    maxDep=0;
-    maxTile=std::make_pair(0,0);
+
+
+
+
+
+    integSum += integral;
+    h1->Reset();
+    h2->Reset();
+
+
+    std::cout<<integSum<<std::endl;
+
+
   }
-
-
-
-
-
 }

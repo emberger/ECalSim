@@ -171,10 +171,10 @@ TCanvas.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TCanvas.h
 TGraph.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TGraph.h
-TH1I.h
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TH1I.h
-TH2I.h
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TH2I.h
+TH1D.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TH1D.h
+TH2D.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TH2D.h
 TColor.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TColor.h
 TH3D.h
@@ -818,7 +818,7 @@ float.h
 TFitResultPtr.h
 /opt/root/5.34/include/TFitResultPtr.h
 
-/opt/root/5.34/include/TH1I.h
+/opt/root/5.34/include/TH1D.h
 TH1.h
 /opt/root/5.34/include/TH1.h
 
@@ -830,7 +830,7 @@ TMatrixFBasefwd.h
 TMatrixDBasefwd.h
 /opt/root/5.34/include/TMatrixDBasefwd.h
 
-/opt/root/5.34/include/TH2I.h
+/opt/root/5.34/include/TH2D.h
 TH2.h
 /opt/root/5.34/include/TH2.h
 

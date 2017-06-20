@@ -2604,9 +2604,9 @@ B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TFit
 B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TGenericClassInfo.h
 B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TGraph.h
 B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TH1.h
-B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TH1I.h
+B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TH1D.h
 B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TH2.h
-B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TH2I.h
+B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TH2D.h
 B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TH3.h
 B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TH3D.h
 B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o: /opt/root/5.34/include/TIterator.h

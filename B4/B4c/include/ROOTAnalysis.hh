@@ -3,8 +3,8 @@
 #include "TChain.h"
 #include "TCanvas.h"
 #include "TGraph.h"
-#include "TH1I.h"
-#include "TH2I.h"
+#include "TH1D.h"
+#include "TH2D.h"
 #include "TColor.h"
 #include "TH3D.h"
 

@@ -24,7 +24,7 @@
 // ********************************************************************
 //
 // $Id: B4PrimaryGeneratorAction.cc 100946 2016-11-03 11:28:08Z gcosmo $
-// 
+//
 /// \file B4PrimaryGeneratorAction.cc
 /// \brief Implementation of the B4PrimaryGeneratorAction class
 
@@ -52,10 +52,11 @@ B4PrimaryGeneratorAction::B4PrimaryGeneratorAction()
 
   // default particle kinematic
   //
-  auto particleDefinition 
+  auto particleDefinition
     = G4ParticleTable::GetParticleTable()->FindParticle("gamma");
   fParticleGun->SetParticleDefinition(particleDefinition);
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
+
+
   fParticleGun->SetParticleEnergy(2.*GeV);
 }
 
@@ -73,7 +74,7 @@ void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   // This function is called at the begining of event
 
   // In order to avoid dependence of PrimaryGeneratorAction
-  // on DetectorConstruction class we get world volume 
+  // on DetectorConstruction class we get world volume
   // from G4LogicalVolumeStore
   //
   G4double worldZHalfLength = 0.;
@@ -86,7 +87,7 @@ void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   }
 
   if ( worldBox ) {
-    worldZHalfLength = worldBox->GetZHalfLength();  
+    worldZHalfLength = worldBox->GetZHalfLength();
   }
   else  {
     G4ExceptionDescription msg;
@@ -95,14 +96,19 @@ void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     msg << "The gun will be place in the center.";
     G4Exception("B4PrimaryGeneratorAction::GeneratePrimaries()",
       "MyCode0002", JustWarning, msg);
-  } 
-  
+  }
+  G4double PartMomx = 0;//G4UniformRand()*0.23-0.115;
+  G4double PartMomy = 0;//G4UniformRand()*0.23-0.115;
+
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(PartMomx,PartMomy,1.));
+
   // Set gun position
+  // G4double PartPosx = G4UniformRand()*30.0;
+  // G4double PartPosy = G4UniformRand()*30.0;
   fParticleGun
-    ->SetParticlePosition(G4ThreeVector(0., 0., -worldZHalfLength));
+    ->SetParticlePosition(G4ThreeVector(0. , 0. , -worldZHalfLength));
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
