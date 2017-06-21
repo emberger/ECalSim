@@ -169,6 +169,10 @@ TColor.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TColor.h
 TH3D.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TH3D.h
+TStyle.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TStyle.h
+TGraph2D.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TGraph2D.h
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/RootClasses_dict.hh
 stddef.h
@@ -790,6 +794,20 @@ TVectorDfwd.h
 TFitResultPtr.h
 /opt/root/5.34/include/TFitResultPtr.h
 
+/opt/root/5.34/include/TGraph2D.h
+TNamed.h
+/opt/root/5.34/include/TNamed.h
+TVirtualHistPainter.h
+/opt/root/5.34/include/TVirtualHistPainter.h
+TAttLine.h
+/opt/root/5.34/include/TAttLine.h
+TAttFill.h
+/opt/root/5.34/include/TAttFill.h
+TAttMarker.h
+/opt/root/5.34/include/TAttMarker.h
+TFitResultPtr.h
+/opt/root/5.34/include/TFitResultPtr.h
+
 /opt/root/5.34/include/TH1.h
 TAxis.h
 /opt/root/5.34/include/TAxis.h
@@ -1083,6 +1101,10 @@ Rtypes.h
 /opt/root/5.34/include/TVersionCheck.h
 RVersion.h
 /opt/root/5.34/include/RVersion.h
+
+/opt/root/5.34/include/TVirtualHistPainter.h
+TObject.h
+/opt/root/5.34/include/TObject.h
 
 /opt/root/5.34/include/TVirtualIsAProxy.h
 

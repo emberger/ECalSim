@@ -7,6 +7,8 @@
 #include "TH2D.h"
 #include "TColor.h"
 #include "TH3D.h"
+#include "TStyle.h"
+#include "TGraph2D.h"
 
 class TROOTAnalysis{
 

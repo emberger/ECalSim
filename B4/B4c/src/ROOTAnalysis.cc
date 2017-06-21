@@ -84,11 +84,14 @@ void TROOTAnalysis::GetCOG(Int_t maxlayer, Int_t cev){            //Get vector o
 
   TH2D * h1 = new TH2D("h1", "h1", 200,0,200,200,0,200);
   TH2D * h2 = new TH2D("h2", "h2", 200,0,200,200,0,200);
-
+  TH3D * h3 = new TH3D("h3", "h3",200,0,200,200,0,200,50,0,50);
+  TGraph2D * g = new TGraph2D("Fit");
   EcalTree->GetEntry(cev);
   Int_t cnh = Cevent->NHits();
   Double_t integSum=0;
   Double_t integral;
+
+  std::vector<std::tuple<Int_t, Int_t, Int_t>> cog;
 
   for(Int_t i=0;i<maxlayer;i++){
     for(Int_t j =0;j<cnh;j++){
@@ -128,13 +131,13 @@ void TROOTAnalysis::GetCOG(Int_t maxlayer, Int_t cev){            //Get vector o
       while(esum<integral*0.8 && currX<binx+20){          //do spiral until desired energyfraction is reached
           currX+=xdir;
           currY+=ydir;
-          std::cout<<"X: "<<currX<<"Y: "<<currY<<std::endl;
+          //std::cout<<"X: "<<currX<<"Y: "<<currY<<std::endl;
           curre=h1->GetBinContent(currX, currY);
-          std::cout<<"curre"<<curre<<std::endl;
+          //std::cout<<"curre"<<curre<<std::endl;
           h2->SetBinContent(currX, currY, curre);
           h1->SetBinContent(currX, currY, 0);
           esum+=curre;
-          std::cout<<(esum/integral)*100<<" % of layer energy"<<std::endl;
+          //std::cout<<(esum/integral)*100<<" % of layer energy"<<std::endl;
           stepsctr++;
           if(stepsctr==stepstodo){
             stepsctr=0;
@@ -149,8 +152,14 @@ void TROOTAnalysis::GetCOG(Int_t maxlayer, Int_t cev){            //Get vector o
           ctr++;
         }
       }
-
-
+      Int_t cgx=h2->GetMean(1);
+      Int_t cgy=h2->GetMean(2);
+      Int_t cgz=i;
+      //std::cout<<"Center of gravity: "<<cgx<<" "<<cgy<<" "<<cgz<<std::endl;
+      //h3->Fill(cgx, cgy, cgz);
+      g->SetPoint(i, cgx, cgy, cgz);
+      auto cg=std::make_tuple(cgx,cgy,cgz);
+      cog.push_back(cg);
 
 
 
@@ -163,4 +172,10 @@ void TROOTAnalysis::GetCOG(Int_t maxlayer, Int_t cev){            //Get vector o
 
 
   }
+  // h3->GetXaxis()->SetTitle("X");
+  // h3->GetYaxis()->SetTitle("Y");
+  // h3->GetZaxis()->SetTitle("Z");
+  // h3->Draw("");
+  g->Draw("");
+
 }

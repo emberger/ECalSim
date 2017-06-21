@@ -97,8 +97,8 @@ void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4Exception("B4PrimaryGeneratorAction::GeneratePrimaries()",
       "MyCode0002", JustWarning, msg);
   }
-  G4double PartMomx = 0;//G4UniformRand()*0.23-0.115;
-  G4double PartMomy = 0;//G4UniformRand()*0.23-0.115;
+  G4double PartMomx = G4UniformRand()*0.23-0.115;
+  G4double PartMomy = G4UniformRand()*0.23-0.115;
 
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(PartMomx,PartMomy,1.));
 
