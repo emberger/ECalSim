@@ -45,7 +45,7 @@ std::cout << "Created Analysis Class" << std::endl;
 Int_t evt= std::stoi(argv[1]);
 Int_t ml= std::stoi(argv[2]);
 
-A.plotEvent(evt-1);
+//A.plotEvent(evt-1);
 A.GetCOG(ml, evt-1);
 app->Run();
 
