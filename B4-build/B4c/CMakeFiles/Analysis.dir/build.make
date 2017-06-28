@@ -345,9 +345,33 @@ B4c/CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.o.provides: B4c/CMakeFiles
 B4c/CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.o.provides.build: B4c/CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.o
 
 
+B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o: B4c/CMakeFiles/Analysis.dir/flags.make
+B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/Minimizer.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o"
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Analysis.dir/src/Minimizer.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/Minimizer.cc
+
+B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Analysis.dir/src/Minimizer.cc.i"
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/Minimizer.cc > CMakeFiles/Analysis.dir/src/Minimizer.cc.i
+
+B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Analysis.dir/src/Minimizer.cc.s"
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/Minimizer.cc -o CMakeFiles/Analysis.dir/src/Minimizer.cc.s
+
+B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o.requires:
+
+.PHONY : B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o.requires
+
+B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o.provides: B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o.requires
+	$(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o.provides.build
+.PHONY : B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o.provides
+
+B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o.provides.build: B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o
+
+
 B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o: B4c/CMakeFiles/Analysis.dir/flags.make
 B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/ROOTAnalysis.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/ROOTAnalysis.cc
 
 B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.i: cmake_force
@@ -371,7 +395,7 @@ B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o.provides.build: B4c/CMakeFiles
 
 B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o: B4c/CMakeFiles/Analysis.dir/flags.make
 B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o: /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o -c /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.cc
 
 B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.i: cmake_force
@@ -407,6 +431,7 @@ Analysis_OBJECTS = \
 "CMakeFiles/Analysis.dir/src/B4cDummySD.cc.o" \
 "CMakeFiles/Analysis.dir/src/B4cEventAction.cc.o" \
 "CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.o" \
+"CMakeFiles/Analysis.dir/src/Minimizer.cc.o" \
 "CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o" \
 "CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o"
 
@@ -425,6 +450,7 @@ B4c/Analysis: B4c/CMakeFiles/Analysis.dir/src/B4cDetectorConstruction.cc.o
 B4c/Analysis: B4c/CMakeFiles/Analysis.dir/src/B4cDummySD.cc.o
 B4c/Analysis: B4c/CMakeFiles/Analysis.dir/src/B4cEventAction.cc.o
 B4c/Analysis: B4c/CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.o
+B4c/Analysis: B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o
 B4c/Analysis: B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o
 B4c/Analysis: B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o
 B4c/Analysis: B4c/CMakeFiles/Analysis.dir/build.make
@@ -474,7 +500,7 @@ B4c/Analysis: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4i
 B4c/Analysis: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4global.so
 B4c/Analysis: /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/lib/libG4clhep.so
 B4c/Analysis: B4c/CMakeFiles/Analysis.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable Analysis"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable Analysis"
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Analysis.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -494,6 +520,7 @@ B4c/CMakeFiles/Analysis.dir/requires: B4c/CMakeFiles/Analysis.dir/src/B4cDetecto
 B4c/CMakeFiles/Analysis.dir/requires: B4c/CMakeFiles/Analysis.dir/src/B4cDummySD.cc.o.requires
 B4c/CMakeFiles/Analysis.dir/requires: B4c/CMakeFiles/Analysis.dir/src/B4cEventAction.cc.o.requires
 B4c/CMakeFiles/Analysis.dir/requires: B4c/CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.o.requires
+B4c/CMakeFiles/Analysis.dir/requires: B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o.requires
 B4c/CMakeFiles/Analysis.dir/requires: B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o.requires
 B4c/CMakeFiles/Analysis.dir/requires: B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o.requires
 

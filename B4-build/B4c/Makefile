@@ -613,6 +613,36 @@ src/B4cReadoutGeometry.cc.s:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.s
 .PHONY : src/B4cReadoutGeometry.cc.s
 
+src/Minimizer.o: src/Minimizer.cc.o
+
+.PHONY : src/Minimizer.o
+
+# target to build an object file
+src/Minimizer.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/Minimizer.cc.o
+.PHONY : src/Minimizer.cc.o
+
+src/Minimizer.i: src/Minimizer.cc.i
+
+.PHONY : src/Minimizer.i
+
+# target to preprocess a source file
+src/Minimizer.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/Minimizer.cc.i
+.PHONY : src/Minimizer.cc.i
+
+src/Minimizer.s: src/Minimizer.cc.s
+
+.PHONY : src/Minimizer.s
+
+# target to generate assembly for a file
+src/Minimizer.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/Minimizer.cc.s
+.PHONY : src/Minimizer.cc.s
+
 src/ROOTAnalysis.o: src/ROOTAnalysis.cc.o
 
 .PHONY : src/ROOTAnalysis.o
@@ -730,6 +760,9 @@ help:
 	@echo "... src/B4cReadoutGeometry.o"
 	@echo "... src/B4cReadoutGeometry.i"
 	@echo "... src/B4cReadoutGeometry.s"
+	@echo "... src/Minimizer.o"
+	@echo "... src/Minimizer.i"
+	@echo "... src/Minimizer.s"
 	@echo "... src/ROOTAnalysis.o"
 	@echo "... src/ROOTAnalysis.i"
 	@echo "... src/ROOTAnalysis.s"

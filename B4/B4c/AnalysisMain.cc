@@ -35,7 +35,7 @@ int main(int argc, char const *argv[]) {
 TChain * ch1 = new TChain("eventTree");
 
 std::cout << "Adding " <<"ECalEventTree.root"<<" to the Chain"<< std::endl;
-ch1->Add("ECalEventTree.root");
+ch1->Add("ECalEventTree1.root");
 ch1->Draw("");
 std::cout<<"Added Tree"<<std::endl;
 
@@ -43,10 +43,14 @@ TROOTAnalysis A(ch1);
 std::cout << "Created Analysis Class" << std::endl;
 
 Int_t evt= std::stoi(argv[1]);
-Int_t ml= std::stoi(argv[2]);
+Int_t minl= std::stoi(argv[2]);
+Int_t maxl= std::stoi(argv[3]);
 
 //A.plotEvent(evt-1);
-A.GetCOG(ml, evt-1);
+A.CalcCOG(minl, maxl);
+A.FitCOGs();
+//A.PrintFitParams();
+A.PrintFitHists();
 app->Run();
 
   return 0;

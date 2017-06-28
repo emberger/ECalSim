@@ -96,7 +96,7 @@ if(this->GetName()=="GapSD"){
 //}
 //G4int no=hce->GetNumberOfCollections();
 //if(no==2)
-std::cout<<hce->GetHC(0)->GetSize()<<std::endl;
+//std::cout<<hce->GetHC(0)->GetSize()<<std::endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

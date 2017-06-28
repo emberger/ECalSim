@@ -11,6 +11,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Analysis.dir/src/B4cDummySD.cc.o"
   "CMakeFiles/Analysis.dir/src/B4cEventAction.cc.o"
   "CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.o"
+  "CMakeFiles/Analysis.dir/src/Minimizer.cc.o"
   "CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o"
   "CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o"
   "Analysis.pdb"

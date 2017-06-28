@@ -11,6 +11,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o"
   "CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o"
   "CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o"
+  "CMakeFiles/exampleB4c.dir/src/Minimizer.cc.o"
   "CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o"
   "CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o"
   "exampleB4c.pdb"

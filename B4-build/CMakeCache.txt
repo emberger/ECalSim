@@ -15,35 +15,17 @@
 ########################
 
 //Value Computed by CMake
-B4a_BINARY_DIR:STATIC=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4a
-
-//Value Computed by CMake
-B4a_SOURCE_DIR:STATIC=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4a
-
-//Value Computed by CMake
-B4b_BINARY_DIR:STATIC=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4b
-
-//Value Computed by CMake
-B4b_SOURCE_DIR:STATIC=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4b
-
-//Value Computed by CMake
 B4c_BINARY_DIR:STATIC=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c
 
 //Value Computed by CMake
 B4c_SOURCE_DIR:STATIC=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c
-
-//Value Computed by CMake
-B4d_BINARY_DIR:STATIC=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4d
-
-//Value Computed by CMake
-B4d_SOURCE_DIR:STATIC=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4d
 
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
 //Choose the type of build, options are: None Release MinSizeRel
 // Debug RelWithDebInfo MinSizeRel.
-CMAKE_BUILD_TYPE:STRING=debug
+CMAKE_BUILD_TYPE:STRING=Debug
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON

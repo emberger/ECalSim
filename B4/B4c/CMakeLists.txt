@@ -5,8 +5,6 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 project(B4c)
 
-
-
 #---------------------------------------------------------------------------
 # finding root
 
@@ -35,8 +33,17 @@ set(CMAKE_PREFIX_PATH $ENV{ROOTSYS})
 
 
 set(CMAKE_MODULE_PATH $ENV{ROOTSYS}/etc/cmake)
-find_package(ROOT REQUIRED)
+
+#find_package(ROOT REQUIRED COMPONENTS RIO Net Hist Graf Graf3d Gpad Tree Rint Postscript Matrix Physics MathCore Thread Matrix Minuit Minuit2)
+#find_package(ROOT REQUIRED)
+find_package(ROOT REQUIRED COMPONENTS Minuit Minuit2)
+set(ROOT_LIBRARIES ${ROOT_LIBRARIES} -lMinuit -lMinuit2)
+#include(${ROOT_USE_FILE})
+
+
+
 include_directories(${ROOT_INCLUDE_DIR})
+#include_directories(${ROOT_INCLUDE_DIR}/Minuit2)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
@@ -82,7 +89,7 @@ add_executable(Analysis AnalysisMain.cc ${sources} ${headers})
 #target_link_libraries(exampleB4c ${Geant4_LIBRARIES})
 target_link_libraries(exampleB4c ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} RootLib)
 target_link_libraries(Analysis ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} RootLib)
-
+MESSAGE(${ROOT_LIBRARIES})
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
 # build B4c. This is so that we can run the executable directly because it

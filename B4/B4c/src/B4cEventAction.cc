@@ -73,10 +73,11 @@ B4ROOTEvent* B4cEventAction::CalEvent()
 		eventTree = new TTree("eventTree", "B4ROOT Event Tree");
 		calEvent = new B4ROOTEvent();
     calEvent->SetTilesX(GetInst().GetnofTilesX());
-    std::cout<<"TilesX: "<<GetInst().GetnofTilesX()<<std::endl;
-    std::cout<<"TilesX: "<<calEvent->TilesX()<<std::endl;
+    //std::cout<<"TilesX: "<<GetInst().GetnofTilesX()<<std::endl;
+    //std::cout<<"TilesX: "<<calEvent->TilesX()<<std::endl;
     calEvent->SetTilesY(GetInst().GetnofTilesY());
     calEvent->SetLayers(GetInst().GetfNofLayers());
+    calEvent->SetcalSizeXY(GetInst().GetcalorSizeXY());
 		eventTree->Branch("EventBranch", "B4ROOTEvent", &calEvent);
 		eventTree->SetAutoSave(1.99e9);
 //		rootFile->SetCompressionLevel(9);
@@ -237,7 +238,7 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
 	//if(event->GetEventID()==G4RunManager::GetCurrentRun()->GetNumberOfEventToBeProcessed()){
 	//rootFile->Write();
 	//rootFile->Close();
-	std::cout<<"Event done"<<std::endl;
+	//std::cout<<"Event done"<<std::endl;
   std::cout<<"Tree has now "<<eventTree->GetEntries()<<" entries"<<std::endl;
   //eventTree->Print();
 	//}

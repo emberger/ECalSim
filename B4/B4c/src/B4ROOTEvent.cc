@@ -27,12 +27,12 @@ B4ROOTEvent::~B4ROOTEvent() {
 }
 
 void B4ROOTEvent::Clear(const Option_t*) {
-	std::cout << "Clearing Event..." << std::endl;
+	//std::cout << "Clearing Event..." << std::endl;
 	m_EventNo = 0;
 	m_GapEnergy = 0;
 	m_NHits=0;
 	m_Hits->Clear();
-	std::cout << "Clear done!" << std::endl;
+	//std::cout << "Clear done!" << std::endl;
 }
 void B4ROOTEvent::Reset(Option_t * /*option*/)
 {

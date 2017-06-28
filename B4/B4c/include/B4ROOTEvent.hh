@@ -54,6 +54,7 @@ private:
 	Int_t m_TilesX;
 	Int_t m_TilesY;
 	Int_t m_Layers;
+	Double_t m_calSizeXY;
 	TClonesArray *m_Hits; //->
 	static TClonesArray *aHits;
 
@@ -71,7 +72,7 @@ public:
 	Int_t TilesX(){return m_TilesX;}
 	Int_t TilesY(){return m_TilesY;}
 	Int_t Layers(){return m_Layers;}
-
+	Double_t calSizeXY(){return m_calSizeXY;}
 	Int_t NHits() const {return m_NHits;}
 	TClonesArray* Hits() const {return m_Hits;}
 	B4ROOTHit* Hit(Int_t i) {return (B4ROOTHit*)m_Hits->At(i);}
@@ -82,6 +83,7 @@ public:
 	void SetTilesX(Int_t nx){m_TilesX=nx;}
 	void SetTilesY(Int_t ny){m_TilesY=ny;}
 	void SetLayers(Int_t nl){m_Layers=nl;}
+	void SetcalSizeXY(Double_t cs){m_calSizeXY=cs;}
 
 
 	B4ROOTHit* AddHit(B4ROOTHit& cand);
