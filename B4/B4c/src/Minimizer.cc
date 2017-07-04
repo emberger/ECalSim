@@ -7,32 +7,34 @@ double Fcn::operator()(const std::vector<double> &par) const
 
   double chisq = 0.;
 
-    for(int i = 0; i<COGs[currentEvent].size(); i++){
+  for(int i = 0; i<COGs[currentEvent].size(); i++){
 
-        double term = 0;
+        double termx = 0;
+        double termy = 0;
 
-          term += (std::get<0>(COGs[currentEvent][i]) - (par[0] * std::get<2>(COGs[currentEvent][i])+par[1])) / std::get<3>(COGs[currentEvent][i]);
+          termx += ((std::get<0>(COGs[currentEvent][i]) - (par[0] * std::get<2>(COGs[currentEvent][i])+par[1])) / std::get<3>(COGs[currentEvent][i]))
+                    ;
 
-          //term += (std::get<1>(COGs[currentEvent][i]) - (par[2] * std::get<2>(COGs[currentEvent][i])+par[3])) / std::get<4>(COGs[currentEvent][i]);
+          termy += ((std::get<1>(COGs[currentEvent][i]) - (par[2] * std::get<2>(COGs[currentEvent][i])+par[3])) / std::get<4>(COGs[currentEvent][i]))
+                    ;
+
+          chisq +=termx*termx+termy*termy ;
+    }
+
+      // XYZVector xp;
+      // xp.SetCoordinates(std::get<0>(COGs[currentEvent][i]),std::get<1>(COGs[currentEvent][1]),std::get<2>(COGs[currentEvent][i]));
+      // XYZVector x0(par[0], par[1], par[2]);
+      // XYZVector x1(par[3], par[4], par[5]);
+      //
+      // XYZVector u = x1 .Unit();
+      //
+      //
+      // dist += TMath::Sqrt(((x0-xp)-((x0-xp).Dot(u)) * u ) .Mag2());
+  // }
 
 
-          chisq += term * term;
-        }
-        for(int i = 0; i<COGs[currentEvent].size(); i++){
+  return chisq;
 
-            double term = 0;
-
-              //term += (std::get<0>(COGs[currentEvent][i]) - (par[0] * std::get<2>(COGs[currentEvent][i])+par[1])) / std::get<3>(COGs[currentEvent][i]);
-
-              term += (std::get<1>(COGs[currentEvent][i]) - (par[2] * std::get<2>(COGs[currentEvent][i])+par[3])) / std::get<4>(COGs[currentEvent][i]);
-
-
-              chisq += term * term;
-            }
-
-
-        return chisq;
-      
 
 }
 

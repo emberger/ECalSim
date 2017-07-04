@@ -150,10 +150,9 @@ G4bool B4cCalorimeterSD::ProcessHits(G4Step* step,
   }
 
 
-  auto hitLayer=(*fHitsCollection)[ROLayerID];
+  auto hitLayer = (*fHitsCollection)[ROLayerID];
   // Get hit for total accounting
-  auto hitTotal
-    = (*fHitsCollection)[fHitsCollection->entries()-1];
+  auto hitTotal = (*fHitsCollection)[fHitsCollection->entries()-1];
 
   // Add values to cell information
   hit->Add(edep, stepLength);

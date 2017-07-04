@@ -6,14 +6,15 @@
 // root include
 #include <TFile.h>
 #include <TF1.h>
-
+#include "TMath.h"
 //minuit includes
 #include "Minuit2/FunctionMinimum.h"
 #include "Minuit2/MnMigrad.h"
 #include "Minuit2/MnPrint.h"
 #include "Minuit2/FCNBase.h"
+#include <Math/Vector3D.h>
 
-
+using namespace ROOT::Math;
 using namespace ROOT::Minuit2;
 using namespace std;
 
@@ -32,11 +33,11 @@ public:
    virtual double Up() const;
   //
    inline void SetCurrentEvent(Int_t ce){currentEvent=ce;};
-   inline void SetCOGs(std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t>>> c){COGs=c;};
+   inline void SetCOGs(std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>>> c){COGs=c;};
    void PrintCOGs();
 
 private:
-  std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t>>> COGs;
+  std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>>> COGs;
   Int_t currentEvent;
 
 };

@@ -162,18 +162,18 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
 	// Get hit with total values
 	auto gapHit = (*gapHC)[gapHC->entries()-1];
 
-	G4int nIsTouch=0;
+	//G4int nIsTouch=0;
 
-	for (int i=0; i<gapHC->entries();i++){
-
-		auto hit=(*gapHC)[i];
-		if (hit -> GetTouch()==true && hit->GetCellInfo()==true){
-			//G4cout<<"X:"<<hit->GetX()<<"Y:"<<hit->GetY()<<"Z:"<<hit->GetZ()<<"E:"<<hit->GetEdep()<<"Touched?:"<<hit->GetTouch()<<G4endl;
-			nIsTouch++;
-		}
-
-	}
-	G4cout<<"Touched hits:"<<nIsTouch<<G4endl;
+	// for (int i=0; i<gapHC->entries();i++){
+  //
+	// 	auto hit=(*gapHC)[i];
+	// 	if (hit -> GetTouch()==true && hit->GetCellInfo()==true){
+	// 		//G4cout<<"X:"<<hit->GetX()<<"Y:"<<hit->GetY()<<"Z:"<<hit->GetZ()<<"E:"<<hit->GetEdep()<<"Touched?:"<<hit->GetTouch()<<G4endl;
+	// 		nIsTouch++;
+	// 	}
+  //
+	// }
+	// G4cout<<"Touched hits:"<<nIsTouch<<G4endl;
 
 
 	// Print per event (modulo n)
@@ -212,7 +212,7 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
 	//fill ROOT Classes
 
 	this->CalEvent()->SetEventNo(eventID);
-	std::cout<<this->CalEvent()->EventNo()<<std::endl;
+	//std::cout<<this->CalEvent()->EventNo()<<std::endl;
 
 	auto ent=gapHC->entries();
 
