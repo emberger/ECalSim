@@ -103,10 +103,11 @@ void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(PartMomx,PartMomy,1.));
 
   // Set gun position
-  // G4double PartPosx = G4UniformRand()*30.0;
-  // G4double PartPosy = G4UniformRand()*30.0;
+  G4double PartPosx = 500;
+  G4double PartPosy = 500;
+  G4double PartPosz = 1000;         //mm from the calorimeter front face
   fParticleGun
-    ->SetParticlePosition(G4ThreeVector(5. , 5. , -worldZHalfLength));
+    ->SetParticlePosition(G4ThreeVector(PartPosx -500. ,  PartPosy -500. , -295- PartPosz));//-worldZHalfLength));
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }

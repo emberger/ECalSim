@@ -34,18 +34,7 @@ void TROOTAnalysis::plotEvent(Int_t pev){     //plot 3DHisto of selected event
     for(Int_t j=0;j<pnh;j++){
       h->Fill(event->Hit(j)->X(), event->Hit(j)->Y(),event->Hit(j)->Z(), event->Hit(j)->EnergyDeposit());
     }
-//  }
-  // const Int_t Number = 3;
-  // Double_t Red[Number]    = { 1.00, 0.00, 0.00};
-  // Double_t Green[Number]  = { 0.00, 1.00, 0.00};
-  // Double_t Blue[Number]   = { 1.00, 0.00, 1.00};
-  // Double_t Length[Number] = { 0.00, 0.50, 1.00 };
-  // Int_t nb=50;
-  // TColor::CreateGradientColorTable(Number,Length,Red,Green,Blue,nb);
-  // h->SetContour(nb);
-  // h->SetLineWidth(1);
-  // h->SetLineColor(kBlack);
-  Eges=h->Integral();
+
   h->GetXaxis()->SetTitle("X");
   h->GetYaxis()->SetTitle("Y");
   h->GetZaxis()->SetTitle("Z");
@@ -53,22 +42,12 @@ void TROOTAnalysis::plotEvent(Int_t pev){     //plot 3DHisto of selected event
   //h->Draw("BOX");
 }
 
-void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){            //Get vector of (X,Y) tuples containing layerwise center of gravity
+void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){            //calculate vector of (X,Y) tuples containing layerwise center of gravity
   B4ROOTEvent * Cevent = new B4ROOTEvent();
   EcalTree->SetBranchAddress("EventBranch", &Cevent);
 
 
-  Double_t histsizeX=100;
-  Double_t histsizeY=100;
-  Double_t histsizeZ=50;
 
-  TCanvas * c2 = new TCanvas("COGs", "COGs");
-
-
-
-  TH2D * h1 = new TH2D("h1", "h1", histsizeX,0,histsizeX,histsizeY,0,histsizeY);
-  TH2D * h2 = new TH2D("h2", "h2", histsizeX,0,histsizeX,histsizeY,0,histsizeY);
-  TH3D * h3 = new TH3D("h3", "h3",20,40,60,20,40,60,histsizeZ,0,histsizeZ);
   //TGraph2D * g = new TGraph2D();
 
 
@@ -97,39 +76,39 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
   Double_t cgz=0;
   Double_t Eweight=0;
 
-  for(Int_t eventstodo=0;eventstodo<nofEntries;eventstodo++){
-    EcalTree->GetEntry(eventstodo);
+  for(Int_t eventstodo=0;eventstodo<nofEntries;eventstodo++){           //loop over all simulated events
+
+    EcalTree->GetEntry(eventstodo);             //grab evetn from tree
+    Eges = Cevent->GapEnergy();
+    //std::cout<<Eges<<std::endl;
     Int_t cnh = Cevent->NHits();
     Double_t integSum=0;
     Double_t integral;
     Int_t graphctr=0;
 
-  for(Int_t i=minlayer;i<maxlayer;i++){
-    for(Int_t j =0;j<cnh ;j++){
+  for(Int_t i=minlayer;i<maxlayer;i++){               //loop over all layers in event
+    for(Int_t j =0;j<cnh ;j++){                       //loop over all hits in laver i
       if(Cevent->Hit(j)->Z()==i)
-        h1->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(), Cevent->Hit(j)->EnergyDeposit());
+        h1->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(), Cevent->Hit(j)->EnergyDeposit());  //fill histogram with hits of layer i
 
     }
     integral=h1->Integral();
 
     maxbin=h1->GetMaximumBin();
-    maxdep=h1->GetBinContent(maxbin);
+    maxdep=h1->GetBinContent(maxbin);                   // get coordinates of bin with maximum energy deposition
     h1->GetBinXYZ(maxbin, binx, biny, binz);
 
-    // std::cout<<"Maximum at "<<maxdep<<"MeV"<<" : "<<binx<<":"<<biny<<std::endl;
-    //std::cout<<"Integral: "<<integral<<std::endl;
-
-
     //Do spiral for clustering only if energy in Layer
-    if(integral!=0 && maxdep > c){
+
+    if(integral!=0 && maxdep > c){              //check if layer containes energy
 
 
-      xdir=1;       // integers for direction
+      xdir=1;            // integers for direction
       ydir=0;
-      stepstodo=1;      // how many steps to go before rotation
-      stepsctr=0;   // number of steps since last rotation
+      stepstodo=1;       // how many steps to go before rotation
+      stepsctr=0;        // number of steps since last rotation
 
-      currX=binx;  // starting the spiral on the histogram maximum
+      currX=binx;        // starting the spiral on the histogram maximum
       currY=biny;
 
       esum=0;
@@ -139,22 +118,22 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
       auto tp=std::make_tuple(currX, currY, maxdep);
       ClusteredHits.push_back(tp);
       h1->SetBinContent(binx, biny, 0);
-      //Int_t ctr=0;
 
-      while(esum<integral*0.8 && currX<binx+12){          //do spiral until desired energyfraction is reached
+      while(esum<integral*0.9 && currX<binx+4){
+                                                          //do spiral until desired energyfraction is reached
           currX+=xdir;
           currY+=ydir;
-          //std::cout<<"X: "<<currX<<"Y: "<<currY<<std::endl;
+
           curre=h1->GetBinContent(currX, currY);
-          //std::cout<<"curre"<<curre<<std::endl;
-          if(curre>0){
+
+          if(curre>0){                                    //save tile only if it containes energy
             tp=std::make_tuple(currX, currY, curre);
             ClusteredHits.push_back(tp);
             h2->SetBinContent(currX, currY, curre);
           }
+
           h1->SetBinContent(currX, currY, 0);
           esum+=curre;
-          //std::cout<<(esum/integral)*100<<" % of layer energy"<<std::endl;
           stepsctr++;
           if(stepsctr==stepstodo){
             stepsctr=0;
@@ -166,29 +145,19 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
               stepstodo++;
             }
           }
-          //ctr++;
         }
 
-      // for(Int_t foo=0;foo<ClusteredHits.size();foo++){
-      //   std::cout<<"X: "<<std::get<0>(ClusteredHits[foo])<<" Y: "<<std::get<1>(ClusteredHits[foo])<<" E: "<<std::get<2>(ClusteredHits[foo])<<std::endl;
-      // }
 
 
+      Double_t e=h2->Integral();        //get energy contained in cluster
 
-      Double_t integral2= h2->Integral();
-
-      Eweight=1;//integral2/Eges;
+      Eweight=e/Eges;                   //calculate weight
 
       cgx=h2->GetMean(1);
       xerr=h2->GetMeanError(1);
-
+                                        //extract center of gravity and error
       cgy=h2->GetMean(2);
       yerr=h2->GetMeanError(2);
-
-      // if(ClusteredHits.size()==1){
-      //     yerr=1/TMath::Sqrt(12);
-      //     xerr=1/TMath::Sqrt(12);
-      // }
 
       if(yerr<0.00001){yerr=1/TMath::Sqrt(12);}
       if(xerr<0.00001){xerr=1/TMath::Sqrt(12);}
@@ -222,14 +191,7 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
       //hit1->Fill(i, ClusteredHits.size());
       er1->Fill(i, xerr/nofEntries);
       er2->Fill(i, yerr/nofEntries);
-      // std::cout<<"-------"<<std::endl;
-      // std::cout<<integral2<<" hits: "<<ClusteredHits.size()<<"energy in first entry"<<std::get<2>(ClusteredHits[0])<<std::endl;
-      // std::cout<<xerr<<" : "<<yerr<<std::endl;
-      //
-      // std::cout<<"Layer "<<i<<"done"<<std::endl;
-      // std::cout<<"-------"<<std::endl;
-      //cgx=cgx/integral2;
-      //cgy=cgy/integral2;
+
 
 
       //std::cout<<"Center of gravity: "<<cgx<<" "<<cgy<<" "<<cgz<<std::endl;
@@ -243,19 +205,21 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
 
 
     integSum += integral;
+
     graphctr++;
+
     ClusteredHits.clear();
-    //std::vector<std::tuple<Double_t, Double_t, Double_t>>().swap(ClusteredHits);
+
     h1->Reset();
+
     h2->Reset();
+
     Eweight=0;
 
 
 
 
   }
-  //std::cout<<"Event done"<<std::endl;
-  //std::cout<<integSum<<std::endl;
   COGCollection.push_back(coglist);
   coglist.clear();
    h3->GetXaxis()->SetTitle("X");
@@ -265,20 +229,35 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
    c2->cd();
    h3->Draw("");
    //h3->Reset();
-  //g->Draw("");
 
 }
-// for(Int_t p=0;p<nofEntries;p++){
-//   for(Int_t q=0;q<COGCollection[p].size();q++){
-// std::cout<<std::get<0>(COGCollection[p][q])<<":"<<std::get<1>(COGCollection[p][q])<<":"<<std::get<2>(COGCollection[p][q])<<std::endl;
-// std::cout<<"Errorx: "<<std::get<3>(COGCollection[p][q])<<"Errory: "<<std::get<4>(COGCollection[p][q])<<std::endl;
-//
-// }
-// std::cout<<"--------------------"<<std::endl;
-// }
+
 }
 
 void TROOTAnalysis::FitCOGs(){
+  //histograms for correlation
+  TCanvas * corr1 = new TCanvas("Correlations");
+  corr1->Divide(3,2,0.01,0.01);
+
+  TH1D * co1 = new TH1D("MxTx correllation", "MxTx correllation",100, -1,1 );
+  co1->GetXaxis()->SetTitle("corellation of X slope and X intercept");
+  TH1D * co2 = new TH1D("MxMy correllation", "MxMy correllation",100, -1,1 );
+  co2->GetXaxis()->SetTitle("corellation of X slope and Y slope");
+  TH1D * co3 = new TH1D("MxTy correllation", "MxTy correllation",100, -1,1 );
+  co3->GetXaxis()->SetTitle("correlation of X slope and Y intercept");
+  TH1D * co4 = new TH1D("TxMy correllation", "TxMy correllation",100, -1,1 );
+  co4->GetXaxis()->SetTitle("correlation of X intercept and Y slope");
+  TH1D * co5 = new TH1D("TxTy correllation", "TxTy correllation",100, -1,1 );
+  co5->GetXaxis()->SetTitle("correlation of X intercapt an Y intercept");
+  TH1D * co6 = new TH1D("MyTy correllation", "MyTy correllation",100, -1,1 );
+  co6->GetXaxis()->SetTitle("correlation of Y slope and Y intercept");
+
+  TCanvas * dist1= new TCanvas("2m distance");
+  dist1->Divide(2,1,0.01,0.01);
+  TH1D * dx = new TH1D("2m distance X", "2m distance X", 1000, 30,70);
+  dx->GetXaxis()->SetTitle("X[cm]");
+  TH1D * dy = new TH1D("2m distance Y", "2m distance Y", 1000, 30,70);
+  dy->GetXaxis()->SetTitle("Y[cm]");
 
 
     Fcn myfcn;
@@ -292,17 +271,11 @@ void TROOTAnalysis::FitCOGs(){
     upar.Add("my", 0., error_minimizer_parameters);
     upar.Add("ty", 1., error_minimizer_parameters);
 
-    // upar.Add("a1", 0., error_minimizer_parameters);
-    // upar.Add("a2", 0., error_minimizer_parameters);
-    // upar.Add("a3", 50., error_minimizer_parameters);
-    // upar.Fix("a3");
-    // upar.Add("x1", 0., error_minimizer_parameters);
-    // upar.Add("x2", 0., error_minimizer_parameters);
-    // upar.Add("x3", 1., error_minimizer_parameters);
-    //upar.Fix("x3");
     cout << upar << endl;
 
     MnMigrad migrad(myfcn, upar, 2);
+
+
 
     for(int events = 0; events <nofEntries; events++){
 
@@ -310,20 +283,26 @@ void TROOTAnalysis::FitCOGs(){
         upar.SetValue("tx", 50.);
         upar.SetValue("my", 0.);
         upar.SetValue("ty", 50.);
-        // upar.SetValue("a1", 1.);
-        // upar.SetValue("a2", 1.);
-        // upar.SetValue("a3", 1.);
-
-        // upar.SetValue("x1", 1.);
-        // upar.SetValue("x2", 1.);
-        // upar.SetValue("x3", 1.);
 
         myfcn.SetCurrentEvent(events);
 
 
         FunctionMinimum min = migrad();
 
+        std::cout<<min<<std::endl;
 
+        MnUserCovariance cov = min.UserCovariance();
+
+        //std::cout<<cov(0 ,0)<<" "<<cov(1,1)<<" "<<cov(2,2)<<" "<<cov(3,3)<<std::endl;
+        Double_t covar[4][4];
+        Double_t error[4];
+
+        for(Int_t row=0;row<4;row++){
+          for(Int_t col=0;col<4;col++){
+            covar[row][col]=cov(row,col);
+
+          }
+        }
 
         MnUserParameterState userParameterState = min.UserState();
 
@@ -331,12 +310,57 @@ void TROOTAnalysis::FitCOGs(){
                         userParameterState.Value("my"), userParameterState.Value("ty"));
         FitParams.push_back(tp);
 
+        dx->Fill(std::get<0>(tp)*200+std::get<1>(tp));
+        dy->Fill(std::get<2>(tp)*200+std::get<3>(tp));
+
+
+        error[0]= userParameterState.Error("mx");
+        error[1]= userParameterState.Error("tx");
+        error[2]= userParameterState.Error("my");
+        error[3]= userParameterState.Error("ty");
+
+        //Fill correlation Histograms
+
+        co1->Fill(covar[0][1]/(error[0]*error[1]));
+        co2->Fill(covar[0][2]/(error[0]*error[2]));
+        co3->Fill(covar[0][3]/(error[0]*error[3]));
+        co4->Fill(covar[1][2]/(error[1]*error[2]));
+        co5->Fill(covar[1][3]/(error[1]*error[3]));
+        co6->Fill(covar[2][3]/(error[2]*error[3]));
+
         // auto tp=std::make_tuple(userParameterState.Value("a1"),userParameterState.Value("a2"),userParameterState.Value("a3"),
         //                         userParameterState.Value("x1"),userParameterState.Value("x2"),userParameterState.Value("x3"));
         //
         // FitParams.push_back(tp);
     }
+
+    dist1->cd(1);
+    dx->Draw("");
+
+    dist1->cd(2);
+    dy->Draw("");
+
+    corr1->cd(1);
+    co1->Draw("");
+
+    corr1->cd(2);
+    co2->Draw("");
+
+    corr1->cd(3);
+    co3->Draw("");
+
+    corr1->cd(4);
+    co4->Draw("");
+
+    corr1->cd(5);
+    co5->Draw("");
+
+    corr1->cd(6);
+    co6->Draw("");
+
 }
+
+
 
 void TROOTAnalysis::PrintFitParams(){
 
@@ -354,11 +378,11 @@ void TROOTAnalysis::PrintFitHists(){
   TCanvas * c1 = new TCanvas("Fit", "Fit");
   c1->Divide(2,3,0.01, 0.01);
 
-  TH1D * fitX = new TH1D("X Fit","X Fit", 1000,40,60);
-  TH1D * fitY = new TH1D("Y Fit","Y Fit", 1000,40,60);
+  TH1D * fitX = new TH1D("X Fit","X Fit", 800,40,60);
+  TH1D * fitY = new TH1D("Y Fit","Y Fit", 800,40,60);
 
-  TH1D * fitSX = new TH1D("X Slope Fit","X Slope Fit", 1000,-1,1);
-  TH1D * fitSY = new TH1D("Y Slope Fit","Y Slope Fit", 1000,-1,1);
+  TH1D * fitSX = new TH1D("X Slope Fit","X Slope Fit", 800,-2,2);
+  TH1D * fitSY = new TH1D("Y Slope Fit","Y Slope Fit", 800,-2,2);
 
   for(Int_t i=0;i<nofEntries;i++){
       fitX->Fill(std::get<1>(FitParams[i]));
@@ -402,25 +426,130 @@ void TROOTAnalysis::PrintFitHists(){
   c1->cd(6);
   er2->Draw();
 
-  //c1->cd(7);
-  //hit1->SetNormFactor(10.);
-  //hit1->Draw();
+//  er1->Reset();
+//  er2->Reset();
+
+
 
 }
 
-// void TROOTAnalysis::PrintFitHists2(){
-//
-//   for(Int_t i=0;i<nofEntries;i++){
-//     std::cout<<"-----------------------"<<std::endl;
-//     std::cout<<"Support: "<<std::get<0>(FitParams[i])<<" : "<<std::get<1>(FitParams[i])<<" : "<<std::get<2>(FitParams[i])<<std::endl;
-//     XYZVector d(std::get<3>(FitParams[i]),std::get<4>(FitParams[i]),std::get<5>(FitParams[i]));
-//     Double_t n=TMath::Sqrt(d.Mag2());
-//     std::cout<<"Direction: "<<std::get<3>(FitParams[i])/n<<" : "<<std::get<4>(FitParams[i])/n<<" : "<<std::get<5>(FitParams[i])/n<<std::endl;
-//   }
-// }
+void TROOTAnalysis::PrintFitHists2(){
+  TCanvas * c4 = new TCanvas("cleaned Fit", "cleaned Fit");
+  c4->Divide(2,3,0.01, 0.01);
+
+  TH1D * cfitX = new TH1D("cX Fit","cX Fit", 1000,40,60);
+  TH1D * cfitY = new TH1D("cY Fit","cY Fit", 1000,40,60);
+
+  TH1D * cfitSX = new TH1D("cX Slope Fit","cX Slope Fit", 1000,-2,2);
+  TH1D * cfitSY = new TH1D("cY Slope Fit","cY Slope Fit", 1000,-2,2);
+
+  for(Int_t i=0;i<nofEntries;i++){
+      cfitX->Fill(std::get<1>(FitParams[i]));
+  }
+
+  for(Int_t i=0;i<nofEntries;i++){
+      cfitY->Fill(std::get<3>(FitParams[i]));
+  }
+
+  for(Int_t i=0;i<nofEntries;i++){
+      cfitSX->Fill(std::get<0>(FitParams[i]));
+  }
+
+  for(Int_t i=0;i<nofEntries;i++){
+      cfitSY->Fill(std::get<2>(FitParams[i]));
+  }
+
+  c4->cd(1);
+  cfitX->GetXaxis()->SetTitle("X");
+  cfitX->GetYaxis()->SetTitle("#");
+  cfitX->Draw();
+
+  c4->cd(2);
+  cfitY->GetXaxis()->SetTitle("Y");
+  cfitY->GetYaxis()->SetTitle("#");
+  cfitY->Draw();
+
+  c4->cd(3);
+  cfitSX->GetXaxis()->SetTitle("X Slope");
+  cfitSX->GetYaxis()->SetTitle("#");
+  cfitSX->Draw();
+
+  c4->cd(4);
+  cfitSY->GetXaxis()->SetTitle("Y Slope");
+  cfitSY->GetYaxis()->SetTitle("#");
+  cfitSY->Draw();
+
+  c4->cd(5);
+  er1->Draw();
+
+  c4->cd(6);
+  er2->Draw();
+
+  er1->Reset();
+  er2->Reset();
+
+}
+
+
+void TROOTAnalysis::CleanCOGs(){
+
+
+
+  TCanvas * c3 = new TCanvas("CleanCOGs", "CleanCOGs");
+  TH3D * clCOG = new TH3D("COGs after cleaning", "COGs after celaning",20,40,60,20,40,60,50,0,50);
+
+  Double_t MoliereRaduis=4.87;   // in cm
+
+  CalcCOG(0,10,0);
+  FitCOGs();
+
+  COGCollection.clear();
+  coglist.clear();
+  ClusteredHits.clear();
+
+  //PrintFitHists();
+  CalcCOG(0,50,0);
+
+  Int_t erasecounter=0;
+  Int_t totalcounter=0;
+  for(int i=0; i<nofEntries;i++){                                       //Delete the COGs, outside of one MoliereRadius
+    for(int z=0; z<COGCollection[i].size(); z++){
+
+      Double_t distx=(std::get<0>(FitParams[i])*z+std::get<1>(FitParams[i]))-std::get<0>(COGCollection[i][z]);
+      Double_t disty=(std::get<2>(FitParams[i])*z+std::get<3>(FitParams[i]))-std::get<1>(COGCollection[i][z]);
+      totalcounter++;
+      if(TMath::Sqrt(distx*distx)>MoliereRaduis || TMath::Sqrt(disty*disty)>MoliereRaduis){
+        COGCollection[i].erase(COGCollection[i].begin()+z);
+        //std::cout<<"X distance: "<<distx<<" Y distance: "<<disty<<std::endl;
+        erasecounter++;
+      }
+
+    }
+
+  }
+
+  // for(int i=0; i<nofEntries;i++){                                       //Delete the COGs, outside of one MoliereRadius
+  //   for(int z=0; z<COGCollection[i].size(); z++){
+  //     clCOG->Fill(std::get<0>(COGCollection[i][z]), std::get<1>(COGCollection[i][z]), std::get<2>(COGCollection[i][z]));
+  //   }
+  // }
+  //
+  // clCOG->GetXaxis()->SetTitle("X");
+  // clCOG->GetYaxis()->SetTitle("Y");
+  // clCOG->GetZaxis()->SetTitle("Z");
+  // clCOG->SetMarkerStyle(4);
+  // c3->cd();
+  // clCOG->Draw("");
+
+  FitParams.clear();
+
+
+  FitCOGs();                //refit the leftover COGs
+  PrintFitHists2();
+
+  std::cout<<"Discarded COGs: "<<erasecounter<<" Total COGs:"<<totalcounter<<std::endl;
 
 
 
 
-
-// std::vector TROOTAnalysis::GetCOGs(){return coglist;}
+}

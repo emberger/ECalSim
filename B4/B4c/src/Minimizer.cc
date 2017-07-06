@@ -13,10 +13,11 @@ double Fcn::operator()(const std::vector<double> &par) const
         double termy = 0;
 
           termx += ((std::get<0>(COGs[currentEvent][i]) - (par[0] * std::get<2>(COGs[currentEvent][i])+par[1])) / std::get<3>(COGs[currentEvent][i]))
-                    ;
+                    *std::get<5>(COGs[currentEvent][i]);
 
           termy += ((std::get<1>(COGs[currentEvent][i]) - (par[2] * std::get<2>(COGs[currentEvent][i])+par[3])) / std::get<4>(COGs[currentEvent][i]))
-                    ;
+                    *std::get<5>(COGs[currentEvent][i]);
+
 
           chisq +=termx*termx+termy*termy ;
     }

@@ -215,8 +215,14 @@ TMath.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TMath.h
 Minuit2/MnUserParameters.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minuit2/MnUserParameters.h
+Minuit2/MnUserCovariance.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minuit2/MnUserCovariance.h
 Minimizer.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minimizer.hh
+Minuit2/Minuit2Minimizer.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minuit2/Minuit2Minimizer.h
+chrono
+-
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/RootClasses_dict.hh
 stddef.h
@@ -536,6 +542,14 @@ G__ci_fproto.h
 Rtypes.h
 /opt/root/5.34/include/Rtypes.h
 
+/opt/root/5.34/include/Math/Error.h
+iostream
+-
+TError.h
+/opt/root/5.34/include/Math/TError.h
+Math/Util.h
+/opt/root/5.34/include/Math/Math/Util.h
+
 /opt/root/5.34/include/Math/GenVector/BitReproducible.h
 iostream
 -
@@ -652,12 +666,42 @@ limits
 cmath
 -
 
+/opt/root/5.34/include/Math/IFunction.h
+Math/IFunctionfwd.h
+/opt/root/5.34/include/Math/Math/IFunctionfwd.h
+
+/opt/root/5.34/include/Math/IFunctionfwd.h
+
 /opt/root/5.34/include/Math/Math.h
 cmath
 -
 math.h
 -
 limits
+-
+
+/opt/root/5.34/include/Math/Minimizer.h
+Math/IFunction.h
+/opt/root/5.34/include/Math/Math/IFunction.h
+Math/MinimizerOptions.h
+/opt/root/5.34/include/Math/Math/MinimizerOptions.h
+Math/Util.h
+/opt/root/5.34/include/Math/Math/Util.h
+Math/Error.h
+/opt/root/5.34/include/Math/Math/Error.h
+vector
+-
+string
+-
+limits
+-
+cmath
+-
+
+/opt/root/5.34/include/Math/MinimizerOptions.h
+string
+-
+iostream
 -
 
 /opt/root/5.34/include/Math/ParamFunctor.h
@@ -893,6 +937,14 @@ Minuit2/MnRefCountedPointer.h
 /opt/root/5.34/include/Minuit2/Minuit2/MnRefCountedPointer.h
 Minuit2/BasicMinimumState.h
 /opt/root/5.34/include/Minuit2/Minuit2/BasicMinimumState.h
+
+/opt/root/5.34/include/Minuit2/Minuit2Minimizer.h
+Math/Minimizer.h
+/opt/root/5.34/include/Minuit2/Math/Minimizer.h
+Minuit2/MnUserParameterState.h
+/opt/root/5.34/include/Minuit2/Minuit2/MnUserParameterState.h
+Math/IFunctionfwd.h
+/opt/root/5.34/include/Minuit2/Math/IFunctionfwd.h
 
 /opt/root/5.34/include/Minuit2/MinuitParameter.h
 algorithm

@@ -15,8 +15,13 @@
 #include "TMath.h"
 
 #include "Minuit2/MnUserParameters.h"
-
+#include "Minuit2/MnUserCovariance.h"
 #include "Minimizer.hh"
+#include "Minuit2/Minuit2Minimizer.h"
+
+
+
+#include <chrono>
 using namespace ROOT::Math;
 using namespace ROOT::Minuit2;
 
@@ -29,15 +34,20 @@ public:
   void plotEvent(Int_t pev);
   void CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c);
   void FitCOGs();
+  void CleanCOGs();
+
+
+
   void PrintFitParams();
+
   void PrintFitHists();
-  //void PrintFitHists2();
-  //std::vector GetCOGs();
+  void PrintFitHists2();
 
 
 private:
   Int_t nofEntries;
   TTree* EcalTree;
+
   std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>> coglist;
   std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>>> COGCollection;
   std::vector<std::tuple<Double_t, Double_t, Double_t, Double_t>> FitParams;
@@ -52,6 +62,15 @@ private:
   TH1D * er1= new TH1D("errx", "errx", 50,0,50);
   TH1D * er2= new TH1D("erry", "erry", 50,0,50);
 
-  TH1D * hit1= new TH1D("hits", "hits", 50,0,50);
+  TCanvas * c2 = new TCanvas("COGs", "COGs");
+
+  Double_t histsizeX=100;
+  Double_t histsizeY=100;
+  Double_t histsizeZ=50;
+
+  TH2D * h1 = new TH2D("h1", "h1", histsizeX,0,histsizeX,histsizeY,0,histsizeY);
+  TH2D * h2 = new TH2D("h2", "h2", histsizeX,0,histsizeX,histsizeY,0,histsizeY);
+  TH3D * h3 = new TH3D("h3", "h3",20,40,60,20,40,60,histsizeZ,0,histsizeZ);
+
 
 };
