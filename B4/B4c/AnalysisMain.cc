@@ -11,9 +11,6 @@
 int main(int argc, char const *argv[]) {
 
   std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-  Double_t cut;
-  std::cout<<"Enter an energy cut on the cluster maximum (in MeV)): "<<std::endl;
-  std::cin>>cut;
 
  TApplication* app = new TApplication("app", 0, 0, 0);
 //
@@ -49,20 +46,25 @@ std::cout<<"Added Tree"<<std::endl;
 TROOTAnalysis A(ch1);
 std::cout << "Created Analysis Class" << std::endl;
 
-Int_t evt= std::stoi(argv[1]);
-Int_t minl= std::stoi(argv[2]);
-Int_t maxl= std::stoi(argv[3]);
 
-//A.plotEvent(evt-1);
-A.CalcCOG(minl-1, maxl-1, cut);
-A.FitCOGs();
+Int_t minl= std::stoi(argv[1]);
+Int_t maxl= std::stoi(argv[2]);
+Int_t minevt= std::stoi(argv[3]);
+Int_t maxevt= std::stoi(argv[4]);
+
+//A.plotEvent(1422);
+//A.CalcCOG(minl-1, maxl-1, minevt, maxevt+1);
+//A.FitCOGs(minevt, maxevt+1);
 //A.PrintFitParams();
-A.PrintFitHists();
-//A.CleanCOGs();
+//A.PrintFitHists();
+A.CalcCOGwithFit(minevt, maxevt);
+
 std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 std::cout << "Computing took "
               << std::chrono::duration_cast<std::chrono::seconds>(end - start).count()
               <<" seconds"<<std::endl;
+
+
 app->Run();
 
   return 0;

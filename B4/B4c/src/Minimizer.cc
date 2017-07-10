@@ -6,7 +6,7 @@ double Fcn::operator()(const std::vector<double> &par) const
 {
 
   double chisq = 0.;
-
+  //std::cout<<COGs[currentEvent].size()<<std::endl;
   for(int i = 0; i<COGs[currentEvent].size(); i++){
 
         double termx = 0;

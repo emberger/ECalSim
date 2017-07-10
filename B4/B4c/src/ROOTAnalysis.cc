@@ -5,6 +5,12 @@ TROOTAnalysis::TROOTAnalysis(TChain* ch){
   this->EcalTree=ch->GetTree();
   std::cout << "assigned Tree" << '\n';
   nofEntries=EcalTree->GetEntries();
+  std::cout<<nofEntries<<std::endl;
+
+
+    Cevent = new B4ROOTEvent();
+    EcalTree->SetBranchAddress("EventBranch", &Cevent);
+
   //EcalTree->Print();
 }
 
@@ -24,7 +30,7 @@ void TROOTAnalysis::plotEvent(Int_t pev){     //plot 3DHisto of selected event
     return;
   }
 
-  TH3D * h = new TH3D("ECalEvent","ECalEvent",500,0,500,500,0,500,50,0,50);
+  TH3D * h = new TH3D("ECalEvent","ECalEvent",100,0,100,100,0,100,50,0,50);
 
   //for(Int_t i=0;i<nent; i++){
 
@@ -39,16 +45,308 @@ void TROOTAnalysis::plotEvent(Int_t pev){     //plot 3DHisto of selected event
   h->GetYaxis()->SetTitle("Y");
   h->GetZaxis()->SetTitle("Z");
 
-  //h->Draw("BOX");
+  h->Draw("BOX");
 }
 
-void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){            //calculate vector of (X,Y) tuples containing layerwise center of gravity
-  B4ROOTEvent * Cevent = new B4ROOTEvent();
-  EcalTree->SetBranchAddress("EventBranch", &Cevent);
 
+void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent){            //calculate vector of (X,Y) tuples containing layerwise center of gravity
 
+  //variables for clustering
+  Int_t xdir=1;       // integers for direction
+  Int_t ydir=0;
+  Int_t buf;
+  Int_t stepstodo=1;      // how many steps to go before rotation
+  Int_t stepsctr=0;   // number of steps since last rotation
 
-  //TGraph2D * g = new TGraph2D();
+  Int_t currX=0;  // starting the spiral on the histogram maximum
+  Int_t currY=0;
+
+  Double_t esum=0;
+  Double_t curre=0;
+
+  Int_t maxbin=0;
+  Double_t maxdep=0;
+  Int_t binx, biny, binz;
+
+  // Variables for fit
+  Double_t xerr=0;
+  Double_t yerr=0;
+  Double_t cgx=0;
+  Double_t cgy=0;
+  Double_t cgz=0;
+  Double_t Eweight=0;
+
+  for(Int_t eventstodo=minevent; eventstodo<maxevent ;eventstodo++){           //loop over all simulated events
+
+    EcalTree->GetEntry(eventstodo);             //grab evetn from tree
+    Eges = Cevent->GapEnergy();
+    Int_t cnh = Cevent->NHits();
+    Double_t integSum=0;
+    Double_t integral;
+    Bool_t foundstart=false;
+  for(Int_t i=minlayer;i<maxlayer;i++){               //loop over all layers in event
+    for(Int_t j =0;j<cnh ;j++){                       //loop over all hits in laver i
+      if(Cevent->Hit(j)->Z()==i)
+        h1->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(), Cevent->Hit(j)->EnergyDeposit());  //fill histogram with hits of layer i
+    }
+
+    integral=h1->Integral();
+    if(integral != 0 && foundstart==false){
+      showerstart=i;
+      foundstart=true;
+    }
+
+    maxbin=h1->GetMaximumBin();
+    maxdep=h1->GetBinContent(maxbin);                   // get coordinates of bin with maximum energy deposition
+    h1->GetBinXYZ(maxbin, binx, biny, binz);
+
+    //Do spiral for clustering only if energy in Layer
+
+    if(integral!=0){                          //check if layer containes energy
+
+      xdir=1;                                  // integers for direction
+      ydir=0;
+      stepstodo=1;                             // how many steps to go before rotation
+      stepsctr=0;                             // number of steps since last rotation
+
+      currX=binx;                              // starting the spiral on the histogram maximum
+      currY=biny;
+
+      esum=0;
+      curre=0;
+      esum+=maxdep;
+      h2->SetBinContent(currX, currY, maxdep);
+      auto tp=std::make_tuple(currX, currY, maxdep);
+      ClusteredHits.push_back(tp);
+      h1->SetBinContent(binx, biny, 0);
+
+      while(esum<integral*0.9 || currX<binx+4){
+                                                          //do spiral until desired energyfraction is reached
+          currX+=xdir;
+          currY+=ydir;
+          curre=h1->GetBinContent(currX, currY);
+
+          if(curre>0){                                    //save tile only if it containes energy
+            tp=std::make_tuple(currX, currY, curre);
+            ClusteredHits.push_back(tp);
+            h2->SetBinContent(currX, currY, curre);
+          }
+          h1->SetBinContent(currX, currY, 0);
+          esum+=curre;
+          stepsctr++;
+          if(stepsctr==stepstodo){
+            stepsctr=0;
+            buf=xdir;         //rotate 90 deg
+            xdir= -ydir;
+            ydir=buf;
+
+            if(ydir==0){      //incremant steps at every iteration along x
+              stepstodo++;
+            }
+          }
+        }
+
+      Double_t e=h2->Integral();        //get energy contained in cluster
+
+      Eweight=e/Eges;                   //calculate weight
+
+      cgx=h2->GetMean(1);
+      xerr=h2->GetMeanError(1);
+                                        //extract center of gravity and error
+      cgy=h2->GetMean(2);
+      yerr=h2->GetMeanError(2);
+
+      if(yerr<0.00001){yerr=1/TMath::Sqrt(12);}
+      if(xerr<0.00001){xerr=1/TMath::Sqrt(12);}
+
+      cgz=i;
+
+      er1->Fill(i, xerr/nofEntries);
+      er2->Fill(i, yerr/nofEntries);
+
+      h3->Fill(cgx, cgy, cgz);
+
+      auto cg=std::make_tuple(cgx,cgy,cgz, xerr, yerr, Eweight);
+      coglist.push_back(cg);
+
+    }         // end of clustering
+
+    integSum += integral;
+
+    ClusteredHits.clear();
+
+    h1->Reset();
+
+    h2->Reset();
+
+    Eweight=0;
+
+  }
+  COGCollection.push_back(coglist);
+  coglist.clear();
+
+}
+
+}
+
+void TROOTAnalysis::CalcCOG(Int_t minevent, Int_t maxevent){            //calculate vector of (X,Y) tuples containing layerwise center of gravity
+
+  //variables for clustering
+  Int_t xdir=1;       // integers for direction
+  Int_t ydir=0;
+  Int_t buf;
+  Int_t stepstodo=1;      // how many steps to go before rotation
+  Int_t stepsctr=0;   // number of steps since last rotation
+
+  Int_t currX=0;  // starting the spiral on the histogram maximum
+  Int_t currY=0;
+
+  Double_t esum=0;
+  Double_t curre=0;
+
+  Int_t maxbin=0;
+  Double_t maxdep=0;
+  Int_t binx, biny, binz;
+
+  // Variables for fit
+  Double_t xerr=0;
+  Double_t yerr=0;
+  Double_t cgx=0;
+  Double_t cgy=0;
+  Double_t cgz=0;
+  Double_t Eweight=0;
+
+  for(Int_t eventstodo=minevent; eventstodo<maxevent ;eventstodo++){           //loop over all simulated events
+    std::cout<<"CenterEvent: "<<eventstodo<<std::endl;
+    EcalTree->GetEntry(eventstodo);             //grab evetn from tree
+    Eges = Cevent->GapEnergy();
+    Int_t cnh = Cevent->NHits();
+    Double_t integSum=0;
+    Double_t integral;
+    Bool_t foundstart=false;
+    Int_t i = 0;
+    Int_t collected=0;
+    showerstart=0;
+
+  while(collected<15 || i < 49 ){               //loop over layers until some layers after showerstart
+    for(Int_t j =0;j<cnh ;j++){                       //loop over all hits in laver i
+      if(Cevent->Hit(j)->Z()==i)
+        h1->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(), Cevent->Hit(j)->EnergyDeposit());  //fill histogram with hits of layer i
+    }
+
+    integral=h1->Integral();
+    if(integral != 0 && foundstart==false){
+      showerstart=i;
+    //  std::cout<<"showerstart: "<<showerstart<<std::endl;
+      foundstart=true;
+    }
+
+    maxbin=h1->GetMaximumBin();
+    maxdep=h1->GetBinContent(maxbin);                   // get coordinates of bin with maximum energy deposition
+    h1->GetBinXYZ(maxbin, binx, biny, binz);
+
+    //Do spiral for clustering only if energy in Layer
+
+    if(integral!=0){                          //check if layer containes energy
+      collected++;
+
+      xdir=1;                                  // integers for direction
+      ydir=0;
+      stepstodo=1;                             // how many steps to go before rotation
+      stepsctr=0;                             // number of steps since last rotation
+
+      currX=binx;                              // starting the spiral on the histogram maximum
+      currY=biny;
+
+      esum=0;
+      curre=0;
+      esum+=maxdep;
+      h2->SetBinContent(currX, currY, maxdep);
+      auto tp=std::make_tuple(currX, currY, maxdep);
+      ClusteredHits.push_back(tp);
+      h1->SetBinContent(binx, biny, 0);
+
+      while(esum<integral*0.9 || currX<binx+4){
+                                                          //do spiral until desired energyfraction is reached
+          currX+=xdir;
+          currY+=ydir;
+          curre=h1->GetBinContent(currX, currY);
+
+          if(curre>0){                                    //save tile only if it containes energy
+            tp=std::make_tuple(currX, currY, curre);
+            ClusteredHits.push_back(tp);
+            h2->SetBinContent(currX, currY, curre);
+          }
+          h1->SetBinContent(currX, currY, 0);
+          esum+=curre;
+          stepsctr++;
+          if(stepsctr==stepstodo){
+            stepsctr=0;
+            buf=xdir;         //rotate 90 deg
+            xdir= -ydir;
+            ydir=buf;
+
+            if(ydir==0){      //incremant steps at every iteration along x
+              stepstodo++;
+            }
+          }
+        }
+
+      Double_t e=h2->Integral();        //get energy contained in cluster
+
+      Eweight=e/Eges;                   //calculate weight
+
+      cgx=h2->GetMean(1);
+      xerr=h2->GetMeanError(1);
+                                        //extract center of gravity and error
+      cgy=h2->GetMean(2);
+      yerr=h2->GetMeanError(2);
+
+      if(yerr<0.00001){yerr=1/TMath::Sqrt(12);}
+      if(xerr<0.00001){xerr=1/TMath::Sqrt(12);}
+
+      cgz=i;
+
+      er1->Fill(i, xerr/nofEntries);
+      er2->Fill(i, yerr/nofEntries);
+
+      h3->Fill(cgx, cgy, cgz);
+
+      auto cg=std::make_tuple(cgx,cgy,cgz, xerr, yerr, Eweight);
+      coglist.push_back(cg);
+
+    }         // end of clustering
+
+    integSum += integral;
+
+    ClusteredHits.clear();
+
+    h1->Reset();
+
+    h2->Reset();
+
+    Eweight=0;
+
+    i++;
+  }
+  COGCollection.push_back(coglist);
+  coglist.clear();
+}
+
+}
+
+void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
+
+  TCanvas * c4 = new TCanvas("ReClustering","ReClustering");
+
+  CalcCOG(minevent, maxevent);                          //overloaded CalcCOG function for getting COGs after cluster start
+  std::cout<<"center done"<<std::endl;
+  FitCOGs(minevent, maxevent);
+  std::cout<<"center fit done"<<std::endl;
+//  PrintFitHists();
+  COGCollection.clear();      // clear the cluster and COG vectors for reclustering
+  coglist.clear();
+  ClusteredHits.clear();
 
 
   //variables for clustering
@@ -76,32 +374,66 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
   Double_t cgz=0;
   Double_t Eweight=0;
 
-  for(Int_t eventstodo=0;eventstodo<nofEntries;eventstodo++){           //loop over all simulated events
+  Int_t breakctr=0;
 
+  for(Int_t eventstodo=minevent;eventstodo<maxevent;eventstodo++){           //loop over all simulated events
+    std::cout<<"ReClustering event: "<<eventstodo<<std::endl;
     EcalTree->GetEntry(eventstodo);             //grab evetn from tree
     Eges = Cevent->GapEnergy();
     //std::cout<<Eges<<std::endl;
     Int_t cnh = Cevent->NHits();
     Double_t integSum=0;
     Double_t integral;
-    Int_t graphctr=0;
 
-  for(Int_t i=minlayer;i<maxlayer;i++){               //loop over all layers in event
-    for(Int_t j =0;j<cnh ;j++){                       //loop over all hits in laver i
-      if(Cevent->Hit(j)->Z()==i)
+
+  for(Int_t i=0;i<50;i++){
+  //  std::cout<<"layer: "<<i<<std::endl;
+    Int_t nofFills=0;                                 //loop over all layers in event
+    for(Int_t j =0;j<cnh ;j++){                       //loop over all hits in event i
+      if(Cevent->Hit(j)->Z()==i){
         h1->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(), Cevent->Hit(j)->EnergyDeposit());  //fill histogram with hits of layer i
-
+        nofFills++;
+      }
     }
-    integral=h1->Integral();
+    //std::cout<<nofFills<<std::endl;
 
-    maxbin=h1->GetMaximumBin();
-    maxdep=h1->GetBinContent(maxbin);                   // get coordinates of bin with maximum energy deposition
-    h1->GetBinXYZ(maxbin, binx, biny, binz);
+    Double_t MoliereRaduis=4.7; //cm
+    Int_t nofLoops=0;
+
+    while(nofLoops<nofFills){                                        // check if maximum is within 1 MoliereRaduis of Fit
+
+      maxbin=h1->GetMaximumBin();
+      maxdep=h1->GetBinContent(maxbin);                              // get coordinates of bin with maximum energy deposition
+      h1->GetBinXYZ(maxbin, binx, biny, binz);
+      Double_t Xpred=(std::get<0>(FitParams[eventstodo - minevent])*i+std::get<1>(FitParams[eventstodo - minevent]));
+      Double_t Ypred=(std::get<2>(FitParams[eventstodo - minevent])*i+std::get<3>(FitParams[eventstodo - minevent]));
+
+    //  std::cout<<"Maxdep: "<<binx<<":"<<biny<<"Pred: "<<Xpred<<":"<<Ypred<<std::endl;
+
+      Double_t d = TMath::Sqrt(    (binx-Xpred) * (binx-Xpred)
+                              +    (biny-Ypred) * (biny-Ypred)   );
+
+
+    //  std::cout<<"d: "<<d<<std::endl;
+
+      if(d>MoliereRaduis){
+        h1->SetBinContent(binx, biny, 0);
+
+      }
+      else{
+    //    std::cout<<"accepted: "<<d<<std::endl;
+        breakctr++;
+        break;
+      }
+
+      nofLoops++;
+    }
+
+    integral=h1->Integral();
 
     //Do spiral for clustering only if energy in Layer
 
-    if(integral!=0 && maxdep > c){              //check if layer containes energy
-
+    if(integral!=0){              //check if layer containes energy
 
       xdir=1;            // integers for direction
       ydir=0;
@@ -119,7 +451,7 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
       ClusteredHits.push_back(tp);
       h1->SetBinContent(binx, biny, 0);
 
-      while(esum<integral*0.9 && currX<binx+4){
+      while(esum<integral*0.9 || currX<binx+4){
                                                           //do spiral until desired energyfraction is reached
           currX+=xdir;
           currY+=ydir;
@@ -130,9 +462,10 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
             tp=std::make_tuple(currX, currY, curre);
             ClusteredHits.push_back(tp);
             h2->SetBinContent(currX, currY, curre);
+            h1->SetBinContent(currX, currY, 0);
           }
 
-          h1->SetBinContent(currX, currY, 0);
+
           esum+=curre;
           stepsctr++;
           if(stepsctr==stepstodo){
@@ -162,33 +495,8 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
       if(yerr<0.00001){yerr=1/TMath::Sqrt(12);}
       if(xerr<0.00001){xerr=1/TMath::Sqrt(12);}
 
-
-      //Double_t cgx=0;
-      //Double_t cgy=0;
       cgz=i;
 
-
-
-
-      //xerr=0;
-      //yerr=0;
-      //Double_t counter=0;
-      //for(Int_t er=0; er<ClusteredHits.size();er++){
-        //cgx += (std::get<0>(ClusteredHits[er])*std::get<2>(ClusteredHits[er]));
-        //cgy += (std::get<1>(ClusteredHits[er])*std::get<2>(ClusteredHits[er]));
-
-      //  xerr+= std::get<2>(ClusteredHits[er])*std::get<2>(ClusteredHits[er]);
-      //  yerr+= std::get<2>(ClusteredHits[er])*std::get<2>(ClusteredHits[er]);
-        //counter++;
-      //}
-
-
-
-
-
-    //  xerr=TMath::Sqrt(xerr)/(TMath::Sqrt(12.0)*integral2);
-    //  yerr=TMath::Sqrt(yerr)/(TMath::Sqrt(12.0)*integral2);
-      //hit1->Fill(i, ClusteredHits.size());
       er1->Fill(i, xerr/nofEntries);
       er2->Fill(i, yerr/nofEntries);
 
@@ -196,17 +504,16 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
 
       //std::cout<<"Center of gravity: "<<cgx<<" "<<cgy<<" "<<cgz<<std::endl;
       h3->Fill(cgx, cgy, cgz);
-      //g->SetPoint(graphctr, cgx, cgy, cgz);
-      //if(integral2 != 0){
-        auto cg=std::make_tuple(cgx,cgy,cgz, xerr, yerr, Eweight);
-        coglist.push_back(cg);
-      //}
+
+      auto cg=std::make_tuple(cgx,cgy,cgz, xerr, yerr, Eweight);
+      coglist.push_back(cg);
+
     }         // end of clustering
 
 
     integSum += integral;
 
-    graphctr++;
+
 
     ClusteredHits.clear();
 
@@ -219,22 +526,35 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c){        
 
 
 
-  }
+  }                   // loop over layers
+
   COGCollection.push_back(coglist);
   coglist.clear();
-   h3->GetXaxis()->SetTitle("X");
-   h3->GetYaxis()->SetTitle("Y");
-   h3->GetZaxis()->SetTitle("Z");
-   h3->SetMarkerStyle(4);
-   c2->cd();
-   h3->Draw("");
-   //h3->Reset();
+
+}                     // loop over events
+  FitCOGs(minevent, maxevent);
+  PrintFitHists();
+  plotCOGs();
+  //std::cout<<breakctr<<std::endl;
+}
+
+
+
+void TROOTAnalysis::plotCOGs(){
+
+  h3->GetXaxis()->SetTitle("X");
+  h3->GetYaxis()->SetTitle("Y");
+  h3->GetZaxis()->SetTitle("Z");
+  h3->SetMarkerStyle(4);
+  c2->cd();
+  h3->Draw("");
+  //h3->Reset();
 
 }
 
-}
 
-void TROOTAnalysis::FitCOGs(){
+
+void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
   //histograms for correlation
   TCanvas * corr1 = new TCanvas("Correlations");
   corr1->Divide(3,2,0.01,0.01);
@@ -252,12 +572,12 @@ void TROOTAnalysis::FitCOGs(){
   TH1D * co6 = new TH1D("MyTy correllation", "MyTy correllation",100, -1,1 );
   co6->GetXaxis()->SetTitle("correlation of Y slope and Y intercept");
 
-  TCanvas * dist1= new TCanvas("2m distance");
-  dist1->Divide(2,1,0.01,0.01);
-  TH1D * dx = new TH1D("2m distance X", "2m distance X", 1000, 30,70);
-  dx->GetXaxis()->SetTitle("X[cm]");
-  TH1D * dy = new TH1D("2m distance Y", "2m distance Y", 1000, 30,70);
-  dy->GetXaxis()->SetTitle("Y[cm]");
+  // TCanvas * dist1= new TCanvas("2m distance");
+  // dist1->Divide(2,1,0.01,0.01);
+  // TH1D * dx = new TH1D("2m distance X", "2m distance X", 1000, 30,70);
+  // dx->GetXaxis()->SetTitle("X[cm]");
+  // TH1D * dy = new TH1D("2m distance Y", "2m distance Y", 1000, 30,70);
+  // dy->GetXaxis()->SetTitle("Y[cm]");
 
 
     Fcn myfcn;
@@ -277,7 +597,7 @@ void TROOTAnalysis::FitCOGs(){
 
 
 
-    for(int events = 0; events <nofEntries; events++){
+    for(int events = 0; events < maxevent-minevent; events++){
 
         upar.SetValue("mx", 0.);
         upar.SetValue("tx", 50.);
@@ -286,10 +606,11 @@ void TROOTAnalysis::FitCOGs(){
 
         myfcn.SetCurrentEvent(events);
 
-
+        //std::cout<<events<<std::endl;
         FunctionMinimum min = migrad();
 
-        std::cout<<min<<std::endl;
+        //std::cout<<min<<std::endl;
+
 
         MnUserCovariance cov = min.UserCovariance();
 
@@ -304,14 +625,15 @@ void TROOTAnalysis::FitCOGs(){
           }
         }
 
+
         MnUserParameterState userParameterState = min.UserState();
 
         auto tp = std::make_tuple(userParameterState.Value("mx"), userParameterState.Value("tx"),
                         userParameterState.Value("my"), userParameterState.Value("ty"));
         FitParams.push_back(tp);
 
-        dx->Fill(std::get<0>(tp)*200+std::get<1>(tp));
-        dy->Fill(std::get<2>(tp)*200+std::get<3>(tp));
+        // dx->Fill(std::get<0>(tp)*200+std::get<1>(tp));
+        // dy->Fill(std::get<2>(tp)*200+std::get<3>(tp));
 
 
         error[0]= userParameterState.Error("mx");
@@ -334,11 +656,11 @@ void TROOTAnalysis::FitCOGs(){
         // FitParams.push_back(tp);
     }
 
-    dist1->cd(1);
-    dx->Draw("");
-
-    dist1->cd(2);
-    dy->Draw("");
+    // dist1->cd(1);
+    // dx->Draw("");
+    //
+    // dist1->cd(2);
+    // dy->Draw("");
 
     corr1->cd(1);
     co1->Draw("");
@@ -360,19 +682,6 @@ void TROOTAnalysis::FitCOGs(){
 
 }
 
-
-
-void TROOTAnalysis::PrintFitParams(){
-
-  for(Int_t p=0;p<nofEntries;p++){
-    std::cout<<"Event 1 ------------------------"<<std::endl;
-    std::cout<<"mx: "<<std::get<0>(FitParams[p])<<" tx: "<<std::get<1>(FitParams[p])<<" my: "<<std::get<2>(FitParams[p])<<" ty: "<<std::get<3>(FitParams[p])<<std::endl;
-
-  }
-
-
-
-}
 
 void TROOTAnalysis::PrintFitHists(){
   TCanvas * c1 = new TCanvas("Fit", "Fit");
@@ -428,87 +737,26 @@ void TROOTAnalysis::PrintFitHists(){
 
 //  er1->Reset();
 //  er2->Reset();
-
-
-
 }
 
-void TROOTAnalysis::PrintFitHists2(){
-  TCanvas * c4 = new TCanvas("cleaned Fit", "cleaned Fit");
-  c4->Divide(2,3,0.01, 0.01);
-
-  TH1D * cfitX = new TH1D("cX Fit","cX Fit", 1000,40,60);
-  TH1D * cfitY = new TH1D("cY Fit","cY Fit", 1000,40,60);
-
-  TH1D * cfitSX = new TH1D("cX Slope Fit","cX Slope Fit", 1000,-2,2);
-  TH1D * cfitSY = new TH1D("cY Slope Fit","cY Slope Fit", 1000,-2,2);
-
-  for(Int_t i=0;i<nofEntries;i++){
-      cfitX->Fill(std::get<1>(FitParams[i]));
-  }
-
-  for(Int_t i=0;i<nofEntries;i++){
-      cfitY->Fill(std::get<3>(FitParams[i]));
-  }
-
-  for(Int_t i=0;i<nofEntries;i++){
-      cfitSX->Fill(std::get<0>(FitParams[i]));
-  }
-
-  for(Int_t i=0;i<nofEntries;i++){
-      cfitSY->Fill(std::get<2>(FitParams[i]));
-  }
-
-  c4->cd(1);
-  cfitX->GetXaxis()->SetTitle("X");
-  cfitX->GetYaxis()->SetTitle("#");
-  cfitX->Draw();
-
-  c4->cd(2);
-  cfitY->GetXaxis()->SetTitle("Y");
-  cfitY->GetYaxis()->SetTitle("#");
-  cfitY->Draw();
-
-  c4->cd(3);
-  cfitSX->GetXaxis()->SetTitle("X Slope");
-  cfitSX->GetYaxis()->SetTitle("#");
-  cfitSX->Draw();
-
-  c4->cd(4);
-  cfitSY->GetXaxis()->SetTitle("Y Slope");
-  cfitSY->GetYaxis()->SetTitle("#");
-  cfitSY->Draw();
-
-  c4->cd(5);
-  er1->Draw();
-
-  c4->cd(6);
-  er2->Draw();
-
-  er1->Reset();
-  er2->Reset();
-
-}
-
-
-void TROOTAnalysis::CleanCOGs(){
+void TROOTAnalysis::CleanCOGs(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent){
 
 
 
-  TCanvas * c3 = new TCanvas("CleanCOGs", "CleanCOGs");
-  TH3D * clCOG = new TH3D("COGs after cleaning", "COGs after celaning",20,40,60,20,40,60,50,0,50);
+  //TCanvas * c3 = new TCanvas("CleanCOGs", "CleanCOGs");
+  //TH3D * clCOG = new TH3D("COGs after cleaning", "COGs after celaning",20,40,60,20,40,60,50,0,50);
 
   Double_t MoliereRaduis=4.87;   // in cm
 
-  CalcCOG(0,10,0);
-  FitCOGs();
+  CalcCOG(0,10, minevent-1, maxevent-1);
+  FitCOGs(minevent-1, maxevent-1);
 
   COGCollection.clear();
   coglist.clear();
   ClusteredHits.clear();
 
   //PrintFitHists();
-  CalcCOG(0,50,0);
+  CalcCOG(minlayer-1,maxlayer-1,minevent-1, maxevent-1 );
 
   Int_t erasecounter=0;
   Int_t totalcounter=0;
@@ -544,8 +792,8 @@ void TROOTAnalysis::CleanCOGs(){
   FitParams.clear();
 
 
-  FitCOGs();                //refit the leftover COGs
-  PrintFitHists2();
+  FitCOGs(minevent-1, maxevent-1);                //refit the leftover COGs
+  PrintFitHists();
 
   std::cout<<"Discarded COGs: "<<erasecounter<<" Total COGs:"<<totalcounter<<std::endl;
 

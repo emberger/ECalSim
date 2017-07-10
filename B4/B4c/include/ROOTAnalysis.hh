@@ -32,21 +32,29 @@ public:
   ~TROOTAnalysis();
 
   void plotEvent(Int_t pev);
-  void CalcCOG(Int_t minlayer, Int_t maxlayer, Double_t c);
-  void FitCOGs();
-  void CleanCOGs();
+  void plotCOGs();
 
+  void CalcCOG(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent);
+  void CalcCOG(Int_t minevent, Int_t maxevent);
 
+  void CalcCOGwithFit(Int_t minevent, Int_t maxevent);
 
-  void PrintFitParams();
+  void FitCOGs( Int_t minevent, Int_t maxevent);
+
+//  void CalcCOGwithFit(Int_t minlayer, Int_t maxlayer);
+  void CleanCOGs(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent);
+
 
   void PrintFitHists();
-  void PrintFitHists2();
 
 
 private:
-  Int_t nofEntries;
+  Int_t nofEntries;   // number of events in Tree
+  Double_t Eges;      //Energy in event
+  Int_t showerstart;
+
   TTree* EcalTree;
+  B4ROOTEvent * Cevent;
 
   std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>> coglist;
   std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>>> COGCollection;
@@ -55,7 +63,7 @@ private:
 
   std::vector<std::tuple<Double_t, Double_t, Double_t>> ClusteredHits;
 
-  Double_t Eges;      //Energy in event
+
 
 
 
