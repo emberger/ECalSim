@@ -19,33 +19,66 @@ TROOTAnalysis::~TROOTAnalysis(){}
 
 
 void TROOTAnalysis::plotEvent(Int_t pev){     //plot 3DHisto of selected event
-
-  B4ROOTEvent * event = new B4ROOTEvent();
-  //std::cout << "Event" << '\n';
-  EcalTree->SetBranchAddress("EventBranch", &event);
-  //std::cout << "Branch" << '\n';
+  TCanvas * plotcanvas1 = new TCanvas("eventplotter", "eventplotter");
 
   if(nofEntries<pev+1){
     std::cout<<"Tree has less than "<<pev+1<<" events, it has "<<nofEntries<<"."<<std::endl;
     return;
   }
 
-  TH3D * h = new TH3D("ECalEvent","ECalEvent",100,0,100,100,0,100,50,0,50);
+
 
   //for(Int_t i=0;i<nent; i++){
 
     EcalTree->GetEntry(pev);
-    Int_t pnh=event->NHits();
+    Int_t pnh=Cevent->NHits();
 
     for(Int_t j=0;j<pnh;j++){
-      h->Fill(event->Hit(j)->X(), event->Hit(j)->Y(),event->Hit(j)->Z(), event->Hit(j)->EnergyDeposit());
+      h->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(),Cevent->Hit(j)->Z(), Cevent->Hit(j)->EnergyDeposit());
     }
 
   h->GetXaxis()->SetTitle("X");
   h->GetYaxis()->SetTitle("Y");
   h->GetZaxis()->SetTitle("Z");
 
+  plotcanvas1->cd();
   h->Draw("BOX");
+}
+
+
+void TROOTAnalysis::findShowercenter(Int_t minevent, Int_t maxevent){
+
+
+
+  TH1I * ZHits= new TH1I("ZHits", "ZHits",50,0,50);
+
+  for(Int_t events=minevent;events<maxevent;events++){
+    EcalTree->GetEntry(events);
+
+    Int_t nhits=Cevent->NHits();
+    std::cout<<nhits<<std::endl;
+
+    Int_t maxZ=0;
+    for(Int_t i = 0 ; i<nhits ; i++){
+      Int_t Z=Cevent->Hit(i)->Z();
+      ZHits->Fill(Z);
+      std::cout<<"fill"<<std::endl;
+      // if(tmp<i){maxZ=Z;}
+      // tmp=Z;
+    }
+    std::cout<<"filled"<<std::endl;
+    showerCenters.push_back(ZHits->GetMean());
+
+    std::cout<<ZHits->GetMean()<<std::endl;
+    ZHits->Reset();
+  }
+
+  for(Int_t j=0;j<maxevent-minevent;j++){
+    std::cout<<showerCenters[j]-7<<std::endl;
+  }
+ //ZHits->Draw("");
+
+
 }
 
 
@@ -78,23 +111,19 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_
 
   for(Int_t eventstodo=minevent; eventstodo<maxevent ;eventstodo++){           //loop over all simulated events
 
-    EcalTree->GetEntry(eventstodo);             //grab evetn from tree
+    EcalTree->GetEntry(eventstodo);                   //grab evetn from tree
     Eges = Cevent->GapEnergy();
     Int_t cnh = Cevent->NHits();
-    Double_t integSum=0;
     Double_t integral;
     Bool_t foundstart=false;
   for(Int_t i=minlayer;i<maxlayer;i++){               //loop over all layers in event
     for(Int_t j =0;j<cnh ;j++){                       //loop over all hits in laver i
       if(Cevent->Hit(j)->Z()==i)
-        h1->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(), Cevent->Hit(j)->EnergyDeposit());  //fill histogram with hits of layer i
+        h1->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(), Cevent->Hit(j)->EnergyDeposit());
+         //fill histogram with hits of layer i
     }
 
     integral=h1->Integral();
-    if(integral != 0 && foundstart==false){
-      showerstart=i;
-      foundstart=true;
-    }
 
     maxbin=h1->GetMaximumBin();
     maxdep=h1->GetBinContent(maxbin);                   // get coordinates of bin with maximum energy deposition
@@ -171,22 +200,18 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_
 
     }         // end of clustering
 
-    integSum += integral;
-
     ClusteredHits.clear();
 
     h1->Reset();
 
     h2->Reset();
 
-    Eweight=0;
-
   }
   COGCollection.push_back(coglist);
   coglist.clear();
 
 }
-
+  plotCOGs();
 }
 
 void TROOTAnalysis::CalcCOG(Int_t minevent, Int_t maxevent){            //calculate vector of (X,Y) tuples containing layerwise center of gravity
@@ -218,28 +243,31 @@ void TROOTAnalysis::CalcCOG(Int_t minevent, Int_t maxevent){            //calcul
 
   for(Int_t eventstodo=minevent; eventstodo<maxevent ;eventstodo++){           //loop over all simulated events
     std::cout<<"CenterEvent: "<<eventstodo<<std::endl;
+    std::cout<<eventstodo-minevent<<std::endl;
     EcalTree->GetEntry(eventstodo);             //grab evetn from tree
     Eges = Cevent->GapEnergy();
     Int_t cnh = Cevent->NHits();
     Double_t integSum=0;
     Double_t integral;
     Bool_t foundstart=false;
-    Int_t i = 0;
+    Int_t i = showerCenters[eventstodo-minevent]-7;
+    std::cout<<i<<std::endl;
     Int_t collected=0;
-    showerstart=0;
+    if(i<0){
+      i=0;
+      collected=4;
+    }
 
-  while(collected<15 || i < 49 ){               //loop over layers until some layers after showerstart
+
+  while(collected<7 && i<50){               //loop over layers until some layers after showerstart
+    if(i==49 && collected==0){i=0;}
+    std::cout<<"i: "<<i<<std::endl;
     for(Int_t j =0;j<cnh ;j++){                       //loop over all hits in laver i
       if(Cevent->Hit(j)->Z()==i)
         h1->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(), Cevent->Hit(j)->EnergyDeposit());  //fill histogram with hits of layer i
     }
 
     integral=h1->Integral();
-    if(integral != 0 && foundstart==false){
-      showerstart=i;
-    //  std::cout<<"showerstart: "<<showerstart<<std::endl;
-      foundstart=true;
-    }
 
     maxbin=h1->GetMaximumBin();
     maxdep=h1->GetBinContent(maxbin);                   // get coordinates of bin with maximum energy deposition
@@ -249,7 +277,7 @@ void TROOTAnalysis::CalcCOG(Int_t minevent, Int_t maxevent){            //calcul
 
     if(integral!=0){                          //check if layer containes energy
       collected++;
-
+      std::cout<<collected<<":"<<i<<std::endl;
       xdir=1;                                  // integers for direction
       ydir=0;
       stepstodo=1;                             // how many steps to go before rotation
@@ -310,7 +338,7 @@ void TROOTAnalysis::CalcCOG(Int_t minevent, Int_t maxevent){            //calcul
       er1->Fill(i, xerr/nofEntries);
       er2->Fill(i, yerr/nofEntries);
 
-      h3->Fill(cgx, cgy, cgz);
+      //h3->Fill(cgx, cgy, cgz);
 
       auto cg=std::make_tuple(cgx,cgy,cgz, xerr, yerr, Eweight);
       coglist.push_back(cg);
@@ -325,8 +353,6 @@ void TROOTAnalysis::CalcCOG(Int_t minevent, Int_t maxevent){            //calcul
 
     h2->Reset();
 
-    Eweight=0;
-
     i++;
   }
   COGCollection.push_back(coglist);
@@ -338,12 +364,12 @@ void TROOTAnalysis::CalcCOG(Int_t minevent, Int_t maxevent){            //calcul
 void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
 
   TCanvas * c4 = new TCanvas("ReClustering","ReClustering");
-
+  findShowercenter(minevent, maxevent);
   CalcCOG(minevent, maxevent);                          //overloaded CalcCOG function for getting COGs after cluster start
   std::cout<<"center done"<<std::endl;
   FitCOGs(minevent, maxevent);
   std::cout<<"center fit done"<<std::endl;
-//  PrintFitHists();
+  //PrintFitHists();
   COGCollection.clear();      // clear the cluster and COG vectors for reclustering
   coglist.clear();
   ClusteredHits.clear();
@@ -374,8 +400,6 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
   Double_t cgz=0;
   Double_t Eweight=0;
 
-  Int_t breakctr=0;
-
   for(Int_t eventstodo=minevent;eventstodo<maxevent;eventstodo++){           //loop over all simulated events
     std::cout<<"ReClustering event: "<<eventstodo<<std::endl;
     EcalTree->GetEntry(eventstodo);             //grab evetn from tree
@@ -397,7 +421,8 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
     }
     //std::cout<<nofFills<<std::endl;
 
-    Double_t MoliereRaduis=4.7; //cm
+    Double_t MoliereRaduis=4.8; //cm
+
     Int_t nofLoops=0;
 
     while(nofLoops<nofFills){                                        // check if maximum is within 1 MoliereRaduis of Fit
@@ -410,19 +435,17 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
 
     //  std::cout<<"Maxdep: "<<binx<<":"<<biny<<"Pred: "<<Xpred<<":"<<Ypred<<std::endl;
 
-      Double_t d = TMath::Sqrt(    (binx-Xpred) * (binx-Xpred)
-                              +    (biny-Ypred) * (biny-Ypred)   );
-
+      Double_t d = TMath::Sqrt(    (binx-Xpred) * (binx-Xpred)  +   (biny-Ypred) * (biny-Ypred)   );
 
     //  std::cout<<"d: "<<d<<std::endl;
 
       if(d>MoliereRaduis){
+
         h1->SetBinContent(binx, biny, 0);
 
       }
       else{
     //    std::cout<<"accepted: "<<d<<std::endl;
-        breakctr++;
         break;
       }
 
@@ -451,7 +474,7 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
       ClusteredHits.push_back(tp);
       h1->SetBinContent(binx, biny, 0);
 
-      while(esum<integral*0.9 || currX<binx+4){
+      while(esum<integral*0.9 || currX<binx+9){
                                                           //do spiral until desired energyfraction is reached
           currX+=xdir;
           currY+=ydir;
@@ -532,8 +555,9 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
   coglist.clear();
 
 }                     // loop over events
+  FitParams.clear();
   FitCOGs(minevent, maxevent);
-  PrintFitHists();
+  PrintFitHists(minevent, maxevent);
   plotCOGs();
   //std::cout<<breakctr<<std::endl;
 }
@@ -606,7 +630,7 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
 
         myfcn.SetCurrentEvent(events);
 
-        //std::cout<<events<<std::endl;
+        std::cout<<"event: "<<events<<std::endl;
         FunctionMinimum min = migrad();
 
         //std::cout<<min<<std::endl;
@@ -615,15 +639,6 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
         MnUserCovariance cov = min.UserCovariance();
 
         //std::cout<<cov(0 ,0)<<" "<<cov(1,1)<<" "<<cov(2,2)<<" "<<cov(3,3)<<std::endl;
-        Double_t covar[4][4];
-        Double_t error[4];
-
-        for(Int_t row=0;row<4;row++){
-          for(Int_t col=0;col<4;col++){
-            covar[row][col]=cov(row,col);
-
-          }
-        }
 
 
         MnUserParameterState userParameterState = min.UserState();
@@ -635,6 +650,8 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
         // dx->Fill(std::get<0>(tp)*200+std::get<1>(tp));
         // dy->Fill(std::get<2>(tp)*200+std::get<3>(tp));
 
+        Double_t covar[4][4];
+        Double_t error[4];
 
         error[0]= userParameterState.Error("mx");
         error[1]= userParameterState.Error("tx");
@@ -642,14 +659,23 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
         error[3]= userParameterState.Error("ty");
 
         //Fill correlation Histograms
+        if(COGCollection[events].size() != 0){
 
-        co1->Fill(covar[0][1]/(error[0]*error[1]));
-        co2->Fill(covar[0][2]/(error[0]*error[2]));
-        co3->Fill(covar[0][3]/(error[0]*error[3]));
-        co4->Fill(covar[1][2]/(error[1]*error[2]));
-        co5->Fill(covar[1][3]/(error[1]*error[3]));
-        co6->Fill(covar[2][3]/(error[2]*error[3]));
 
+          for(Int_t row=0;row<4;row++){
+            for(Int_t col=0;col<4;col++){
+              covar[row][col]=cov(row,col);
+
+            }
+          }
+
+          co1->Fill(covar[0][1]/(error[0]*error[1]));
+          co2->Fill(covar[0][2]/(error[0]*error[2]));
+          co3->Fill(covar[0][3]/(error[0]*error[3]));
+          co4->Fill(covar[1][2]/(error[1]*error[2]));
+          co5->Fill(covar[1][3]/(error[1]*error[3]));
+          co6->Fill(covar[2][3]/(error[2]*error[3]));
+        }
         // auto tp=std::make_tuple(userParameterState.Value("a1"),userParameterState.Value("a2"),userParameterState.Value("a3"),
         //                         userParameterState.Value("x1"),userParameterState.Value("x2"),userParameterState.Value("x3"));
         //
@@ -683,29 +709,26 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
 }
 
 
-void TROOTAnalysis::PrintFitHists(){
+void TROOTAnalysis::PrintFitHists(Int_t minevent, Int_t maxevent){
+  Int_t ent=maxevent-minevent;
   TCanvas * c1 = new TCanvas("Fit", "Fit");
   c1->Divide(2,3,0.01, 0.01);
 
-  TH1D * fitX = new TH1D("X Fit","X Fit", 800,40,60);
-  TH1D * fitY = new TH1D("Y Fit","Y Fit", 800,40,60);
 
-  TH1D * fitSX = new TH1D("X Slope Fit","X Slope Fit", 800,-2,2);
-  TH1D * fitSY = new TH1D("Y Slope Fit","Y Slope Fit", 800,-2,2);
 
-  for(Int_t i=0;i<nofEntries;i++){
+  for(Int_t i=0;i<ent;i++){
       fitX->Fill(std::get<1>(FitParams[i]));
   }
 
-  for(Int_t i=0;i<nofEntries;i++){
+  for(Int_t i=0;i<ent;i++){
       fitY->Fill(std::get<3>(FitParams[i]));
   }
 
-  for(Int_t i=0;i<nofEntries;i++){
+  for(Int_t i=0;i<ent;i++){
       fitSX->Fill(std::get<0>(FitParams[i]));
   }
 
-  for(Int_t i=0;i<nofEntries;i++){
+  for(Int_t i=0;i<ent;i++){
       fitSY->Fill(std::get<2>(FitParams[i]));
   }
 
@@ -743,8 +766,8 @@ void TROOTAnalysis::CleanCOGs(Int_t minlayer, Int_t maxlayer, Int_t minevent, In
 
 
 
-  //TCanvas * c3 = new TCanvas("CleanCOGs", "CleanCOGs");
-  //TH3D * clCOG = new TH3D("COGs after cleaning", "COGs after celaning",20,40,60,20,40,60,50,0,50);
+  TCanvas * c3 = new TCanvas("CleanCOGs", "CleanCOGs");
+  TH3D * clCOG = new TH3D("COGs after cleaning", "COGs after celaning",20,40,60,20,40,60,50,0,50);
 
   Double_t MoliereRaduis=4.87;   // in cm
 
@@ -776,24 +799,25 @@ void TROOTAnalysis::CleanCOGs(Int_t minlayer, Int_t maxlayer, Int_t minevent, In
 
   }
 
-  // for(int i=0; i<nofEntries;i++){                                       //Delete the COGs, outside of one MoliereRadius
-  //   for(int z=0; z<COGCollection[i].size(); z++){
-  //     clCOG->Fill(std::get<0>(COGCollection[i][z]), std::get<1>(COGCollection[i][z]), std::get<2>(COGCollection[i][z]));
-  //   }
-  // }
-  //
-  // clCOG->GetXaxis()->SetTitle("X");
-  // clCOG->GetYaxis()->SetTitle("Y");
-  // clCOG->GetZaxis()->SetTitle("Z");
-  // clCOG->SetMarkerStyle(4);
-  // c3->cd();
-  // clCOG->Draw("");
+  for(int i=0; i<nofEntries;i++){                                       //Delete the COGs, outside of one MoliereRadius
+    for(int z=0; z<COGCollection[i].size(); z++){
+      clCOG->Fill(std::get<0>(COGCollection[i][z]), std::get<1>(COGCollection[i][z]), std::get<2>(COGCollection[i][z]));
+    }
+  }
+
+  clCOG->GetXaxis()->SetTitle("X");
+  clCOG->GetYaxis()->SetTitle("Y");
+  clCOG->GetZaxis()->SetTitle("Z");
+  clCOG->SetMarkerStyle(4);
+  c3->cd();
+  clCOG->Draw("");
 
   FitParams.clear();
 
 
-  FitCOGs(minevent-1, maxevent-1);                //refit the leftover COGs
-  PrintFitHists();
+  FitCOGs(minevent, maxevent);                //refit the leftover COGs
+  PrintFitHists(minevent, maxevent);
+  plotCOGs();
 
   std::cout<<"Discarded COGs: "<<erasecounter<<" Total COGs:"<<totalcounter<<std::endl;
 

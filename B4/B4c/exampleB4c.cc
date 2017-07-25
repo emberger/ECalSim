@@ -63,6 +63,7 @@ namespace {
 
 int main(int argc,char** argv)
 {
+  
 	//Set Detector geometry
 
 
@@ -73,7 +74,7 @@ std::cout<<GetInst().GetfNofLayers()<<std::endl;
     PrintUsage();
     return 1;
   }
-  
+
   G4String macro;
   G4String session;
 #ifdef G4MULTITHREADED
@@ -91,8 +92,8 @@ std::cout<<GetInst().GetfNofLayers()<<std::endl;
       PrintUsage();
       return 1;
     }
-  }  
-  
+  }
+
   // Detect interactive mode (if no macro provided) and define UI session
   //
   G4UIExecutive* ui = 0;
@@ -103,14 +104,14 @@ std::cout<<GetInst().GetfNofLayers()<<std::endl;
   // Choose the Random engine
   //
   G4Random::setTheEngine(new CLHEP::RanecuEngine);
-  
+
   // Construct the default run manager
   //
 #ifdef G4MULTITHREADED
   G4MTRunManager * runManager = new G4MTRunManager;
-  if ( nThreads > 0 ) { 
+  if ( nThreads > 0 ) {
     runManager->SetNumberOfThreads(nThreads);
-  }  
+  }
 #else
   G4RunManager * runManager = new G4RunManager;
 #endif
@@ -122,10 +123,10 @@ std::cout<<GetInst().GetfNofLayers()<<std::endl;
 
   auto physicsList = new FTFP_BERT;
   runManager->SetUserInitialization(physicsList);
-    
+
   auto actionInitialization = new B4cActionInitialization();
   runManager->SetUserInitialization(actionInitialization);
-  
+
   // Initialize visualization
   auto visManager = new G4VisExecutive;
   // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
@@ -142,7 +143,7 @@ std::cout<<GetInst().GetfNofLayers()<<std::endl;
     G4String command = "/control/execute ";
     UImanager->ApplyCommand(command+macro);
   }
-  else  {  
+  else  {
     // interactive mode : define UI session
     UImanager->ApplyCommand("/control/execute init_vis.mac");
     if (ui->IsGUI()) {
@@ -154,7 +155,7 @@ std::cout<<GetInst().GetfNofLayers()<<std::endl;
 
   // Job termination
   // Free the store: user actions, physics_list and detector_description are
-  // owned and deleted by the run manager, so they should not be deleted 
+  // owned and deleted by the run manager, so they should not be deleted
   // in the main() program !
 
   delete visManager;

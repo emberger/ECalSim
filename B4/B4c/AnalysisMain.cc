@@ -39,7 +39,7 @@ TChain * ch1 = new TChain("eventTree");
 
 
 std::cout << "Adding " <<"ECalEventTree.root"<<" to the Chain"<< std::endl;
-ch1->Add("ECalEventTree.root");
+ch1->Add("ECalEventTree10GeVstudy.root");
 ch1->Draw("");
 std::cout<<"Added Tree"<<std::endl;
 
@@ -51,14 +51,19 @@ Int_t minl= std::stoi(argv[1]);
 Int_t maxl= std::stoi(argv[2]);
 Int_t minevt= std::stoi(argv[3]);
 Int_t maxevt= std::stoi(argv[4]);
+if(std::stoi(argv[5])==0){
 
-//A.plotEvent(1422);
-//A.CalcCOG(minl-1, maxl-1, minevt, maxevt+1);
-//A.FitCOGs(minevt, maxevt+1);
+//A.plotEvent(774);
+//A.findShowercenter(104, 105);
+A.CalcCOG(minl-1, maxl-1, minevt, maxevt);
+A.FitCOGs(minevt, maxevt);
 //A.PrintFitParams();
-//A.PrintFitHists();
+A.PrintFitHists(minevt, maxevt);
+//A.CleanCOGs(minl, maxl, minevt, maxevt);
+}
+else{
 A.CalcCOGwithFit(minevt, maxevt);
-
+}
 std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 std::cout << "Computing took "
               << std::chrono::duration_cast<std::chrono::seconds>(end - start).count()

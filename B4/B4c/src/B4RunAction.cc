@@ -92,7 +92,7 @@ B4RunAction::~B4RunAction()
 void B4RunAction::BeginOfRunAction(const G4Run* /*run*/)
 {
 
-  rootFile = new TFile("ECalEventTree1.root", "RECREATE");
+  rootFile = new TFile("ECalEventTree10GeVstudy.root", "RECREATE");
   //inform the runManager to save random number seed
   //G4RunManager::GetRunManager()->SetRandomNumberStore(true);
 

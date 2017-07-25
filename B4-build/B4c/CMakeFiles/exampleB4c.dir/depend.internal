@@ -2785,6 +2785,8 @@ B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o
  /opt/root/5.34/include/TAxis.h
  /opt/root/5.34/include/TBits.h
  /opt/root/5.34/include/TBranch.h
+ /opt/root/5.34/include/TBrowser.h
+ /opt/root/5.34/include/TBrowserImp.h
  /opt/root/5.34/include/TBuffer.h
  /opt/root/5.34/include/TCanvas.h
  /opt/root/5.34/include/TCanvasImp.h
