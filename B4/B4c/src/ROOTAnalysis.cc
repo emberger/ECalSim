@@ -11,6 +11,15 @@ TROOTAnalysis::TROOTAnalysis(TChain* ch){
     Cevent = new B4ROOTEvent();
     EcalTree->SetBranchAddress("EventBranch", &Cevent);
 
+    // for(Int_t i=0;i<nofEntries;i++){
+    //   EcalTree->GetEntry(i);
+    //   Int_t hitnr = Cevent->NHits();
+    //   for(Int_t j=0;j<hitnr;j++){
+    //     Cevent->Hit(j)->SetCoordinates(-495 + Cevent->Hit(j)->X() * 10 , -495 + Cevent->Hit(j)->Y() * 10 , -288.2 + Cevent->Hit(j)->Z() * 11.8 );  //convert Copynumber coordinates
+    //   }                                                                                                                                         //to geant4 coordinates
+    // }
+
+
   //EcalTree->Print();
 }
 
@@ -50,7 +59,7 @@ void TROOTAnalysis::findShowercenter(Int_t minevent, Int_t maxevent){
 
 
 
-  TH1I * ZHits= new TH1I("ZHits", "ZHits",50,0,50);
+  TH1I * ZHits= new TH1I("ZHits", "ZHits",10000,-295,295);
 
   for(Int_t events=minevent;events<maxevent;events++){
     EcalTree->GetEntry(events);
@@ -421,7 +430,7 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
     }
     //std::cout<<nofFills<<std::endl;
 
-    Double_t MoliereRaduis=4.8; //cm
+    Double_t MoliereRaduis=48; //cm
 
     Int_t nofLoops=0;
 
@@ -435,7 +444,7 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
 
     //  std::cout<<"Maxdep: "<<binx<<":"<<biny<<"Pred: "<<Xpred<<":"<<Ypred<<std::endl;
 
-      Double_t d = TMath::Sqrt(    (binx-Xpred) * (binx-Xpred)  +   (biny-Ypred) * (biny-Ypred)   );
+      Double_t d = TMath::Sqrt(    ((-495 + binx*10) - Xpred) * ((-495 + binx*10) - Xpred)  +   ((-495 + biny*10) - Ypred) * ((-495 + biny*10)-Ypred)   );
 
     //  std::cout<<"d: "<<d<<std::endl;
 
@@ -596,16 +605,44 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
   TH1D * co6 = new TH1D("MyTy correllation", "MyTy correllation",100, -1,1 );
   co6->GetXaxis()->SetTitle("correlation of Y slope and Y intercept");
 
-  // TCanvas * dist1= new TCanvas("2m distance");
-  // dist1->Divide(2,1,0.01,0.01);
-  // TH1D * dx = new TH1D("2m distance X", "2m distance X", 1000, 30,70);
-  // dx->GetXaxis()->SetTitle("X[cm]");
-  // TH1D * dy = new TH1D("2m distance Y", "2m distance Y", 1000, 30,70);
-  // dy->GetXaxis()->SetTitle("Y[cm]");
+  TCanvas * dist1= new TCanvas("2m distance");
+  dist1->Divide(2,1,0.01,0.01);
+  TH1D * dx = new TH1D("Front X", "Front X", 2000, -50,150);
+  dx->GetXaxis()->SetTitle("X[cm]");
+  TH1D * dy = new TH1D("Front Y", "Front Y", 2000, -50,150);
+  dy->GetXaxis()->SetTitle("Y[cm]");
+
+
+    //transform from copynumber coordinates to geant4 coordinates
+    std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>> Transcoglist;
+    std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>>> TransfomedCOGs;
+
+    for(Int_t i = 0;i<nofEntries;i++){
+      for(Int_t j = 0;j<COGCollection[i].size();j++){
+
+        auto tc = std::make_tuple((-495 + std::get<0>(COGCollection[i][j]) * 10) ,
+                                  (-495 + std::get<1>(COGCollection[i][j]) * 10) ,
+                                  -288.2 + std::get<2>(COGCollection[i][j]) * 11.8,
+                                  std::get<3>(COGCollection[i][j]),
+                                  std::get<4>(COGCollection[i][j]),
+                                  std::get<5>(COGCollection[i][j])  );
+        Transcoglist.push_back(tc);
+
+      }
+      TransfomedCOGs.push_back(Transcoglist);
+      Transcoglist.clear();
+    }
+
+    for(Int_t i = 0; i<nofEntries;i++){
+      for(Int_t j =0;j<TransfomedCOGs[i].size();j++){
+        std::cout<<std::get<0>(TransfomedCOGs[i][j])<<":"<<std::get<1>(TransfomedCOGs[i][j])<<":"<<std::get<2>(TransfomedCOGs[i][j])<<"-----"
+        <<std::get<0>(COGCollection[i][j])<<":"<<std::get<1>(COGCollection[i][j])<<":"<<std::get<2>(COGCollection[i][j])<<std::endl;;
+      }
+    }
 
 
     Fcn myfcn;
-    myfcn.SetCOGs(COGCollection);
+    myfcn.SetCOGs(TransfomedCOGs);
     //myfcn.PrintCOGs();
     MnUserParameters upar;
     double error_minimizer_parameters = 1e-4;
@@ -624,9 +661,9 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
     for(int events = 0; events < maxevent-minevent; events++){
 
         upar.SetValue("mx", 0.);
-        upar.SetValue("tx", 50.);
+        upar.SetValue("tx", 0.);
         upar.SetValue("my", 0.);
-        upar.SetValue("ty", 50.);
+        upar.SetValue("ty", 0.);
 
         myfcn.SetCurrentEvent(events);
 
@@ -647,8 +684,8 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
                         userParameterState.Value("my"), userParameterState.Value("ty"));
         FitParams.push_back(tp);
 
-        // dx->Fill(std::get<0>(tp)*200+std::get<1>(tp));
-        // dy->Fill(std::get<2>(tp)*200+std::get<3>(tp));
+        dx->Fill(std::get<0>(tp)*(-295)+std::get<1>(tp));
+        dy->Fill(std::get<2>(tp)*(-295)+std::get<3>(tp));
 
         Double_t covar[4][4];
         Double_t error[4];
@@ -659,7 +696,7 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
         error[3]= userParameterState.Error("ty");
 
         //Fill correlation Histograms
-        if(COGCollection[events].size() != 0){
+        if(COGCollection[events].size() > 1){
 
 
           for(Int_t row=0;row<4;row++){
@@ -682,11 +719,11 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
         // FitParams.push_back(tp);
     }
 
-    // dist1->cd(1);
-    // dx->Draw("");
-    //
-    // dist1->cd(2);
-    // dy->Draw("");
+    dist1->cd(1);
+    dx->Draw("");
+
+    dist1->cd(2);
+    dy->Draw("");
 
     corr1->cd(1);
     co1->Draw("");

@@ -64,8 +64,8 @@ private:
   std::vector<std::tuple<Double_t, Double_t, Double_t>> ClusteredHits;
   std::vector<Double_t> showerCenters;
 
-  TH1D * fitX = new TH1D("X Fit","X Fit", 800,40,60);
-  TH1D * fitY = new TH1D("Y Fit","Y Fit", 800,40,60);
+  TH1D * fitX = new TH1D("X Fit","X Fit", 8000,-600,600);
+  TH1D * fitY = new TH1D("Y Fit","Y Fit", 8000,-600,600);
 
   TH1D * fitSX = new TH1D("X Slope Fit","X Slope Fit", 800,-2,2);
   TH1D * fitSY = new TH1D("Y Slope Fit","Y Slope Fit", 800,-2,2);
@@ -82,8 +82,8 @@ private:
 
   TH3D * h = new TH3D("ECalEvent","ECalEvent",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);                                   //plot Event
 
-  TH2D * h1 = new TH2D("h1", "h1", histsizeX,0,histsizeX,histsizeY,0,histsizeY);                                 //  clustering
-  TH2D * h2 = new TH2D("h2", "h2", histsizeX,0,histsizeX,histsizeY,0,histsizeY);                               //  clustering
+  TH2D * h1 = new TH2D("h1", "h1", histsizeX+1,-0.5,histsizeX+0.5,histsizeY+1,-0.5,histsizeY+0.5);                                 //  clustering
+  TH2D * h2 = new TH2D("h2", "h2", histsizeX+1,-0.5,histsizeX+0.5,histsizeY+1,-0.5,histsizeY+0.5);                               //  clustering
 
   TH3D * h3 = new TH3D("h3", "h3",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);         //  plot cogs
 

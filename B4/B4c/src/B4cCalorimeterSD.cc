@@ -134,7 +134,7 @@ G4bool B4cCalorimeterSD::ProcessHits(G4Step* step,
 
   auto Layer=ROhist->GetReplicaNumber(3);
   //  auto LayerV=ROhist-> GetVolume(3)->GetName();
-
+  G4cout<<Layer<<":"<<Strip<<":"<<Cell<<G4endl;
 
   //Calculate CellID
 
