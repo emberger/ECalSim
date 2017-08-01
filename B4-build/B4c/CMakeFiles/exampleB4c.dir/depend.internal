@@ -2808,6 +2808,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o
  /opt/root/5.34/include/TGenericClassInfo.h
  /opt/root/5.34/include/TGraph.h
  /opt/root/5.34/include/TGraph2D.h
+ /opt/root/5.34/include/TGraphErrors.h
  /opt/root/5.34/include/TH1.h
  /opt/root/5.34/include/TH1D.h
  /opt/root/5.34/include/TH2.h

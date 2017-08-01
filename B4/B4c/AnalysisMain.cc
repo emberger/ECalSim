@@ -39,7 +39,7 @@ TChain * ch1 = new TChain("eventTree");
 
 
 std::cout << "Adding " <<"ECalEventTree.root"<<" to the Chain"<< std::endl;
-ch1->Add("ECalEventTree1.root");
+ch1->Add("Gamma5mmTile_2mmMeV.root");
 ch1->Draw("");
 std::cout<<"Added Tree"<<std::endl;
 
@@ -51,12 +51,15 @@ Int_t minl= std::stoi(argv[1]);
 Int_t maxl= std::stoi(argv[2]);
 Int_t minevt= std::stoi(argv[3]);
 Int_t maxevt= std::stoi(argv[4]);
+
+//A.PrintERes();
+
 if(std::stoi(argv[5])==0){
 
-  //A.plotEvent(774);
+  //A.plotEvent(100);
   //A.findShowercenter(104, 105);
   A.CalcCOG(minl-1, maxl, minevt, maxevt);
-  A.FitCOGs(minevt, maxevt);
+  A.FitCOGs(minevt, maxevt, 5 );
   //A.PrintFitParams();
   A.PrintFitHists(minevt, maxevt);
   //A.CleanCOGs(minl, maxl, minevt, maxevt);

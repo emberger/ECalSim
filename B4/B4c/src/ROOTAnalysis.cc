@@ -11,12 +11,12 @@ TROOTAnalysis::TROOTAnalysis(TChain* ch){
     Cevent = new B4ROOTEvent();
     EcalTree->SetBranchAddress("EventBranch", &Cevent);
 
-    // for(Int_t i=0;i<nofEntries;i++){
+    // for(Int_t i=0;i<nofEntries;i++){                                              //energySmearing
     //   EcalTree->GetEntry(i);
     //   Int_t hitnr = Cevent->NHits();
     //   for(Int_t j=0;j<hitnr;j++){
-    //     Cevent->Hit(j)->SetCoordinates(-495 + Cevent->Hit(j)->X() * 10 , -495 + Cevent->Hit(j)->Y() * 10 , -288.2 + Cevent->Hit(j)->Z() * 11.8 );  //convert Copynumber coordinates
-    //   }                                                                                                                                         //to geant4 coordinates
+    //     //Cevent0->Hit(j)->SetEnergyDeposit(Cevent->Hit(j)->EnergyDeposit()*);
+    //   }
     // }
 
 
@@ -39,12 +39,12 @@ void TROOTAnalysis::plotEvent(Int_t pev){     //plot 3DHisto of selected event
 
   //for(Int_t i=0;i<nent; i++){
 
-    EcalTree->GetEntry(pev);
-    Int_t pnh=Cevent->NHits();
+  EcalTree->GetEntry(pev);
+  Int_t pnh=Cevent->NHits();
 
-    for(Int_t j=0;j<pnh;j++){
-      h->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(),Cevent->Hit(j)->Z(), Cevent->Hit(j)->EnergyDeposit());
-    }
+  for(Int_t j=0;j<pnh;j++){
+    h->Fill(Cevent->Hit(j)->X(), Cevent->Hit(j)->Y(),Cevent->Hit(j)->Z(), Cevent->Hit(j)->EnergyDeposit());
+  }
 
   h->GetXaxis()->SetTitle("X");
   h->GetYaxis()->SetTitle("Y");
@@ -53,6 +53,52 @@ void TROOTAnalysis::plotEvent(Int_t pev){     //plot 3DHisto of selected event
   plotcanvas1->cd();
   h->Draw("BOX");
 }
+
+
+
+void TROOTAnalysis::PrintERes(){
+
+  TCanvas * res = new TCanvas("Energy Resolution", "ERes");
+  TCanvas * gap = new TCanvas("GapEnergy", "GapEnergy");
+
+  Double_t y[12]={4.55/19.25 , 5.942/38.47 , 9.056/77.51 , 12.06/115.9 , 11.59/154.2 , 13.71/192.9 , 17.98/268.8 , 20.25/384 , 53.25/956.2 , 69.23/1905 , 94.6/2836, 146.7/3779};
+  Double_t x[12]={50,100,200,300,400,500,700,1000,2500,5000,7500,10000};
+
+  TGraph * re1 = new TGraph(12, x, y);
+  re1->SetTitle("Energyresolution");
+  TF1 * EnergyRes = new TF1("EnergyRes", "sqrt(([0] * [0] / x) + ([1]*[1])  + ([2]*[2]/(x*x)))");
+
+  re1->Fit(EnergyRes);
+
+  re1->GetXaxis()->SetTitle("Energy[MeV]");
+  re1->GetYaxis()->SetTitle("#frac{#sigma}{E}");
+  re1->GetYaxis()->SetTitleOffset(1.3);
+  //re1->GetYaxis()->LabelsOption("v");
+  //re1->SetMarkerStyle(23);
+  gStyle->SetOptFit();
+  res->cd(0);
+  re1->Draw("A*");
+
+  Double_t Egun[12]={50,100,200,300,400,500,700,1000,2500,5000,7500,10000};
+  Double_t Egap[12]={19.25,38.47,77.51,115.9,154.2,192.9,268.8,384,956.2,1905,2836,3779};
+
+  Double_t errx[12]={0,0,0,0,0,0,0,0,0,0,0,0};
+  Double_t erry[12]={4.55 , 5.942 , 9.056 , 12.06 , 11.59 , 13.71 , 17.98 , 20.25 , 53.25 , 69.23 , 94.6, 146.7};
+
+  TF1 * Efficiency = new TF1("Efficiency", "[0]*x+[1]");
+
+  TGraphErrors * gap1 = new TGraphErrors(12, Egun, Egap, errx, erry );
+  gap1->SetTitle("Efficiency");
+  gap1->Fit(Efficiency);
+  gap1->GetXaxis()->SetTitle("Gun Energy[MeV]");
+  gap1->GetYaxis()->SetTitle("Gap Energy[MeV]");
+  gap1->GetYaxis()->SetTitleOffset(1.3);
+  gStyle->SetOptFit();
+
+  gap->cd(0);
+  gap1->Draw("A*");
+}
+
 
 
 void TROOTAnalysis::findShowercenter(Int_t minevent, Int_t maxevent){
@@ -376,7 +422,7 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
   findShowercenter(minevent, maxevent);
   CalcCOG(minevent, maxevent);                          //overloaded CalcCOG function for getting COGs after cluster start
   std::cout<<"center done"<<std::endl;
-  FitCOGs(minevent, maxevent);
+  FitCOGs(minevent, maxevent, 5);
   std::cout<<"center fit done"<<std::endl;
   //PrintFitHists();
   COGCollection.clear();      // clear the cluster and COG vectors for reclustering
@@ -430,7 +476,7 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
     }
     //std::cout<<nofFills<<std::endl;
 
-    Double_t MoliereRaduis=48; //cm
+    Double_t MoliereRaduis=48; //mm
 
     Int_t nofLoops=0;
 
@@ -565,7 +611,7 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
 
 }                     // loop over events
   FitParams.clear();
-  FitCOGs(minevent, maxevent);
+  FitCOGs(minevent, maxevent, 5);
   PrintFitHists(minevent, maxevent);
   plotCOGs();
   //std::cout<<breakctr<<std::endl;
@@ -587,7 +633,7 @@ void TROOTAnalysis::plotCOGs(){
 
 
 
-void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
+void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent, Double_t tileLen){
   //histograms for correlation
   TCanvas * corr1 = new TCanvas("Correlations");
   corr1->Divide(3,2,0.01,0.01);
@@ -605,23 +651,23 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
   TH1D * co6 = new TH1D("MyTy correllation", "MyTy correllation",100, -1,1 );
   co6->GetXaxis()->SetTitle("correlation of Y slope and Y intercept");
 
-  TCanvas * dist1= new TCanvas("2m distance");
+  TCanvas * dist1= new TCanvas("Projection");
   dist1->Divide(2,1,0.01,0.01);
-  TH1D * dx = new TH1D("Front X", "Front X", 2000, -50,150);
-  dx->GetXaxis()->SetTitle("X[cm]");
-  TH1D * dy = new TH1D("Front Y", "Front Y", 2000, -50,150);
-  dy->GetXaxis()->SetTitle("Y[cm]");
+  TH1D * dx = new TH1D("Projection X", "Projection X", 1000, -600,600);
+  dx->GetXaxis()->SetTitle("X[mm]");
+  TH1D * dy = new TH1D("Projection Y", "Projection Y", 1000, -600,600);
+  dy->GetXaxis()->SetTitle("Y[mm]");
 
 
     //transform from copynumber coordinates to geant4 coordinates
     std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>> Transcoglist;
     std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>>> TransfomedCOGs;
 
-    for(Int_t i = 0;i<nofEntries;i++){
+    for(Int_t i = 0;i<nofEntries;i++){                                        //transformation to geant4 coordinate system
       for(Int_t j = 0;j<COGCollection[i].size();j++){
 
-        auto tc = std::make_tuple((-495 + std::get<0>(COGCollection[i][j]) * 10) ,
-                                  (-495 + std::get<1>(COGCollection[i][j]) * 10) ,
+        auto tc = std::make_tuple(((-500+tileLen/2) + std::get<0>(COGCollection[i][j]) * tileLen) ,
+                                  ((-500+tileLen/2) + std::get<1>(COGCollection[i][j]) * tileLen) ,
                                   -288.2 + std::get<2>(COGCollection[i][j]) * 11.8,
                                   std::get<3>(COGCollection[i][j]),
                                   std::get<4>(COGCollection[i][j]),
@@ -633,12 +679,12 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
       Transcoglist.clear();
     }
 
-    for(Int_t i = 0; i<nofEntries;i++){
-      for(Int_t j =0;j<TransfomedCOGs[i].size();j++){
-        std::cout<<std::get<0>(TransfomedCOGs[i][j])<<":"<<std::get<1>(TransfomedCOGs[i][j])<<":"<<std::get<2>(TransfomedCOGs[i][j])<<"-----"
-        <<std::get<0>(COGCollection[i][j])<<":"<<std::get<1>(COGCollection[i][j])<<":"<<std::get<2>(COGCollection[i][j])<<std::endl;;
-      }
-    }
+    // for(Int_t i = 0; i<nofEntries;i++){
+    //   for(Int_t j =0;j<TransfomedCOGs[i].size();j++){
+    //     std::cout<<std::get<0>(TransfomedCOGs[i][j])<<":"<<std::get<1>(TransfomedCOGs[i][j])<<":"<<std::get<2>(TransfomedCOGs[i][j])<<"-----"
+    //     <<std::get<0>(COGCollection[i][j])<<":"<<std::get<1>(COGCollection[i][j])<<":"<<std::get<2>(COGCollection[i][j])<<std::endl;;
+    //   }
+    // }
 
 
     Fcn myfcn;
@@ -684,8 +730,8 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
                         userParameterState.Value("my"), userParameterState.Value("ty"));
         FitParams.push_back(tp);
 
-        dx->Fill(std::get<0>(tp)*(-295)+std::get<1>(tp));
-        dy->Fill(std::get<2>(tp)*(-295)+std::get<3>(tp));
+        dx->Fill(std::get<0>(tp)*(-1295)+std::get<1>(tp));
+        dy->Fill(std::get<2>(tp)*(-1295)+std::get<3>(tp));
 
         Double_t covar[4][4];
         Double_t error[4];
@@ -770,23 +816,33 @@ void TROOTAnalysis::PrintFitHists(Int_t minevent, Int_t maxevent){
   }
 
   c1->cd(1);
-  fitX->GetXaxis()->SetTitle("X");
-  fitX->GetYaxis()->SetTitle("#");
+  fitX->GetXaxis()->SetTitle("X[mm]");
+  fitX->GetYaxis()->SetTitle("Counts");
+  gStyle->SetOptStat(1111);
+  // Set stat options
+  gStyle->SetStatY(0.9);
+  // Set y-position (fraction of pad size)
+  gStyle->SetStatX(0.9);
+  // Set x-position (fraction of pad size)
+  gStyle->SetStatW(0.25);
+  // Set width of stat-box (fraction of pad size)
+  gStyle->SetStatH(0.25);
+  // Set height of stat-box (fraction of pad size)
   fitX->Draw();
 
   c1->cd(2);
-  fitY->GetXaxis()->SetTitle("Y");
-  fitY->GetYaxis()->SetTitle("#");
+  fitY->GetXaxis()->SetTitle("Y[mm]");
+  fitY->GetYaxis()->SetTitle("Counts");
   fitY->Draw();
 
   c1->cd(3);
   fitSX->GetXaxis()->SetTitle("X Slope");
-  fitSX->GetYaxis()->SetTitle("#");
+  fitSX->GetYaxis()->SetTitle("Counts");
   fitSX->Draw();
 
   c1->cd(4);
   fitSY->GetXaxis()->SetTitle("Y Slope");
-  fitSY->GetYaxis()->SetTitle("#");
+  fitSY->GetYaxis()->SetTitle("Counts");
   fitSY->Draw();
 
   c1->cd(5);
@@ -809,7 +865,7 @@ void TROOTAnalysis::CleanCOGs(Int_t minlayer, Int_t maxlayer, Int_t minevent, In
   Double_t MoliereRaduis=4.87;   // in cm
 
   CalcCOG(0,10, minevent-1, maxevent-1);
-  FitCOGs(minevent-1, maxevent-1);
+  FitCOGs(minevent-1, maxevent-1, 5);
 
   COGCollection.clear();
   coglist.clear();
@@ -852,7 +908,7 @@ void TROOTAnalysis::CleanCOGs(Int_t minlayer, Int_t maxlayer, Int_t minevent, In
   FitParams.clear();
 
 
-  FitCOGs(minevent, maxevent);                //refit the leftover COGs
+  FitCOGs(minevent, maxevent, 5);                //refit the leftover COGs
   PrintFitHists(minevent, maxevent);
   plotCOGs();
 

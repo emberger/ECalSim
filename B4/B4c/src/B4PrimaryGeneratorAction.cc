@@ -57,7 +57,7 @@ B4PrimaryGeneratorAction::B4PrimaryGeneratorAction()
   fParticleGun->SetParticleDefinition(particleDefinition);
 
 
-  fParticleGun->SetParticleEnergy(500.*MeV);
+  fParticleGun->SetParticleEnergy(200.*MeV);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -97,16 +97,16 @@ void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4Exception("B4PrimaryGeneratorAction::GeneratePrimaries()",
       "MyCode0002", JustWarning, msg);
   }
-  G4double PartMomx = 0.;// G4UniformRand()*0.23-0.115;
-  G4double PartMomy = 0.;// G4UniformRand()*0.23-0.115;
+  G4double PartMomx = -0.3;// G4UniformRand()*0.23-0.115;
+  G4double PartMomy = -0.3;// G4UniformRand()*0.23-0.115;
   G4double PartMomz = 1. ;
 
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(PartMomx,PartMomy,PartMomz));
 
   // Set gun position
-  G4double PartPosx = 5.;          // 0 for middle of calorimeter
-  G4double PartPosy = 5.;          // 0 for middle of calorimeter
-  G4double PartPosz = -295.;         //front face at -295 mm
+  G4double PartPosx = 200.0;          // 0 for middle of calorimeter
+  G4double PartPosy = 200.0;          // 0 for middle of calorimeter
+  G4double PartPosz = -1295.;         //front face at -295 mm
 
   fParticleGun
     ->SetParticlePosition(G4ThreeVector(PartPosx ,  PartPosy , PartPosz)); //-worldZHalfLength));

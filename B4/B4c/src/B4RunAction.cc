@@ -92,7 +92,7 @@ B4RunAction::~B4RunAction()
 void B4RunAction::BeginOfRunAction(const G4Run* /*run*/)
 {
 
-  rootFile = new TFile("EnergyResolution1GeV_gamma.root", "RECREATE");
+  rootFile = new TFile("Gamma5mmTile_2mmMeV.root", "RECREATE");
   //inform the runManager to save random number seed
   //G4RunManager::GetRunManager()->SetRandomNumberStore(true);
 

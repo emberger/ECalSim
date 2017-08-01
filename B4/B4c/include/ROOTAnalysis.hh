@@ -3,6 +3,7 @@
 #include "TChain.h"
 #include "TCanvas.h"
 #include "TGraph.h"
+#include "TGraphErrors.h"
 #include "TH1D.h"
 #include "TH2D.h"
 #include "TBrowser.h"
@@ -32,6 +33,8 @@ public:
   TROOTAnalysis(TChain* ch);
   ~TROOTAnalysis();
 
+
+  void PrintERes();
   void plotEvent(Int_t pev);
   void plotCOGs();
   void findShowercenter(Int_t minevent, Int_t maxevent);
@@ -41,13 +44,14 @@ public:
 
   void CalcCOGwithFit(Int_t minevent, Int_t maxevent);
 
-  void FitCOGs( Int_t minevent, Int_t maxevent);
+  void FitCOGs( Int_t minevent, Int_t maxevent, Double_t tileLen);
 
 //  void CalcCOGwithFit(Int_t minlayer, Int_t maxlayer);
   void CleanCOGs(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent);
 
 
   void PrintFitHists(Int_t minevent, Int_t maxevent);
+
 
 
 private:
@@ -64,8 +68,8 @@ private:
   std::vector<std::tuple<Double_t, Double_t, Double_t>> ClusteredHits;
   std::vector<Double_t> showerCenters;
 
-  TH1D * fitX = new TH1D("X Fit","X Fit", 8000,-600,600);
-  TH1D * fitY = new TH1D("Y Fit","Y Fit", 8000,-600,600);
+  TH1D * fitX = new TH1D("X Fit","X Fit", 4000,-600,600);
+  TH1D * fitY = new TH1D("Y Fit","Y Fit", 4000,-600,600);
 
   TH1D * fitSX = new TH1D("X Slope Fit","X Slope Fit", 800,-2,2);
   TH1D * fitSY = new TH1D("Y Slope Fit","Y Slope Fit", 800,-2,2);
@@ -76,8 +80,8 @@ private:
 
   TCanvas * c2 = new TCanvas("COGs", "COGs");
 
-  Double_t histsizeX=100;
-  Double_t histsizeY=100;
+  Double_t histsizeX=200;
+  Double_t histsizeY=200;
   Double_t histsizeZ=50;
 
   TH3D * h = new TH3D("ECalEvent","ECalEvent",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);                                   //plot Event
