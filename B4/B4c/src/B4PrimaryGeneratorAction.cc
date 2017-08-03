@@ -53,30 +53,12 @@ B4PrimaryGeneratorAction::B4PrimaryGeneratorAction()
   // default particle kinematic
   //
   auto particleDefinition
-    = G4ParticleTable::GetParticleTable()->FindParticle("gamma");
+    = G4ParticleTable::GetParticleTable()->FindParticle("mu-");
   fParticleGun->SetParticleDefinition(particleDefinition);
 
 
   fParticleGun->SetParticleEnergy(200.*MeV);
-}
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-B4PrimaryGeneratorAction::~B4PrimaryGeneratorAction()
-{
-  delete fParticleGun;
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
-{
-  // This function is called at the begining of event
-
-  // In order to avoid dependence of PrimaryGeneratorAction
-  // on DetectorConstruction class we get world volume
-  // from G4LogicalVolumeStore
-  //
   G4double worldZHalfLength = 0.;
   auto worldLV = G4LogicalVolumeStore::GetInstance()->GetVolume("World");
 
@@ -97,19 +79,41 @@ void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4Exception("B4PrimaryGeneratorAction::GeneratePrimaries()",
       "MyCode0002", JustWarning, msg);
   }
-  G4double PartMomx = -0.3;// G4UniformRand()*0.23-0.115;
-  G4double PartMomy = -0.3;// G4UniformRand()*0.23-0.115;
+
+  G4double PartMomx = 0.;// G4UniformRand()*0.23-0.115;
+  G4double PartMomy = 0.;// G4UniformRand()*0.23-0.115;
   G4double PartMomz = 1. ;
 
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(PartMomx,PartMomy,PartMomz));
+  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(PartMomx,PartMomy,PartMomz));
 
   // Set gun position
-  G4double PartPosx = 200.0;          // 0 for middle of calorimeter
-  G4double PartPosy = 200.0;          // 0 for middle of calorimeter
-  G4double PartPosz = -1295.;         //front face at -295 mm
+  G4double PartPosx = 0.;          // 0 for middle of calorimeter
+  G4double PartPosy = 0.;          // 0 for middle of calorimeter
+  G4double PartPosz = 0.;         //front face at -295 mm
 
-  fParticleGun
-    ->SetParticlePosition(G4ThreeVector(PartPosx ,  PartPosy , PartPosz)); //-worldZHalfLength));
+  //fParticleGun
+  //  ->SetParticlePosition(G4ThreeVector(PartPosx ,  PartPosy ,-worldZHalfLength));
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+B4PrimaryGeneratorAction::~B4PrimaryGeneratorAction()
+{
+  delete fParticleGun;
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
+{
+  // This function is called at the begining of event
+
+  // In order to avoid dependence of PrimaryGeneratorAction
+  // on DetectorConstruction class we get world volume
+  // from G4LogicalVolumeStore
+  //
+
+
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }

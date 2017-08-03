@@ -24,7 +24,7 @@
 // ********************************************************************
 //
 // $Id: B4RunAction.hh 74265 2013-10-02 14:41:20Z gcosmo $
-// 
+//
 /// \file B4RunAction.hh
 /// \brief Definition of the B4RunAction class
 
@@ -47,9 +47,9 @@ class G4Run;
 
 /// Run action class
 ///
-/// It accumulates statistic and computes dispersion of the energy deposit 
+/// It accumulates statistic and computes dispersion of the energy deposit
 /// and track lengths of charged particles with use of analysis tools:
-/// H1D histograms are created in BeginOfRunAction() for the following 
+/// H1D histograms are created in BeginOfRunAction() for the following
 /// physics quantities:
 /// - Edep in absorber
 /// - Edep in gap
@@ -59,7 +59,7 @@ class G4Run;
 /// The histograms and ntuple are saved in the output file in a format
 /// accoring to a selected technology in B4Analysis.hh.
 ///
-/// In EndOfRunAction(), the accumulated statistic and computed 
+/// In EndOfRunAction(), the accumulated statistic and computed
 /// dispersion is printed.
 ///
 
@@ -82,4 +82,3 @@ class B4RunAction : public G4UserRunAction
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif
-

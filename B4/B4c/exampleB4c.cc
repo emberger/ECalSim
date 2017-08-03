@@ -48,6 +48,8 @@
 
 #include "B4cDetParams.hh"
 
+//#include "TFile.h"
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 namespace {
@@ -63,8 +65,9 @@ namespace {
 
 int main(int argc,char** argv)
 {
-  
-	//Set Detector geometry
+
+
+  //OPen ROOT file
 
 
 std::cout<<GetInst().GetfNofLayers()<<std::endl;
@@ -115,6 +118,7 @@ std::cout<<GetInst().GetfNofLayers()<<std::endl;
 #else
   G4RunManager * runManager = new G4RunManager;
 #endif
+
 
   // Set mandatory initialization classes
   //

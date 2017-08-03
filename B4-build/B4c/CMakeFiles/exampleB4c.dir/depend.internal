@@ -2778,6 +2778,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o
  /opt/root/5.34/include/TAttBBox2D.h
  /opt/root/5.34/include/TAttCanvas.h
  /opt/root/5.34/include/TAttFill.h
+ /opt/root/5.34/include/TAttImage.h
  /opt/root/5.34/include/TAttLine.h
  /opt/root/5.34/include/TAttMarker.h
  /opt/root/5.34/include/TAttPad.h
@@ -2816,6 +2817,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o
  /opt/root/5.34/include/TH3.h
  /opt/root/5.34/include/TH3D.h
  /opt/root/5.34/include/THashTable.h
+ /opt/root/5.34/include/TImage.h
  /opt/root/5.34/include/TIterator.h
  /opt/root/5.34/include/TList.h
  /opt/root/5.34/include/TMap.h

@@ -207,6 +207,8 @@ TF1.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TF1.h
 TMath.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TMath.h
+TImage.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TImage.h
 Minuit2/MnUserParameters.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minuit2/MnUserParameters.h
 Minuit2/MnUserCovariance.h
@@ -1242,6 +1244,12 @@ Rtypes.h
 Riosfwd.h
 /opt/root/5.34/include/Riosfwd.h
 
+/opt/root/5.34/include/TAttImage.h
+TObject.h
+/opt/root/5.34/include/TObject.h
+Riosfwd.h
+/opt/root/5.34/include/Riosfwd.h
+
 /opt/root/5.34/include/TAttLine.h
 Rtypes.h
 /opt/root/5.34/include/Rtypes.h
@@ -1539,6 +1547,16 @@ TCollection.h
 /opt/root/5.34/include/TCollection.h
 TString.h
 /opt/root/5.34/include/TString.h
+
+/opt/root/5.34/include/TImage.h
+TNamed.h
+/opt/root/5.34/include/TNamed.h
+TAttImage.h
+/opt/root/5.34/include/TAttImage.h
+GuiTypes.h
+/opt/root/5.34/include/GuiTypes.h
+TVectorDfwd.h
+/opt/root/5.34/include/TVectorDfwd.h
 
 /opt/root/5.34/include/TInterpreter.h
 TDictionary.h

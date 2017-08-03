@@ -15,6 +15,7 @@
 #include "TFile.h"
 #include "TF1.h"
 #include "TMath.h"
+#include "TImage.h"
 
 #include "Minuit2/MnUserParameters.h"
 #include "Minuit2/MnUserCovariance.h"
@@ -37,6 +38,8 @@ public:
   void PrintERes();
   void plotEvent(Int_t pev);
   void plotCOGs();
+  void PlotProjection(Int_t distance);
+
   void findShowercenter(Int_t minevent, Int_t maxevent);
 
   void CalcCOG(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent);
@@ -51,6 +54,7 @@ public:
 
 
   void PrintFitHists(Int_t minevent, Int_t maxevent);
+
 
 
 
@@ -80,8 +84,8 @@ private:
 
   TCanvas * c2 = new TCanvas("COGs", "COGs");
 
-  Double_t histsizeX=200;
-  Double_t histsizeY=200;
+  Double_t histsizeX=100;
+  Double_t histsizeY=100;
   Double_t histsizeZ=50;
 
   TH3D * h = new TH3D("ECalEvent","ECalEvent",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);                                   //plot Event

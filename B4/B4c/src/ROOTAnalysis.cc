@@ -70,6 +70,8 @@ void TROOTAnalysis::PrintERes(){
 
   re1->Fit(EnergyRes);
 
+
+
   re1->GetXaxis()->SetTitle("Energy[MeV]");
   re1->GetYaxis()->SetTitle("#frac{#sigma}{E}");
   re1->GetYaxis()->SetTitleOffset(1.3);
@@ -78,6 +80,10 @@ void TROOTAnalysis::PrintERes(){
   gStyle->SetOptFit();
   res->cd(0);
   re1->Draw("A*");
+  TImage * img1 = TImage::Create();
+  img1->FromPad(res);
+  img1->WriteImage("/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/GammaEnergyandSlopeScan_Analysis/ERes.png");
+  delete img1;
 
   Double_t Egun[12]={50,100,200,300,400,500,700,1000,2500,5000,7500,10000};
   Double_t Egap[12]={19.25,38.47,77.51,115.9,154.2,192.9,268.8,384,956.2,1905,2836,3779};
@@ -99,6 +105,42 @@ void TROOTAnalysis::PrintERes(){
   gap1->Draw("A*");
 }
 
+void TROOTAnalysis::PlotProjection(Int_t distance){
+
+  TCanvas * dist1= new TCanvas("Projection");
+
+  dist1->Divide(3,1,0.01,0.01);
+
+  TH1D * dx = new TH1D("Projection X", "Projection X", 1000, -600,600);
+  dx->GetXaxis()->SetTitle("X[mm]");
+  TH1D * dy = new TH1D("Projection Y", "Projection Y", 1000, -600,600);
+  dy->GetXaxis()->SetTitle("Y[mm]");
+
+  TH2D * cont1 = new TH2D("ProjectionXY", "ProjectionXY", 2000, -1000,1000,2000,-1000,1000);
+  cont1->GetXaxis()->SetTitle("X[mm]");
+  cont1->GetYaxis()->SetTitle("Y[mm]");
+  std::cout<<"Created Hists"<<std::endl;
+
+  for(Int_t i=0; i<nofEntries;i++){
+    Double_t proX=std::get<0>(FitParams[i])*(-295-distance)+std::get<1>(FitParams[i]);
+    Double_t proY=std::get<2>(FitParams[i])*(-295-distance)+std::get<3>(FitParams[i]);
+
+    dx->Fill(proX);
+    dy->Fill(proY);
+    cont1->Fill(proX,proY);
+    std::cout<<"filled: "<<i<<std::endl;
+  }
+
+  dist1->cd(1);
+  dx->Draw("");
+
+  dist1->cd(2);
+  dy->Draw("");
+
+  dist1->cd(3);
+  cont1->Draw();
+
+}
 
 
 void TROOTAnalysis::findShowercenter(Int_t minevent, Int_t maxevent){
@@ -651,12 +693,7 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent, Double_t tileLen){
   TH1D * co6 = new TH1D("MyTy correllation", "MyTy correllation",100, -1,1 );
   co6->GetXaxis()->SetTitle("correlation of Y slope and Y intercept");
 
-  TCanvas * dist1= new TCanvas("Projection");
-  dist1->Divide(2,1,0.01,0.01);
-  TH1D * dx = new TH1D("Projection X", "Projection X", 1000, -600,600);
-  dx->GetXaxis()->SetTitle("X[mm]");
-  TH1D * dy = new TH1D("Projection Y", "Projection Y", 1000, -600,600);
-  dy->GetXaxis()->SetTitle("Y[mm]");
+
 
 
     //transform from copynumber coordinates to geant4 coordinates
@@ -716,7 +753,7 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent, Double_t tileLen){
         std::cout<<"event: "<<events<<std::endl;
         FunctionMinimum min = migrad();
 
-        //std::cout<<min<<std::endl;
+        std::cout<<min<<std::endl;
 
 
         MnUserCovariance cov = min.UserCovariance();
@@ -730,8 +767,7 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent, Double_t tileLen){
                         userParameterState.Value("my"), userParameterState.Value("ty"));
         FitParams.push_back(tp);
 
-        dx->Fill(std::get<0>(tp)*(-1295)+std::get<1>(tp));
-        dy->Fill(std::get<2>(tp)*(-1295)+std::get<3>(tp));
+
 
         Double_t covar[4][4];
         Double_t error[4];
@@ -765,11 +801,7 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent, Double_t tileLen){
         // FitParams.push_back(tp);
     }
 
-    dist1->cd(1);
-    dx->Draw("");
 
-    dist1->cd(2);
-    dy->Draw("");
 
     corr1->cd(1);
     co1->Draw("");

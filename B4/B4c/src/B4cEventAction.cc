@@ -127,17 +127,17 @@ void B4cEventAction::PrintEventStatistics(
 		G4double gapEdep, G4double gapTrackLength) const
 {
 	// print event statistics
-	G4cout
-	<< "(Not implemented)   Absorber: total energy: "
-	<< std::setw(7) << G4BestUnit(absoEdep, "Energy")
-	<< "       total track length: "
-	<< std::setw(7) << G4BestUnit(absoTrackLength, "Length")
-	<< G4endl
-	<< "        Gap: total energy: "
-	<< std::setw(7) << G4BestUnit(gapEdep, "Energy")
-	<< "       total track length: "
-	<< std::setw(7) << G4BestUnit(gapTrackLength, "Length")
-	<< G4endl;
+	// G4cout
+	// << "(Not implemented)   Absorber: total energy: "
+	// << std::setw(7) << G4BestUnit(absoEdep, "Energy")
+	// << "       total track length: "
+	// << std::setw(7) << G4BestUnit(absoTrackLength, "Length")
+	// << G4endl
+	// << "        Gap: total energy: "
+	// << std::setw(7) << G4BestUnit(gapEdep, "Energy")
+	// << "       total track length: "
+	// << std::setw(7) << G4BestUnit(gapTrackLength, "Length")
+	// << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
