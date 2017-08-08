@@ -45,52 +45,56 @@
 
 class B4cCalorHit : public G4VHit
 {
-  public:
-    B4cCalorHit();
-    B4cCalorHit(const B4cCalorHit&);
-    virtual ~B4cCalorHit();
+public:
+B4cCalorHit();
+B4cCalorHit(const B4cCalorHit&);
+virtual ~B4cCalorHit();
 
-    // operators
-    const B4cCalorHit& operator=(const B4cCalorHit&);
-    G4int operator==(const B4cCalorHit&) const;
+// operators
+const B4cCalorHit& operator=(const B4cCalorHit&);
+G4int operator==(const B4cCalorHit&) const;
 
-    inline void* operator new(size_t);
-    inline void  operator delete(void*);
+inline void* operator new(size_t);
+inline void operator delete(void*);
 
-    // methods from base class
-    virtual void Draw() {}
-    virtual void Print();
+// methods from base class
+virtual void Draw() {
+}
+virtual void Print();
 
-    // methods to handle data
-    void Add(G4double de, G4double dl);
+// methods to handle data
+void Add(G4double de, G4double dl);
 
-    void SetTouch();
-    void SetCellInfo();
-    void SetX(G4int x);
-    void SetY(G4int y);
-    void SetZ(G4int z);
+void SetTouch();
+void SetCellInfo();
+void SetPhotonNumber(G4int nr);
+void SetX(G4int x);
+void SetY(G4int y);
+void SetZ(G4int z);
 
-    // get methods
-    G4double GetEdep() const;
-    G4double GetTrackLength() const;
-    G4bool GetTouch();
-    G4bool GetCellInfo();
+// get methods
+G4double GetEdep() const;
+G4double GetTrackLength() const;
+G4bool GetTouch();
+G4bool GetCellInfo();
+G4int GetPhotonNumber();
 
-    G4int GetX();
-    G4int GetY();
-    G4int GetZ();
+G4int GetX();
+G4int GetY();
+G4int GetZ();
 
 
-  private:
-    G4double fEdep;        ///< Energy deposit in the sensitive volume
-    G4double fTrackLength;///< Track length in the  sensitive volume
+private:
+G4double fEdep;            ///< Energy deposit in the sensitive volume
+G4double fTrackLength;    ///< Track length in the  sensitive volume
 
-    G4bool fTouched;	// Bool to select interesting cells
-    G4bool fCellInfo;	// Bool to distinguish cell info from layered info and total accounting
+G4bool fTouched;      // Bool to select interesting cells
+G4bool fCellInfo;     // Bool to distinguish cell info from layered info and total accounting
+G4int Photon;
 
-    G4int Xpos;	//
-    G4int Ypos;	// Coordinates to identify Calorimeter Cell
-    G4int Zpos;	//
+G4int Xpos;     //
+G4int Ypos;     // Coordinates to identify Calorimeter Cell
+G4int Zpos;     //
 
 };
 
@@ -104,58 +108,77 @@ extern G4ThreadLocal G4Allocator<B4cCalorHit>* B4cCalorHitAllocator;
 
 inline void* B4cCalorHit::operator new(size_t)
 {
-  if (!B4cCalorHitAllocator) {
-    B4cCalorHitAllocator = new G4Allocator<B4cCalorHit>;
-  }
-  void *hit;
-  hit = (void *) B4cCalorHitAllocator->MallocSingle();
-  return hit;
+        if (!B4cCalorHitAllocator) {
+                B4cCalorHitAllocator = new G4Allocator<B4cCalorHit>;
+        }
+        void *hit;
+        hit = (void *) B4cCalorHitAllocator->MallocSingle();
+        return hit;
 }
 
 inline void B4cCalorHit::operator delete(void *hit)
 {
-  if (!B4cCalorHitAllocator) {
-    B4cCalorHitAllocator = new G4Allocator<B4cCalorHit>;
-  }
-  B4cCalorHitAllocator->FreeSingle((B4cCalorHit*) hit);
+        if (!B4cCalorHitAllocator) {
+                B4cCalorHitAllocator = new G4Allocator<B4cCalorHit>;
+        }
+        B4cCalorHitAllocator->FreeSingle((B4cCalorHit*) hit);
 }
 
 inline void B4cCalorHit::Add(G4double de, G4double dl) {
-  fEdep += de; 
-  fTrackLength += dl;
+        fEdep += de;
+        fTrackLength += dl;
 }
 
-inline G4double B4cCalorHit::GetEdep() const { 
-  return fEdep; 
+inline G4double B4cCalorHit::GetEdep() const {
+        return fEdep;
 }
 
-inline G4double B4cCalorHit::GetTrackLength() const { 
-  return fTrackLength; 
+inline G4double B4cCalorHit::GetTrackLength() const {
+        return fTrackLength;
 }
 
 inline G4bool B4cCalorHit::GetTouch(){
-	return fTouched;
+        return fTouched;
 }
 
 inline void B4cCalorHit::SetTouch(){
-	fTouched=true;
+        fTouched=true;
+}
+inline void B4cCalorHit::SetPhotonNumber(G4int nr){
+        Photon = nr;
+}
+
+inline G4int B4cCalorHit::GetPhotonNumber(){
+        return Photon;
 }
 
 inline void B4cCalorHit::SetCellInfo(){
-	fCellInfo=true;
+        fCellInfo=true;
 }
 
 inline G4bool B4cCalorHit::GetCellInfo(){
-	return fCellInfo;
+        return fCellInfo;
 }
 
-inline void B4cCalorHit::SetX(G4int x){Xpos=x;}
-inline void B4cCalorHit::SetY(G4int y){Ypos=y;}
-inline void B4cCalorHit::SetZ(G4int z){Zpos=z;}
+inline void B4cCalorHit::SetX(G4int x){
+        Xpos=x;
+}
+inline void B4cCalorHit::SetY(G4int y){
+        Ypos=y;
+}
+inline void B4cCalorHit::SetZ(G4int z){
+        Zpos=z;
+}
 
-inline G4int B4cCalorHit::GetX(){return Xpos;}
-inline G4int B4cCalorHit::GetY(){return Ypos;}
-inline G4int B4cCalorHit::GetZ(){return Zpos;}
+inline G4int B4cCalorHit::GetX(){
+        return Xpos;
+}
+inline G4int B4cCalorHit::GetY(){
+        return Ypos;
+}
+inline G4int B4cCalorHit::GetZ(){
+        return Zpos;
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

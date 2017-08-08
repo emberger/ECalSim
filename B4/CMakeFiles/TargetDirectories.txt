@@ -1,0 +1,16 @@
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/CMakeFiles/install/strip.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/CMakeFiles/install/local.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/CMakeFiles/install.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/CMakeFiles/list_install_components.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/CMakeFiles/rebuild_cache.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/CMakeFiles/edit_cache.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/CMakeFiles/B4.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/CMakeFiles/install/strip.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/CMakeFiles/install/local.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/CMakeFiles/install.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/CMakeFiles/list_install_components.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/CMakeFiles/edit_cache.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/CMakeFiles/Analysis.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/CMakeFiles/rebuild_cache.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/CMakeFiles/exampleB4c.dir
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/CMakeFiles/RootLib.dir

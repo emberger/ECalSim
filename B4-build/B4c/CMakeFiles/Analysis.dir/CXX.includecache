@@ -107,6 +107,8 @@ G4VUserDetectorConstruction.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4VUserDetectorConstruction.hh
 globals.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/globals.hh
+G4UserLimits.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4UserLimits.hh
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cDummySD.hh
 G4VSensitiveDetector.hh
@@ -149,6 +151,26 @@ G4VReadOutGeometry.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4VReadOutGeometry.hh
 globals.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/globals.hh
+
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cTrackInformation.hh
+globals.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/globals.hh
+G4ThreeVector.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4ThreeVector.hh
+G4ParticleDefinition.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4ParticleDefinition.hh
+G4Track.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4Track.hh
+G4Allocator.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4Allocator.hh
+G4VUserTrackInformation.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4VUserTrackInformation.hh
+
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cTrackingAction.hh
+G4TrackingManager.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4TrackingManager.hh
+B4cTrackInformation.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cTrackInformation.hh
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minimizer.hh
 iostream
@@ -218,6 +240,10 @@ Minimizer.hh
 Minuit2/Minuit2Minimizer.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minuit2/Minuit2Minimizer.h
 chrono
+-
+string
+-
+cstring
 -
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/RootClasses_dict.hh
@@ -293,6 +319,8 @@ B4PrimaryGeneratorAction.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4PrimaryGeneratorAction.hh
 B4RunAction.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4RunAction.hh
+B4cTrackingAction.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackingAction.hh
 B4cEventAction.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cEventAction.hh
 
@@ -327,6 +355,10 @@ G4SDManager.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/G4SDManager.hh
 G4ios.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/G4ios.hh
+B4cTrackInformation.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackInformation.hh
+B4cTrackingAction.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackingAction.hh
 B4cDetParams.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDetParams.hh
 
@@ -437,6 +469,24 @@ iostream
 -
 B4cDetParams.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDetParams.hh
+
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackInformation.cc
+B4cTrackInformation.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackInformation.hh
+G4ios.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/G4ios.hh
+
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackingAction.cc
+B4cTrackingAction.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackingAction.hh
+G4TrackingManager.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/G4TrackingManager.hh
+G4Track.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/G4Track.hh
+G4TrackVector.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/G4TrackVector.hh
+B4cTrackInformation.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackInformation.hh
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/Minimizer.cc
 Minimizer.hh
@@ -4083,6 +4133,14 @@ G4UnitsTable.icc
 /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4UnitsTable.icc
 
 /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4UserEventAction.hh
+
+/remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4UserLimits.hh
+globals.hh
+/remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/globals.hh
+G4UserLimits.icc
+/remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4UserLimits.icc
+
+/remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4UserLimits.icc
 
 /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4UserRunAction.hh
 G4Types.hh

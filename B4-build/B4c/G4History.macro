@@ -52,8 +52,3 @@
 /gui/addButton viewer "Flush viewer (= refresh + update)" "/vis/viewer/flush"
 /gui/addButton viewer "Update scene" "/vis/scene/notifyHandlers"
 /run/printProgress 100
-/gun/position 0 0 -295
-/gun/direction 0. 0. 1.0
-/gun/position 0 0 -295 mm
-/run/beamOn 1
-/vis/scene/notifyHandlers scene-0

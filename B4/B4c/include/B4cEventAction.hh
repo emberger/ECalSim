@@ -24,7 +24,7 @@
 // ********************************************************************
 //
 // $Id: B4cEventAction.hh 75215 2013-10-29 16:07:06Z gcosmo $
-// 
+//
 /// \file B4cEventAction.hh
 /// \brief Definition of the B4cEventAction class
 
@@ -49,38 +49,36 @@
 
 /// Event action class
 ///
-/// In EndOfEventAction(), it prints the accumulated quantities of the energy 
-/// deposit and track lengths of charged particles in Absober and Gap layers 
+/// In EndOfEventAction(), it prints the accumulated quantities of the energy
+/// deposit and track lengths of charged particles in Absober and Gap layers
 /// stored in the hits collections.
 
 class B4cEventAction : public G4UserEventAction
 {
 public:
-  B4cEventAction();
-  virtual ~B4cEventAction();
+B4cEventAction();
+virtual ~B4cEventAction();
 
-  B4ROOTEvent* CalEvent();
-  void SetStepHit(G4double x, G4double y, G4double z, G4double eDep);
-  virtual void  BeginOfEventAction(const G4Event* event);
-  virtual void    EndOfEventAction(const G4Event* event);
-    
+B4ROOTEvent* CalEvent();
+void SetStepHit(G4double x, G4double y, G4double z, G4double eDep, G4int phnr);
+virtual void  BeginOfEventAction(const G4Event* event);
+virtual void    EndOfEventAction(const G4Event* event);
+
 private:
-  // methods
-  B4cCalorHitsCollection* GetHitsCollection(G4int hcID,
-                                            const G4Event* event) const;
-  void PrintEventStatistics(G4double absoEdep, G4double absoTrackLength,
-                            G4double gapEdep, G4double gapTrackLength) const;
-  
-  // data members                   
-  G4int  fAbsHCID;
-  G4int  fGapHCID;
-  TTree * eventTree=0;
-  TFile * rootFile=0;
-  B4ROOTEvent * calEvent;
+// methods
+B4cCalorHitsCollection* GetHitsCollection(G4int hcID,
+                                          const G4Event* event) const;
+void PrintEventStatistics(G4double absoEdep, G4double absoTrackLength,
+                          G4double gapEdep, G4double gapTrackLength) const;
+
+// data members
+G4int fAbsHCID;
+G4int fGapHCID;
+TTree * eventTree=0;
+TFile * rootFile=0;
+B4ROOTEvent * calEvent;
 };
-                     
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif
-
-    

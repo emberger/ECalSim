@@ -14,55 +14,61 @@ TClonesArray* B4ROOTEvent::aHits = 0;
 // TPi0Event class
 
 B4ROOTEvent::B4ROOTEvent() {
-	if (!aHits) aHits = new TClonesArray("B4ROOTHit", 1000);
-	m_Hits = aHits;
-	m_EventNo = 0;
-	m_GapEnergy = 0;
-	m_NHits = 0;
+								if (!aHits) aHits = new TClonesArray("B4ROOTHit", 1000);
+								m_Hits = aHits;
+								m_EventNo = 0;
+								m_GapEnergy = 0;
+								m_NHits = 0;
 
 }
 
 B4ROOTEvent::~B4ROOTEvent() {
-	Clear();
+								Clear();
 }
 
 void B4ROOTEvent::Clear(const Option_t*) {
-	//std::cout << "Clearing Event..." << std::endl;
-	m_EventNo = 0;
-	m_GapEnergy = 0;
-	m_NHits=0;
-	m_Hits->Clear();
-	//std::cout << "Clear done!" << std::endl;
+								//std::cout << "Clearing Event..." << std::endl;
+								m_EventNo = 0;
+								m_GapEnergy = 0;
+								m_NHits=0;
+								m_Hits->Clear();
+								//std::cout << "Clear done!" << std::endl;
 }
 void B4ROOTEvent::Reset(Option_t * /*option*/)
 {
-	// Static function to reset all static objects for this event
-		delete aHits; aHits = 0;
+								// Static function to reset all static objects for this event
+								delete aHits; aHits = 0;
 }
 
 
 
 
 B4ROOTHit* B4ROOTEvent::AddHit(B4ROOTHit& cand) {
-	//cout << "Adding Pi0 candidate after " << m_NPi0Candidates << endl;
-	TClonesArray &aCand = *m_Hits;
-	B4ROOTHit *piCand = new(aCand[m_NHits++]) B4ROOTHit(cand);
-	//cout << "Added Candidate " << m_NPi0Candidates << endl;
-	return piCand;
+								//cout << "Adding Pi0 candidate after " << m_NPi0Candidates << endl;
+								TClonesArray &aCand = *m_Hits;
+								B4ROOTHit *piCand = new B4ROOTHit(cand);
+								aCand[m_NHits++]=piCand;
+								//std::cout<<"AddHitCand: "<<cand.PhotNr()<<" AddHitPiCand: "<<piCand->PhotNr()<<std::endl;
+								return piCand;
 }
 
+
 B4ROOTHit::B4ROOTHit() : TObject() {
-	m_X = 0;
-	m_Y = 0;
-	m_Z = 0;
-	m_EnergyDeposit = 0;
+								m_X = 0;
+								m_Y = 0;
+								m_Z = 0;
+								m_EnergyDeposit = 0;
+								m_PhotonNr=0;
 }
 
 B4ROOTHit::B4ROOTHit(const B4ROOTHit& orig) : TObject(orig) {
-	m_X = orig.m_X;
-	m_Y = orig.m_Y;
-	m_Z = orig.m_Z;
-	m_EnergyDeposit = orig.m_EnergyDeposit;
+								m_X = orig.m_X;
+								m_Y = orig.m_Y;
+								m_Z = orig.m_Z;
+								std::cout<<"orig.Phot: "<<orig.m_PhotonNr<<std::endl;
+								m_PhotonNr = orig.m_PhotonNr;
+								m_EnergyDeposit = orig.m_EnergyDeposit;
 }
 
-B4ROOTHit::~B4ROOTHit(){}
+B4ROOTHit::~B4ROOTHit(){
+}

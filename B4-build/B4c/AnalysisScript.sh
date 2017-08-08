@@ -16,10 +16,11 @@ do
     FilePath=$f
     filename="${FilePath##*/}"
 
-    name=${filename%_*}
+    foldername=${filename%_*}
 
-    mkdir $AnaPath/$name
+    mkdir $AnaPath/$foldername
 
+    ./Analysis 1 50 0 2000 0 $FilePath $AnaPath/$foldername
 
 
 done

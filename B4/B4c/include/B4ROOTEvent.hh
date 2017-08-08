@@ -18,28 +18,49 @@
 class B4ROOTHit : public TObject {
 
 private:
-	Double_t m_X;
-	Double_t m_Y;
-	Double_t m_Z;
-	Double_t m_EnergyDeposit;
-
+Double_t m_X;
+Double_t m_Y;
+Double_t m_Z;
+Double_t m_EnergyDeposit;
+Int_t m_PhotonNr;
 
 public:
-	B4ROOTHit();
-	B4ROOTHit(const B4ROOTHit& orig);
-	virtual ~B4ROOTHit();
-	void Clear(const Option_t* option ="") {};
-	// Getters:
-	Double_t X() const {return m_X;}
-	Double_t Y() const {return m_Y;}
-	Double_t Z() const {return m_Z;}
-	Double_t EnergyDeposit() const {return m_EnergyDeposit;}
+B4ROOTHit();
+B4ROOTHit(const B4ROOTHit& orig);
+virtual ~B4ROOTHit();
+void Clear(const Option_t* option ="") {
+};
+// Getters:
+Double_t X() const {
+								return m_X;
+}
+Double_t Y() const {
+								return m_Y;
+}
+Double_t Z() const {
+								return m_Z;
+}
+Double_t EnergyDeposit() const {
+								return m_EnergyDeposit;
+}
 
-	// Setters:
-	void SetCoordinates(Double_t x, Double_t y, Double_t z) {m_X = x; m_Y = y; m_Z = z;}
-	void SetEnergyDeposit(Double_t dep) {m_EnergyDeposit = dep;}
+Int_t PhotNr(){
+								return m_PhotonNr;
+}
 
-	ClassDef(B4ROOTHit,3)
+// Setters:
+void SetPhotNr(Int_t nr){
+								m_PhotonNr=nr;
+}
+
+void SetCoordinates(Double_t x, Double_t y, Double_t z) {
+								m_X = x; m_Y = y; m_Z = z;
+}
+void SetEnergyDeposit(Double_t dep) {
+								m_EnergyDeposit = dep;
+}
+
+ClassDef(B4ROOTHit,3)
 };
 
 
@@ -48,46 +69,76 @@ public:
 class B4ROOTEvent : public TObject {
 
 private:
-	Int_t m_EventNo;
-	Double_t m_GapEnergy;
-	Int_t m_NHits;
-	Int_t m_TilesX;
-	Int_t m_TilesY;
-	Int_t m_Layers;
-	Double_t m_calSizeXY;
-	TClonesArray *m_Hits; //->
-	static TClonesArray *aHits;
+Int_t m_EventNo;
+Double_t m_GapEnergy;
+Int_t m_NHits;
+// Int_t m_TilesX;
+// Int_t m_TilesY;
+// Int_t m_Layers;
+// Double_t m_calSizeXY;
+TClonesArray *m_Hits;  //->
+static TClonesArray *aHits;
 
 public:
-	B4ROOTEvent();
-	virtual ~B4ROOTEvent();
-	void Clear(const Option_t* option ="");
-	static void   Reset(Option_t *option ="");
+B4ROOTEvent();
+virtual ~B4ROOTEvent();
+void Clear(const Option_t* option ="");
+static void   Reset(Option_t *option ="");
 
 
 
-	//Getters
-	Int_t EventNo() const {return m_EventNo;}
-	Double_t GapEnergy() const {return m_GapEnergy;}
-	Int_t TilesX(){return m_TilesX;}
-	Int_t TilesY(){return m_TilesY;}
-	Int_t Layers(){return m_Layers;}
-	Double_t calSizeXY(){return m_calSizeXY;}
-	Int_t NHits() const {return m_NHits;}
-	TClonesArray* Hits() const {return m_Hits;}
-	B4ROOTHit* Hit(Int_t i) {return (B4ROOTHit*)m_Hits->At(i);}
+//Getters
+Int_t EventNo() const {
+								return m_EventNo;
+}
+Double_t GapEnergy() const {
+								return m_GapEnergy;
+}
+// Int_t TilesX(){
+//         return m_TilesX;
+// }
+// Int_t TilesY(){
+//         return m_TilesY;
+// }
+// Int_t Layers(){
+//         return m_Layers;
+// }
+// Double_t calSizeXY(){
+//         return m_calSizeXY;
+// }
+Int_t NHits() const {
+								return m_NHits;
+}
+TClonesArray* Hits() const {
+								return m_Hits;
+}
+B4ROOTHit* Hit(Int_t i) {
+								return (B4ROOTHit*)m_Hits->At(i);
+}
 
-	//Setters
-	void SetEventNo(Int_t evN) {m_EventNo = evN;}
-	void SetGapEnergy(Double_t en) {m_GapEnergy = en;}
-	void SetTilesX(Int_t nx){m_TilesX=nx;}
-	void SetTilesY(Int_t ny){m_TilesY=ny;}
-	void SetLayers(Int_t nl){m_Layers=nl;}
-	void SetcalSizeXY(Double_t cs){m_calSizeXY=cs;}
+//Setters
+void SetEventNo(Int_t evN) {
+								m_EventNo = evN;
+}
+void SetGapEnergy(Double_t en) {
+								m_GapEnergy = en;
+}
+// void SetTilesX(Int_t nx){
+//         m_TilesX=nx;
+// }
+// void SetTilesY(Int_t ny){
+//         m_TilesY=ny;
+// }
+// void SetLayers(Int_t nl){
+//         m_Layers=nl;
+// }
+// void SetcalSizeXY(Double_t cs){
+//         m_calSizeXY=cs;
+// }
 
 
-	B4ROOTHit* AddHit(B4ROOTHit& cand);
+B4ROOTHit* AddHit(B4ROOTHit& cand);
 
-	ClassDef(B4ROOTEvent,1)
+ClassDef(B4ROOTEvent,1)
 };
 #endif

@@ -25,6 +25,8 @@
 
 
 #include <chrono>
+#include <string>
+#include <cstring>
 using namespace ROOT::Math;
 using namespace ROOT::Minuit2;
 
@@ -56,6 +58,11 @@ public:
   void PrintFitHists(Int_t minevent, Int_t maxevent);
 
 
+
+  void SetPath(std::string path){
+    savepath=path;
+    pathset=true;
+}
 
 
 private:
@@ -95,5 +102,8 @@ private:
 
   TH3D * h3 = new TH3D("h3", "h3",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);         //  plot cogs
 
+
+  std::string savepath;
+  Bool_t pathset=false;
 
 };

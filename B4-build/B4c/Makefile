@@ -613,6 +613,66 @@ src/B4cReadoutGeometry.cc.s:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.s
 .PHONY : src/B4cReadoutGeometry.cc.s
 
+src/B4cTrackInformation.o: src/B4cTrackInformation.cc.o
+
+.PHONY : src/B4cTrackInformation.o
+
+# target to build an object file
+src/B4cTrackInformation.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackInformation.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackInformation.cc.o
+.PHONY : src/B4cTrackInformation.cc.o
+
+src/B4cTrackInformation.i: src/B4cTrackInformation.cc.i
+
+.PHONY : src/B4cTrackInformation.i
+
+# target to preprocess a source file
+src/B4cTrackInformation.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackInformation.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackInformation.cc.i
+.PHONY : src/B4cTrackInformation.cc.i
+
+src/B4cTrackInformation.s: src/B4cTrackInformation.cc.s
+
+.PHONY : src/B4cTrackInformation.s
+
+# target to generate assembly for a file
+src/B4cTrackInformation.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackInformation.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackInformation.cc.s
+.PHONY : src/B4cTrackInformation.cc.s
+
+src/B4cTrackingAction.o: src/B4cTrackingAction.cc.o
+
+.PHONY : src/B4cTrackingAction.o
+
+# target to build an object file
+src/B4cTrackingAction.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackingAction.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackingAction.cc.o
+.PHONY : src/B4cTrackingAction.cc.o
+
+src/B4cTrackingAction.i: src/B4cTrackingAction.cc.i
+
+.PHONY : src/B4cTrackingAction.i
+
+# target to preprocess a source file
+src/B4cTrackingAction.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackingAction.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackingAction.cc.i
+.PHONY : src/B4cTrackingAction.cc.i
+
+src/B4cTrackingAction.s: src/B4cTrackingAction.cc.s
+
+.PHONY : src/B4cTrackingAction.s
+
+# target to generate assembly for a file
+src/B4cTrackingAction.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackingAction.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackingAction.cc.s
+.PHONY : src/B4cTrackingAction.cc.s
+
 src/Minimizer.o: src/Minimizer.cc.o
 
 .PHONY : src/Minimizer.o
@@ -760,6 +820,12 @@ help:
 	@echo "... src/B4cReadoutGeometry.o"
 	@echo "... src/B4cReadoutGeometry.i"
 	@echo "... src/B4cReadoutGeometry.s"
+	@echo "... src/B4cTrackInformation.o"
+	@echo "... src/B4cTrackInformation.i"
+	@echo "... src/B4cTrackInformation.s"
+	@echo "... src/B4cTrackingAction.o"
+	@echo "... src/B4cTrackingAction.i"
+	@echo "... src/B4cTrackingAction.s"
 	@echo "... src/Minimizer.o"
 	@echo "... src/Minimizer.i"
 	@echo "... src/Minimizer.s"

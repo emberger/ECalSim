@@ -155,6 +155,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+B4c/CMakeFiles/Analysis.dir/rule:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f CMakeFiles/Makefile2 B4c/CMakeFiles/Analysis.dir/rule
+.PHONY : B4c/CMakeFiles/Analysis.dir/rule
+
+# Convenience name for target.
+Analysis: B4c/CMakeFiles/Analysis.dir/rule
+
+.PHONY : Analysis
+
+# fast build rule for target.
+Analysis/fast:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/build
+.PHONY : Analysis/fast
+
+# Convenience name for target.
 B4c/CMakeFiles/exampleB4c.dir/rule:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f CMakeFiles/Makefile2 B4c/CMakeFiles/exampleB4c.dir/rule
 .PHONY : B4c/CMakeFiles/exampleB4c.dir/rule
@@ -168,6 +183,75 @@ exampleB4c: B4c/CMakeFiles/exampleB4c.dir/rule
 exampleB4c/fast:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/build
 .PHONY : exampleB4c/fast
+
+# Convenience name for target.
+B4c/CMakeFiles/RootLib.dir/rule:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f CMakeFiles/Makefile2 B4c/CMakeFiles/RootLib.dir/rule
+.PHONY : B4c/CMakeFiles/RootLib.dir/rule
+
+# Convenience name for target.
+RootLib: B4c/CMakeFiles/RootLib.dir/rule
+
+.PHONY : RootLib
+
+# fast build rule for target.
+RootLib/fast:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/build
+.PHONY : RootLib/fast
+
+AnalysisMain.o: AnalysisMain.cc.o
+
+.PHONY : AnalysisMain.o
+
+# target to build an object file
+AnalysisMain.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/AnalysisMain.cc.o
+.PHONY : AnalysisMain.cc.o
+
+AnalysisMain.i: AnalysisMain.cc.i
+
+.PHONY : AnalysisMain.i
+
+# target to preprocess a source file
+AnalysisMain.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/AnalysisMain.cc.i
+.PHONY : AnalysisMain.cc.i
+
+AnalysisMain.s: AnalysisMain.cc.s
+
+.PHONY : AnalysisMain.s
+
+# target to generate assembly for a file
+AnalysisMain.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/AnalysisMain.cc.s
+.PHONY : AnalysisMain.cc.s
+
+RootClasses_dict.o: RootClasses_dict.cxx.o
+
+.PHONY : RootClasses_dict.o
+
+# target to build an object file
+RootClasses_dict.cxx.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/RootClasses_dict.cxx.o
+.PHONY : RootClasses_dict.cxx.o
+
+RootClasses_dict.i: RootClasses_dict.cxx.i
+
+.PHONY : RootClasses_dict.i
+
+# target to preprocess a source file
+RootClasses_dict.cxx.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/RootClasses_dict.cxx.i
+.PHONY : RootClasses_dict.cxx.i
+
+RootClasses_dict.s: RootClasses_dict.cxx.s
+
+.PHONY : RootClasses_dict.s
+
+# target to generate assembly for a file
+RootClasses_dict.cxx.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/RootClasses_dict.cxx.s
+.PHONY : RootClasses_dict.cxx.s
 
 exampleB4c.o: exampleB4c.cc.o
 
@@ -202,6 +286,7 @@ src/B4PrimaryGeneratorAction.o: src/B4PrimaryGeneratorAction.cc.o
 
 # target to build an object file
 src/B4PrimaryGeneratorAction.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4PrimaryGeneratorAction.cc.o
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.o
 .PHONY : src/B4PrimaryGeneratorAction.cc.o
 
@@ -211,6 +296,7 @@ src/B4PrimaryGeneratorAction.i: src/B4PrimaryGeneratorAction.cc.i
 
 # target to preprocess a source file
 src/B4PrimaryGeneratorAction.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4PrimaryGeneratorAction.cc.i
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.i
 .PHONY : src/B4PrimaryGeneratorAction.cc.i
 
@@ -220,8 +306,42 @@ src/B4PrimaryGeneratorAction.s: src/B4PrimaryGeneratorAction.cc.s
 
 # target to generate assembly for a file
 src/B4PrimaryGeneratorAction.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4PrimaryGeneratorAction.cc.s
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4PrimaryGeneratorAction.cc.s
 .PHONY : src/B4PrimaryGeneratorAction.cc.s
+
+src/B4ROOTEvent.o: src/B4ROOTEvent.cc.o
+
+.PHONY : src/B4ROOTEvent.o
+
+# target to build an object file
+src/B4ROOTEvent.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4ROOTEvent.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/src/B4ROOTEvent.cc.o
+.PHONY : src/B4ROOTEvent.cc.o
+
+src/B4ROOTEvent.i: src/B4ROOTEvent.cc.i
+
+.PHONY : src/B4ROOTEvent.i
+
+# target to preprocess a source file
+src/B4ROOTEvent.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4ROOTEvent.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/src/B4ROOTEvent.cc.i
+.PHONY : src/B4ROOTEvent.cc.i
+
+src/B4ROOTEvent.s: src/B4ROOTEvent.cc.s
+
+.PHONY : src/B4ROOTEvent.s
+
+# target to generate assembly for a file
+src/B4ROOTEvent.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4ROOTEvent.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/src/B4ROOTEvent.cc.s
+.PHONY : src/B4ROOTEvent.cc.s
 
 src/B4RunAction.o: src/B4RunAction.cc.o
 
@@ -229,6 +349,7 @@ src/B4RunAction.o: src/B4RunAction.cc.o
 
 # target to build an object file
 src/B4RunAction.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4RunAction.cc.o
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.o
 .PHONY : src/B4RunAction.cc.o
 
@@ -238,6 +359,7 @@ src/B4RunAction.i: src/B4RunAction.cc.i
 
 # target to preprocess a source file
 src/B4RunAction.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4RunAction.cc.i
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.i
 .PHONY : src/B4RunAction.cc.i
 
@@ -247,6 +369,7 @@ src/B4RunAction.s: src/B4RunAction.cc.s
 
 # target to generate assembly for a file
 src/B4RunAction.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4RunAction.cc.s
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4RunAction.cc.s
 .PHONY : src/B4RunAction.cc.s
 
@@ -256,6 +379,7 @@ src/B4cActionInitialization.o: src/B4cActionInitialization.cc.o
 
 # target to build an object file
 src/B4cActionInitialization.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cActionInitialization.cc.o
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o
 .PHONY : src/B4cActionInitialization.cc.o
 
@@ -265,6 +389,7 @@ src/B4cActionInitialization.i: src/B4cActionInitialization.cc.i
 
 # target to preprocess a source file
 src/B4cActionInitialization.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cActionInitialization.cc.i
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.i
 .PHONY : src/B4cActionInitialization.cc.i
 
@@ -274,6 +399,7 @@ src/B4cActionInitialization.s: src/B4cActionInitialization.cc.s
 
 # target to generate assembly for a file
 src/B4cActionInitialization.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cActionInitialization.cc.s
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.s
 .PHONY : src/B4cActionInitialization.cc.s
 
@@ -283,6 +409,7 @@ src/B4cCalorHit.o: src/B4cCalorHit.cc.o
 
 # target to build an object file
 src/B4cCalorHit.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cCalorHit.cc.o
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.o
 .PHONY : src/B4cCalorHit.cc.o
 
@@ -292,6 +419,7 @@ src/B4cCalorHit.i: src/B4cCalorHit.cc.i
 
 # target to preprocess a source file
 src/B4cCalorHit.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cCalorHit.cc.i
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.i
 .PHONY : src/B4cCalorHit.cc.i
 
@@ -301,6 +429,7 @@ src/B4cCalorHit.s: src/B4cCalorHit.cc.s
 
 # target to generate assembly for a file
 src/B4cCalorHit.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cCalorHit.cc.s
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorHit.cc.s
 .PHONY : src/B4cCalorHit.cc.s
 
@@ -310,6 +439,7 @@ src/B4cCalorimeterSD.o: src/B4cCalorimeterSD.cc.o
 
 # target to build an object file
 src/B4cCalorimeterSD.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cCalorimeterSD.cc.o
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorimeterSD.cc.o
 .PHONY : src/B4cCalorimeterSD.cc.o
 
@@ -319,6 +449,7 @@ src/B4cCalorimeterSD.i: src/B4cCalorimeterSD.cc.i
 
 # target to preprocess a source file
 src/B4cCalorimeterSD.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cCalorimeterSD.cc.i
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorimeterSD.cc.i
 .PHONY : src/B4cCalorimeterSD.cc.i
 
@@ -328,8 +459,39 @@ src/B4cCalorimeterSD.s: src/B4cCalorimeterSD.cc.s
 
 # target to generate assembly for a file
 src/B4cCalorimeterSD.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cCalorimeterSD.cc.s
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cCalorimeterSD.cc.s
 .PHONY : src/B4cCalorimeterSD.cc.s
+
+src/B4cDetParams.o: src/B4cDetParams.cc.o
+
+.PHONY : src/B4cDetParams.o
+
+# target to build an object file
+src/B4cDetParams.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cDetParams.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cDetParams.cc.o
+.PHONY : src/B4cDetParams.cc.o
+
+src/B4cDetParams.i: src/B4cDetParams.cc.i
+
+.PHONY : src/B4cDetParams.i
+
+# target to preprocess a source file
+src/B4cDetParams.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cDetParams.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cDetParams.cc.i
+.PHONY : src/B4cDetParams.cc.i
+
+src/B4cDetParams.s: src/B4cDetParams.cc.s
+
+.PHONY : src/B4cDetParams.s
+
+# target to generate assembly for a file
+src/B4cDetParams.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cDetParams.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cDetParams.cc.s
+.PHONY : src/B4cDetParams.cc.s
 
 src/B4cDetectorConstruction.o: src/B4cDetectorConstruction.cc.o
 
@@ -337,6 +499,7 @@ src/B4cDetectorConstruction.o: src/B4cDetectorConstruction.cc.o
 
 # target to build an object file
 src/B4cDetectorConstruction.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cDetectorConstruction.cc.o
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.o
 .PHONY : src/B4cDetectorConstruction.cc.o
 
@@ -346,6 +509,7 @@ src/B4cDetectorConstruction.i: src/B4cDetectorConstruction.cc.i
 
 # target to preprocess a source file
 src/B4cDetectorConstruction.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cDetectorConstruction.cc.i
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.i
 .PHONY : src/B4cDetectorConstruction.cc.i
 
@@ -355,8 +519,39 @@ src/B4cDetectorConstruction.s: src/B4cDetectorConstruction.cc.s
 
 # target to generate assembly for a file
 src/B4cDetectorConstruction.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cDetectorConstruction.cc.s
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.s
 .PHONY : src/B4cDetectorConstruction.cc.s
+
+src/B4cDummySD.o: src/B4cDummySD.cc.o
+
+.PHONY : src/B4cDummySD.o
+
+# target to build an object file
+src/B4cDummySD.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cDummySD.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o
+.PHONY : src/B4cDummySD.cc.o
+
+src/B4cDummySD.i: src/B4cDummySD.cc.i
+
+.PHONY : src/B4cDummySD.i
+
+# target to preprocess a source file
+src/B4cDummySD.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cDummySD.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.i
+.PHONY : src/B4cDummySD.cc.i
+
+src/B4cDummySD.s: src/B4cDummySD.cc.s
+
+.PHONY : src/B4cDummySD.s
+
+# target to generate assembly for a file
+src/B4cDummySD.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cDummySD.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.s
+.PHONY : src/B4cDummySD.cc.s
 
 src/B4cEventAction.o: src/B4cEventAction.cc.o
 
@@ -364,6 +559,7 @@ src/B4cEventAction.o: src/B4cEventAction.cc.o
 
 # target to build an object file
 src/B4cEventAction.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cEventAction.cc.o
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o
 .PHONY : src/B4cEventAction.cc.o
 
@@ -373,6 +569,7 @@ src/B4cEventAction.i: src/B4cEventAction.cc.i
 
 # target to preprocess a source file
 src/B4cEventAction.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cEventAction.cc.i
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.i
 .PHONY : src/B4cEventAction.cc.i
 
@@ -382,8 +579,189 @@ src/B4cEventAction.s: src/B4cEventAction.cc.s
 
 # target to generate assembly for a file
 src/B4cEventAction.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cEventAction.cc.s
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.s
 .PHONY : src/B4cEventAction.cc.s
+
+src/B4cReadoutGeometry.o: src/B4cReadoutGeometry.cc.o
+
+.PHONY : src/B4cReadoutGeometry.o
+
+# target to build an object file
+src/B4cReadoutGeometry.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o
+.PHONY : src/B4cReadoutGeometry.cc.o
+
+src/B4cReadoutGeometry.i: src/B4cReadoutGeometry.cc.i
+
+.PHONY : src/B4cReadoutGeometry.i
+
+# target to preprocess a source file
+src/B4cReadoutGeometry.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.i
+.PHONY : src/B4cReadoutGeometry.cc.i
+
+src/B4cReadoutGeometry.s: src/B4cReadoutGeometry.cc.s
+
+.PHONY : src/B4cReadoutGeometry.s
+
+# target to generate assembly for a file
+src/B4cReadoutGeometry.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.s
+.PHONY : src/B4cReadoutGeometry.cc.s
+
+src/B4cTrackInformation.o: src/B4cTrackInformation.cc.o
+
+.PHONY : src/B4cTrackInformation.o
+
+# target to build an object file
+src/B4cTrackInformation.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackInformation.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackInformation.cc.o
+.PHONY : src/B4cTrackInformation.cc.o
+
+src/B4cTrackInformation.i: src/B4cTrackInformation.cc.i
+
+.PHONY : src/B4cTrackInformation.i
+
+# target to preprocess a source file
+src/B4cTrackInformation.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackInformation.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackInformation.cc.i
+.PHONY : src/B4cTrackInformation.cc.i
+
+src/B4cTrackInformation.s: src/B4cTrackInformation.cc.s
+
+.PHONY : src/B4cTrackInformation.s
+
+# target to generate assembly for a file
+src/B4cTrackInformation.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackInformation.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackInformation.cc.s
+.PHONY : src/B4cTrackInformation.cc.s
+
+src/B4cTrackingAction.o: src/B4cTrackingAction.cc.o
+
+.PHONY : src/B4cTrackingAction.o
+
+# target to build an object file
+src/B4cTrackingAction.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackingAction.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackingAction.cc.o
+.PHONY : src/B4cTrackingAction.cc.o
+
+src/B4cTrackingAction.i: src/B4cTrackingAction.cc.i
+
+.PHONY : src/B4cTrackingAction.i
+
+# target to preprocess a source file
+src/B4cTrackingAction.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackingAction.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackingAction.cc.i
+.PHONY : src/B4cTrackingAction.cc.i
+
+src/B4cTrackingAction.s: src/B4cTrackingAction.cc.s
+
+.PHONY : src/B4cTrackingAction.s
+
+# target to generate assembly for a file
+src/B4cTrackingAction.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cTrackingAction.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackingAction.cc.s
+.PHONY : src/B4cTrackingAction.cc.s
+
+src/Minimizer.o: src/Minimizer.cc.o
+
+.PHONY : src/Minimizer.o
+
+# target to build an object file
+src/Minimizer.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/Minimizer.cc.o
+.PHONY : src/Minimizer.cc.o
+
+src/Minimizer.i: src/Minimizer.cc.i
+
+.PHONY : src/Minimizer.i
+
+# target to preprocess a source file
+src/Minimizer.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/Minimizer.cc.i
+.PHONY : src/Minimizer.cc.i
+
+src/Minimizer.s: src/Minimizer.cc.s
+
+.PHONY : src/Minimizer.s
+
+# target to generate assembly for a file
+src/Minimizer.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/Minimizer.cc.s
+.PHONY : src/Minimizer.cc.s
+
+src/ROOTAnalysis.o: src/ROOTAnalysis.cc.o
+
+.PHONY : src/ROOTAnalysis.o
+
+# target to build an object file
+src/ROOTAnalysis.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.o
+.PHONY : src/ROOTAnalysis.cc.o
+
+src/ROOTAnalysis.i: src/ROOTAnalysis.cc.i
+
+.PHONY : src/ROOTAnalysis.i
+
+# target to preprocess a source file
+src/ROOTAnalysis.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.i
+.PHONY : src/ROOTAnalysis.cc.i
+
+src/ROOTAnalysis.s: src/ROOTAnalysis.cc.s
+
+.PHONY : src/ROOTAnalysis.s
+
+# target to generate assembly for a file
+src/ROOTAnalysis.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/ROOTAnalysis.cc.s
+.PHONY : src/ROOTAnalysis.cc.s
+
+src/RootClasses_dict.o: src/RootClasses_dict.cc.o
+
+.PHONY : src/RootClasses_dict.o
+
+# target to build an object file
+src/RootClasses_dict.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o
+.PHONY : src/RootClasses_dict.cc.o
+
+src/RootClasses_dict.i: src/RootClasses_dict.cc.i
+
+.PHONY : src/RootClasses_dict.i
+
+# target to preprocess a source file
+src/RootClasses_dict.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.i
+.PHONY : src/RootClasses_dict.cc.i
+
+src/RootClasses_dict.s: src/RootClasses_dict.cc.s
+
+.PHONY : src/RootClasses_dict.s
+
+# target to generate assembly for a file
+src/RootClasses_dict.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4 && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.s
+.PHONY : src/RootClasses_dict.cc.s
 
 # Help Target
 help:
@@ -396,14 +774,25 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... edit_cache"
+	@echo "... Analysis"
 	@echo "... rebuild_cache"
 	@echo "... exampleB4c"
+	@echo "... RootLib"
+	@echo "... AnalysisMain.o"
+	@echo "... AnalysisMain.i"
+	@echo "... AnalysisMain.s"
+	@echo "... RootClasses_dict.o"
+	@echo "... RootClasses_dict.i"
+	@echo "... RootClasses_dict.s"
 	@echo "... exampleB4c.o"
 	@echo "... exampleB4c.i"
 	@echo "... exampleB4c.s"
 	@echo "... src/B4PrimaryGeneratorAction.o"
 	@echo "... src/B4PrimaryGeneratorAction.i"
 	@echo "... src/B4PrimaryGeneratorAction.s"
+	@echo "... src/B4ROOTEvent.o"
+	@echo "... src/B4ROOTEvent.i"
+	@echo "... src/B4ROOTEvent.s"
 	@echo "... src/B4RunAction.o"
 	@echo "... src/B4RunAction.i"
 	@echo "... src/B4RunAction.s"
@@ -416,12 +805,36 @@ help:
 	@echo "... src/B4cCalorimeterSD.o"
 	@echo "... src/B4cCalorimeterSD.i"
 	@echo "... src/B4cCalorimeterSD.s"
+	@echo "... src/B4cDetParams.o"
+	@echo "... src/B4cDetParams.i"
+	@echo "... src/B4cDetParams.s"
 	@echo "... src/B4cDetectorConstruction.o"
 	@echo "... src/B4cDetectorConstruction.i"
 	@echo "... src/B4cDetectorConstruction.s"
+	@echo "... src/B4cDummySD.o"
+	@echo "... src/B4cDummySD.i"
+	@echo "... src/B4cDummySD.s"
 	@echo "... src/B4cEventAction.o"
 	@echo "... src/B4cEventAction.i"
 	@echo "... src/B4cEventAction.s"
+	@echo "... src/B4cReadoutGeometry.o"
+	@echo "... src/B4cReadoutGeometry.i"
+	@echo "... src/B4cReadoutGeometry.s"
+	@echo "... src/B4cTrackInformation.o"
+	@echo "... src/B4cTrackInformation.i"
+	@echo "... src/B4cTrackInformation.s"
+	@echo "... src/B4cTrackingAction.o"
+	@echo "... src/B4cTrackingAction.i"
+	@echo "... src/B4cTrackingAction.s"
+	@echo "... src/Minimizer.o"
+	@echo "... src/Minimizer.i"
+	@echo "... src/Minimizer.s"
+	@echo "... src/ROOTAnalysis.o"
+	@echo "... src/ROOTAnalysis.i"
+	@echo "... src/ROOTAnalysis.s"
+	@echo "... src/RootClasses_dict.o"
+	@echo "... src/RootClasses_dict.i"
+	@echo "... src/RootClasses_dict.s"
 .PHONY : help
 
 
