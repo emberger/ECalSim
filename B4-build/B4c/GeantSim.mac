@@ -1,0 +1,22 @@
+#
+# Macro file for GEant4
+#
+# set verbose level for this run
+#
+#/run/verbose      2
+#/event/verbose    0
+#/tracking/verbose 1
+#
+# Set the initial kinematic and run 100 events
+# electron 1 GeV to the direction (1.,0.,0.)
+#
+
+/run/initialize
+/gun/position 5 5 -395 mm
+/gun/direction -1.0 -1.0 1.0
+/gun/particle gamma
+/gun/energy 800 MeV
+/run/beamOn 2000
+
+
+exit

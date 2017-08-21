@@ -204,7 +204,7 @@ Minuit2/FCNBase.h
 Math/Vector3D.h
 -
 
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/ROOTAnalysis.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TROOTAnalysis.hh
 B4ROOTEvent.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4ROOTEvent.hh
 TTree.h
@@ -229,6 +229,8 @@ TH3D.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TH3D.h
 TStyle.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TStyle.h
+TColor.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TColor.h
 TGraph2D.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TGraph2D.h
 TAttMarker.h
@@ -254,30 +256,6 @@ chrono
 string
 -
 cstring
--
-
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/RootClasses_dict.hh
-stddef.h
--
-stdio.h
--
-stdlib.h
--
-math.h
--
-string.h
--
-G__ci.h
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G__ci.h
-FastAllocString.h
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/FastAllocString.h
-TObject.h
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TObject.h
-TMemberInspector.h
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TMemberInspector.h
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4ROOTEvent.hh
--
-algorithm
 -
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4PrimaryGeneratorAction.cc
@@ -502,15 +480,11 @@ B4cTrackInformation.hh
 Minimizer.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/Minimizer.hh
 
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/ROOTAnalysis.cc
-ROOTAnalysis.hh
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/ROOTAnalysis.hh
-
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.cc
 RConfig.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RConfig.h
-RootClasses_dict.hh
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.hh
+RootClasses_dict.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.h
 TClass.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/TClass.h
 TBuffer.h
@@ -531,6 +505,34 @@ TFileMergeInfo.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/TFileMergeInfo.h
 new
 -
+
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.h
+stddef.h
+-
+stdio.h
+-
+stdlib.h
+-
+math.h
+-
+string.h
+-
+G__ci.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/G__ci.h
+FastAllocString.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/FastAllocString.h
+TObject.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/TObject.h
+TMemberInspector.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/TMemberInspector.h
+../include/B4ROOTEvent.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4ROOTEvent.hh
+algorithm
+-
+
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/TROOTAnalysis.cc
+TROOTAnalysis.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/TROOTAnalysis.hh
 
 /opt/root/5.34/include/Buttons.h
 

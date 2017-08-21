@@ -5,7 +5,7 @@ B4c/CMakeFiles/Analysis.dir/AnalysisMain.cc.o
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/AnalysisMain.cc
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4ROOTEvent.hh
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minimizer.hh
- /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/ROOTAnalysis.hh
+ /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TROOTAnalysis.hh
  /opt/root/5.34/include/Buttons.h
  /opt/root/5.34/include/DllImport.h
  /opt/root/5.34/include/ESTLType.h
@@ -2875,11 +2875,75 @@ B4c/CMakeFiles/Analysis.dir/src/Minimizer.cc.o
  /opt/root/5.34/include/TVersionCheck.h
  /opt/root/5.34/include/snprintf.h
  /opt/root/5.34/include/strlcpy.h
-B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o
+B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o
+ /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4ROOTEvent.hh
+ /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.cc
+ /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.h
+ /opt/root/5.34/include/DllImport.h
+ /opt/root/5.34/include/ESTLType.h
+ /opt/root/5.34/include/FastAllocString.h
+ /opt/root/5.34/include/Foption.h
+ /opt/root/5.34/include/G__ci.h
+ /opt/root/5.34/include/G__ci_fproto.h
+ /opt/root/5.34/include/Property.h
+ /opt/root/5.34/include/RConfig.h
+ /opt/root/5.34/include/RConfigure.h
+ /opt/root/5.34/include/RVersion.h
+ /opt/root/5.34/include/Riosfwd.h
+ /opt/root/5.34/include/Rtypeinfo.h
+ /opt/root/5.34/include/Rtypes.h
+ /opt/root/5.34/include/RtypesImp.h
+ /opt/root/5.34/include/TArray.h
+ /opt/root/5.34/include/TArrayC.h
+ /opt/root/5.34/include/TArrayD.h
+ /opt/root/5.34/include/TArrayF.h
+ /opt/root/5.34/include/TArrayI.h
+ /opt/root/5.34/include/TArrayS.h
+ /opt/root/5.34/include/TAttAxis.h
+ /opt/root/5.34/include/TAttFill.h
+ /opt/root/5.34/include/TAttLine.h
+ /opt/root/5.34/include/TAttMarker.h
+ /opt/root/5.34/include/TAxis.h
+ /opt/root/5.34/include/TBuffer.h
+ /opt/root/5.34/include/TClass.h
+ /opt/root/5.34/include/TClonesArray.h
+ /opt/root/5.34/include/TCollection.h
+ /opt/root/5.34/include/TDictionary.h
+ /opt/root/5.34/include/TError.h
+ /opt/root/5.34/include/TFileMergeInfo.h
+ /opt/root/5.34/include/TFitResultPtr.h
+ /opt/root/5.34/include/TGenericClassInfo.h
+ /opt/root/5.34/include/TH1.h
+ /opt/root/5.34/include/TInterpreter.h
+ /opt/root/5.34/include/TIsAProxy.h
+ /opt/root/5.34/include/TIterator.h
+ /opt/root/5.34/include/TMath.h
+ /opt/root/5.34/include/TMathBase.h
+ /opt/root/5.34/include/TMemberInspector.h
+ /opt/root/5.34/include/TNamed.h
+ /opt/root/5.34/include/TObjArray.h
+ /opt/root/5.34/include/TObjString.h
+ /opt/root/5.34/include/TObject.h
+ /opt/root/5.34/include/TProcessID.h
+ /opt/root/5.34/include/TRef.h
+ /opt/root/5.34/include/TRefArray.h
+ /opt/root/5.34/include/TSchemaHelper.h
+ /opt/root/5.34/include/TSeqCollection.h
+ /opt/root/5.34/include/TStorage.h
+ /opt/root/5.34/include/TString.h
+ /opt/root/5.34/include/TVectorDfwd.h
+ /opt/root/5.34/include/TVectorFfwd.h
+ /opt/root/5.34/include/TVersionCheck.h
+ /opt/root/5.34/include/TVirtualIsAProxy.h
+ /opt/root/5.34/include/TVirtualMutex.h
+ /opt/root/5.34/include/ThreadLocalStorage.h
+ /opt/root/5.34/include/snprintf.h
+ /opt/root/5.34/include/strlcpy.h
+B4c/CMakeFiles/Analysis.dir/src/TROOTAnalysis.cc.o
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4ROOTEvent.hh
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minimizer.hh
- /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/ROOTAnalysis.hh
- /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/ROOTAnalysis.cc
+ /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TROOTAnalysis.hh
+ /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/TROOTAnalysis.cc
  /opt/root/5.34/include/Buttons.h
  /opt/root/5.34/include/DllImport.h
  /opt/root/5.34/include/ESTLType.h
@@ -3054,70 +3118,6 @@ B4c/CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o
  /opt/root/5.34/include/TVirtualPad.h
  /opt/root/5.34/include/TVirtualTreePlayer.h
  /opt/root/5.34/include/TVirtualX.h
- /opt/root/5.34/include/ThreadLocalStorage.h
- /opt/root/5.34/include/snprintf.h
- /opt/root/5.34/include/strlcpy.h
-B4c/CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o
- /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4ROOTEvent.hh
- /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/RootClasses_dict.hh
- /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/RootClasses_dict.cc
- /opt/root/5.34/include/DllImport.h
- /opt/root/5.34/include/ESTLType.h
- /opt/root/5.34/include/FastAllocString.h
- /opt/root/5.34/include/Foption.h
- /opt/root/5.34/include/G__ci.h
- /opt/root/5.34/include/G__ci_fproto.h
- /opt/root/5.34/include/Property.h
- /opt/root/5.34/include/RConfig.h
- /opt/root/5.34/include/RConfigure.h
- /opt/root/5.34/include/RVersion.h
- /opt/root/5.34/include/Riosfwd.h
- /opt/root/5.34/include/Rtypeinfo.h
- /opt/root/5.34/include/Rtypes.h
- /opt/root/5.34/include/RtypesImp.h
- /opt/root/5.34/include/TArray.h
- /opt/root/5.34/include/TArrayC.h
- /opt/root/5.34/include/TArrayD.h
- /opt/root/5.34/include/TArrayF.h
- /opt/root/5.34/include/TArrayI.h
- /opt/root/5.34/include/TArrayS.h
- /opt/root/5.34/include/TAttAxis.h
- /opt/root/5.34/include/TAttFill.h
- /opt/root/5.34/include/TAttLine.h
- /opt/root/5.34/include/TAttMarker.h
- /opt/root/5.34/include/TAxis.h
- /opt/root/5.34/include/TBuffer.h
- /opt/root/5.34/include/TClass.h
- /opt/root/5.34/include/TClonesArray.h
- /opt/root/5.34/include/TCollection.h
- /opt/root/5.34/include/TDictionary.h
- /opt/root/5.34/include/TError.h
- /opt/root/5.34/include/TFileMergeInfo.h
- /opt/root/5.34/include/TFitResultPtr.h
- /opt/root/5.34/include/TGenericClassInfo.h
- /opt/root/5.34/include/TH1.h
- /opt/root/5.34/include/TInterpreter.h
- /opt/root/5.34/include/TIsAProxy.h
- /opt/root/5.34/include/TIterator.h
- /opt/root/5.34/include/TMath.h
- /opt/root/5.34/include/TMathBase.h
- /opt/root/5.34/include/TMemberInspector.h
- /opt/root/5.34/include/TNamed.h
- /opt/root/5.34/include/TObjArray.h
- /opt/root/5.34/include/TObjString.h
- /opt/root/5.34/include/TObject.h
- /opt/root/5.34/include/TProcessID.h
- /opt/root/5.34/include/TRef.h
- /opt/root/5.34/include/TRefArray.h
- /opt/root/5.34/include/TSchemaHelper.h
- /opt/root/5.34/include/TSeqCollection.h
- /opt/root/5.34/include/TStorage.h
- /opt/root/5.34/include/TString.h
- /opt/root/5.34/include/TVectorDfwd.h
- /opt/root/5.34/include/TVectorFfwd.h
- /opt/root/5.34/include/TVersionCheck.h
- /opt/root/5.34/include/TVirtualIsAProxy.h
- /opt/root/5.34/include/TVirtualMutex.h
  /opt/root/5.34/include/ThreadLocalStorage.h
  /opt/root/5.34/include/snprintf.h
  /opt/root/5.34/include/strlcpy.h

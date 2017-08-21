@@ -4,7 +4,7 @@
 #include "TApplication.h"
 #include "TStyle.h"
 #include "TChain.h"
-#include "ROOTAnalysis.hh"
+#include "TROOTAnalysis.hh"
 #include <stdlib.h>
 
 
@@ -30,7 +30,7 @@ int main(int argc, char * argv[]) {
 //    gStyle->SetPadTickY(1);
 //    gStyle->SetOptTitle(0);
 //    gStyle->SetTitleSize(0.048,"xy");
-//    gStyle->SetLabelSize(0.04,"xy")
+//    gStyle->SetLabelSize(0.04,"xy");
 //    gStyle->SetTitleOffset(1.3,"x");
 //    gStyle->SetTitleOffset(1.3,"y");
 
@@ -66,14 +66,14 @@ int main(int argc, char * argv[]) {
 
                 A.PlotProjection(100);
                 //A.PrintFitParams();
-                A.PrintFitHists(minevt, maxevt);
+                //A.PrintFitHists(minevt, maxevt);
 
                 //A.CleanCOGs(minl, maxl, minevt, maxevt);
         }
         else if(argc = 6) {
                 TApplication* app = new TApplication("app", 0, 0, 0);
 
-                std::cout<<"aereargerhrehg"<<std::endl;
+                //std::cout<<"aereargerhrehg"<<std::endl;
 
                 ch1->Add("Pion.root");
 
@@ -81,14 +81,22 @@ int main(int argc, char * argv[]) {
 
                 ch1->Draw("");
 
-                std::cout<<"oiueroiueio"<<std::endl;
+                //std::cout<<"oiueroiueio"<<std::endl;
 
                 TROOTAnalysis A(ch1);
 
+                //A.PrintERes();
+                A.PlotRMSx();
 
-                std::cout << "Created Analysis Class" << std::endl;
+                // std::cout << "Created Analysis Class" << std::endl;
+                // for(Int_t i=0; i<30; i++) {
+                //         A.plotEventPion(i);
+                // }
 
-                //A.plotEvent(100);
+                // for(Int_t i=0; i<100; i++) {
+                //         A.plotEvent(i);
+                // }
+                //A.AnalyzePions( minl-1, maxl, minevt, maxevt);
                 //A.findShowercenter(104, 105);
                 //  A.CalcCOG(minl-1, maxl, minevt, maxevt);
                 //  A.FitCOGs(minevt, maxevt, 10 );

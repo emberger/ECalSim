@@ -14,8 +14,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Analysis.dir/src/B4cTrackInformation.cc.o"
   "CMakeFiles/Analysis.dir/src/B4cTrackingAction.cc.o"
   "CMakeFiles/Analysis.dir/src/Minimizer.cc.o"
-  "CMakeFiles/Analysis.dir/src/ROOTAnalysis.cc.o"
   "CMakeFiles/Analysis.dir/src/RootClasses_dict.cc.o"
+  "CMakeFiles/Analysis.dir/src/TROOTAnalysis.cc.o"
   "Analysis.pdb"
   "Analysis"
 )

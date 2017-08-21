@@ -5,8 +5,7 @@
 #include "B4ROOTEvent.hh"
 //#include "Stiostream.h"
 
-ClassImp(B4ROOTEvent)
-ClassImp(B4ROOTHit)
+
 
 
 TClonesArray* B4ROOTEvent::aHits = 0;
@@ -65,7 +64,7 @@ B4ROOTHit::B4ROOTHit(const B4ROOTHit& orig) : TObject(orig) {
 								m_X = orig.m_X;
 								m_Y = orig.m_Y;
 								m_Z = orig.m_Z;
-								std::cout<<"orig.Phot: "<<orig.m_PhotonNr<<std::endl;
+								//std::cout<<"orig.Phot: "<<orig.m_PhotonNr<<std::endl;
 								m_PhotonNr = orig.m_PhotonNr;
 								m_EnergyDeposit = orig.m_EnergyDeposit;
 }

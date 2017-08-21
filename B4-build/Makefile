@@ -193,19 +193,6 @@ exampleB4c/fast:
 	$(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/build
 .PHONY : exampleB4c/fast
 
-#=============================================================================
-# Target rules for targets named RootLib
-
-# Build rule for target.
-RootLib: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 RootLib
-.PHONY : RootLib
-
-# fast build rule for target.
-RootLib/fast:
-	$(MAKE) -f B4c/CMakeFiles/RootLib.dir/build.make B4c/CMakeFiles/RootLib.dir/build
-.PHONY : RootLib/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -221,7 +208,6 @@ help:
 	@echo "... B4"
 	@echo "... Analysis"
 	@echo "... exampleB4c"
-	@echo "... RootLib"
 .PHONY : help
 
 

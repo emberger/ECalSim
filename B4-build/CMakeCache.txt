@@ -207,9 +207,6 @@ ROOTCINT_EXECUTABLE:FILEPATH=/opt/root/5.34/bin/rootcint
 //Path to a program.
 ROOT_CONFIG_EXECUTABLE:FILEPATH=/opt/root/5.34/bin/root-config
 
-//Dependencies for target
-RootLib_LIB_DEPENDS:STATIC=
-
 //Build example with Geant4 UI and Vis drivers
 WITH_GEANT4_UIVIS:BOOL=ON
 

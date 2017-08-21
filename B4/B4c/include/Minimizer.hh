@@ -23,23 +23,35 @@ using namespace std;
 class Fcn : public ROOT::Minuit2::FCNBase
 {
 public:
-  //
-  // /** Funktion die minimiert werden soll */
-   virtual double operator()(const std::vector<double> &par) const;
-  //
-  // /** Error definition: Der Fehler e auf einen Parameter x ist definiert
-  // * so dass f(x+-e) = f(x) + Up().
-  // * Für einen Chi^2 fit ist 1 das richtige um 1 sigma Fehler zu bekommen. */
-   virtual double Up() const;
-  //
-   inline void SetCurrentEvent(Int_t ce){currentEvent=ce;};
-   inline void SetCOGs(std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>>> c){COGs=c;};
-   void PrintCOGs();
+//
+// /** Funktion die minimiert werden soll */
+virtual double operator()(const std::vector<double> &par) const;
+//
+// /** Error definition: Der Fehler e auf einen Parameter x ist definiert
+// * so dass f(x+-e) = f(x) + Up().
+// * Für einen Chi^2 fit ist 1 das richtige um 1 sigma Fehler zu bekommen. */
+virtual double Up() const;
+
+inline void SetApproachMode(){
+        approachmode=true;
+};
+inline void SetCurrentEvent(Int_t ce){
+        currentEvent=ce;
+};
+inline void SetCOGs(std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > > c){
+        COGs=c;
+};
+inline void SetParamsPions(std::vector<std::vector<std::tuple<Double_t, Double_t, Double_t, Double_t> > > PPions){
+        ParamsPions=PPions;
+};
+
+void PrintCOGs();
 
 private:
-  std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t>>> COGs;
-  Int_t currentEvent;
-
+std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > > COGs;
+std::vector<std::vector<std::tuple<Double_t, Double_t, Double_t, Double_t> > > ParamsPions;
+Int_t currentEvent;
+Bool_t approachmode=false;
 };
 
 // int Fit2Sigma(TH1D* hist){

@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 Path=/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/

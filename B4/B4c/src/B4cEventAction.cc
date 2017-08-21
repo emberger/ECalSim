@@ -91,7 +91,7 @@ void B4cEventAction::SetStepHit(G4double x, G4double y, G4double z, G4double eDe
         hit.SetCoordinates(x, y, z);
         hit.SetEnergyDeposit(eDep);
         hit.SetPhotNr(phnr);
-        G4cout<<phnr<<" SetStepHit"<<hit.PhotNr()<<G4endl;
+        //G4cout<<phnr<<" SetStepHit"<<hit.PhotNr()<<G4endl;
         this->CalEvent()->AddHit(hit);
         //G4cout << "Setting Hit! " << G4endl;
 

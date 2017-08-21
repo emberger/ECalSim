@@ -35,6 +35,7 @@ protected:
 private:
 
 G4bool isdecayed=false;
+G4bool isPion=false;
 
 B4cTrackInformation * theInfo;
 

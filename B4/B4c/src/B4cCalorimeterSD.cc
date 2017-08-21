@@ -106,10 +106,15 @@ void B4cCalorimeterSD::Initialize(G4HCofThisEvent* hce)
 G4bool B4cCalorimeterSD::ProcessHits(G4Step* step,
                                      G4TouchableHistory* ROhist)
 {
+        G4int photNR=0;
 
         B4cTrackInformation* info = (B4cTrackInformation*)(step->GetTrack()->GetUserInformation());
         //G4cout << "Photon number: "<<info->GetOriginalPhotonNumber()<< G4endl;
-        G4int photNR=info->GetOriginalPhotonNumber();
+        if(info) {
+
+                photNR=info->GetOriginalPhotonNumber();
+        }
+
         // energy deposit
         auto edep = step->GetTotalEnergyDeposit();
 
