@@ -538,6 +538,36 @@ src/B4cEventAction.cc.s:
 	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.s
 .PHONY : src/B4cEventAction.cc.s
 
+src/B4cPionManager.o: src/B4cPionManager.cc.o
+
+.PHONY : src/B4cPionManager.o
+
+# target to build an object file
+src/B4cPionManager.cc.o:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cPionManager.cc.o
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cPionManager.cc.o
+.PHONY : src/B4cPionManager.cc.o
+
+src/B4cPionManager.i: src/B4cPionManager.cc.i
+
+.PHONY : src/B4cPionManager.i
+
+# target to preprocess a source file
+src/B4cPionManager.cc.i:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cPionManager.cc.i
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cPionManager.cc.i
+.PHONY : src/B4cPionManager.cc.i
+
+src/B4cPionManager.s: src/B4cPionManager.cc.s
+
+.PHONY : src/B4cPionManager.s
+
+# target to generate assembly for a file
+src/B4cPionManager.cc.s:
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/Analysis.dir/build.make B4c/CMakeFiles/Analysis.dir/src/B4cPionManager.cc.s
+	cd /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build && $(MAKE) -f B4c/CMakeFiles/exampleB4c.dir/build.make B4c/CMakeFiles/exampleB4c.dir/src/B4cPionManager.cc.s
+.PHONY : src/B4cPionManager.cc.s
+
 src/B4cReadoutGeometry.o: src/B4cReadoutGeometry.cc.o
 
 .PHONY : src/B4cReadoutGeometry.o
@@ -768,6 +798,9 @@ help:
 	@echo "... src/B4cEventAction.o"
 	@echo "... src/B4cEventAction.i"
 	@echo "... src/B4cEventAction.s"
+	@echo "... src/B4cPionManager.o"
+	@echo "... src/B4cPionManager.i"
+	@echo "... src/B4cPionManager.s"
 	@echo "... src/B4cReadoutGeometry.o"
 	@echo "... src/B4cReadoutGeometry.i"
 	@echo "... src/B4cReadoutGeometry.s"

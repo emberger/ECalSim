@@ -78,7 +78,7 @@ B4RunAction::B4RunAction()
         analysisManager->FinishNtuple();
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......z
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 B4RunAction::~B4RunAction()
 {

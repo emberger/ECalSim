@@ -18,6 +18,16 @@ B4ROOTEvent::B4ROOTEvent() {
 								m_EventNo = 0;
 								m_GapEnergy = 0;
 								m_NHits = 0;
+								m_GapThickness=0;
+								m_AbsoThickness=0;
+								m_Layerno=0;
+								m_tilesizeX=0;
+								m_tilesizeY=0;
+								m_calsizeXY=0;
+								m_EnergyPhoton1=0;
+								m_EnergyPhoton2=0;
+								m_MomentumPh1.SetXYZ(0.,0.,0.);
+								m_MomentumPh2.SetXYZ(0.,0.,0.);
 
 }
 
@@ -30,6 +40,16 @@ void B4ROOTEvent::Clear(const Option_t*) {
 								m_EventNo = 0;
 								m_GapEnergy = 0;
 								m_NHits=0;
+								m_GapThickness=0;
+								m_AbsoThickness=0;
+								m_Layerno=0;
+								m_tilesizeX=0;
+								m_tilesizeY=0;
+								m_calsizeXY=0;
+								m_EnergyPhoton1=0;
+								m_EnergyPhoton2=0;
+								m_MomentumPh1.SetXYZ(0.,0.,0.);
+								m_MomentumPh2.SetXYZ(0.,0.,0.);
 								m_Hits->Clear();
 								//std::cout << "Clear done!" << std::endl;
 }

@@ -7,22 +7,22 @@ AngCOUNTER=0
 
 
 Sen=100          #starting energy
-EnIterations=10
+EnIterations=5
 increment=100
-eventsPerEnergy=2000
+eventsPerEnergy=1000
 
-Xangle=-0.2      #starting angles
-Yangle=-0.2
+Xangle=-1.0      #starting angles
+Yangle=-1.0
 Zangle=1.0
-XAngIncrement=-0.2
-YAngIncrement=-0.2
-AngIiterations=5
+XAngIncrement=0.2
+YAngIncrement=0.2
+AngIiterations=10
 
 
 
 
 
-foldername=GammaEnergyandSlopeScan   #folder containing .root files
+foldername=MuonEnergyandSlopeScan_5x5mmTile_1mmLead   #folder containing .root files
 
 
 
@@ -31,27 +31,27 @@ foldername=GammaEnergyandSlopeScan   #folder containing .root files
 
 mkdir $foldername
 
-sed -i "19 s%^/run/beamOn.*%/run/beamOn $eventsPerEnergy%" run2.mac
+sed -i "19 s%^/run/beamOn.*%/run/beamOn $eventsPerEnergy%" GeantSim.mac
 
     while [ $AngCOUNTER -lt $AngIiterations ]; do
 
-        sed -i "16 s%^/gun/direction.*%/gun/direction $Xangle $Yangle $Zangle%" run2.mac
+        sed -i "16 s%^/gun/direction.*%/gun/direction $Xangle $Yangle $Zangle%" GeantSim.mac
 
         EnCOUNTER=0
         en=$Sen
         buf=start
-        sed -i "18 s%^/gun/energy.*%/gun/energy $buf MeV%" run2.mac
+        sed -i "18 s%^/gun/energy.*%/gun/energy $buf MeV%" GeantSim.mac
 
         while [  $EnCOUNTER -lt $EnIterations ]; do
 
             s=$foldername
 
-            sed -i "18 s%$buf%$en%" run2.mac
+            sed -i "18 s%$buf%$en%" GeantSim.mac
             buf=$en
 
             ./exampleB4c -m GeantSim.mac
 
-            s+=/Gamma
+            s+=/Muon
             s+=$en
             s+=MeV
             s+=_$Xangle

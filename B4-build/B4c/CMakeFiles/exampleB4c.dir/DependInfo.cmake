@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDetectorConstruction.cc" "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/CMakeFiles/exampleB4c.dir/src/B4cDetectorConstruction.cc.o"
   "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDummySD.cc" "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/CMakeFiles/exampleB4c.dir/src/B4cDummySD.cc.o"
   "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cEventAction.cc" "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o"
+  "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cPionManager.cc" "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/CMakeFiles/exampleB4c.dir/src/B4cPionManager.cc.o"
   "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cReadoutGeometry.cc" "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o"
   "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackInformation.cc" "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackInformation.cc.o"
   "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackingAction.cc" "/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4-build/B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackingAction.cc.o"

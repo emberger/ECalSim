@@ -42,6 +42,7 @@
 
 #include <string>
 #include "B4cDetParams.hh"
+#include "B4cPionManager.hh"
 #include "Randomize.hh"
 #include <iomanip>
 
@@ -74,6 +75,9 @@ B4ROOTEvent* B4cEventAction::CalEvent()
                 //rootFile = new TFile("ECalEventTree.root", "RECREATE");
                 calEvent = new B4ROOTEvent();
                 eventTree = new TTree("eventTree", "B4ROOT Event Tree");
+
+
+
                 //std::cout<<"TilesX: "<<GetInst().GetnofTilesX()<<std::endl;
                 //std::cout<<"TilesX: "<<calEvent->TilesX()<<std::endl;
                 eventTree->Branch("EventBranch", "B4ROOTEvent", &calEvent);
@@ -212,6 +216,25 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
         //fill ROOT Classes
 
         this->CalEvent()->SetEventNo(eventID);
+        this->CalEvent()->SetGapThickness(GetInst().GetgapThickness());
+
+        //std::cout<<"Gapthickness: "<<GetInst().GetgapThickness()<<std::endl;
+        //std::cout<<"Gapthickness: "<<this->CalEvent()->GapThickness()<<std::endl;
+
+        this->CalEvent()->SetAbsoThickness(GetInst().GetabsoThickness());
+        this->CalEvent()->SetNumberOfLayers(GetInst().GetfNofLayers());
+        this->CalEvent()->SetTilesizeX(GetInst().GettileLenX());
+        this->CalEvent()->SetTilesizeY(GetInst().GettileLenY());
+        this->CalEvent()->SetcalsizeXY(GetInst().GetcalorSizeXY());
+        this->CalEvent()->SetEnergyPhoton1(GetEInst().GetEnergyPh1());
+        this->CalEvent()->SetEnergyPhoton2(GetEInst().GetEnergyPh2());
+
+        G4ThreeVector mom1=GetEInst().GetMomPh1();
+        this->CalEvent()->SetMomentumPh1(mom1.getX(), mom1.getY(),mom1.getZ());
+
+        G4ThreeVector mom2=GetEInst().GetMomPh2();
+        this->CalEvent()->SetMomentumPh2(mom2.getX(), mom2.getY(),mom2.getZ());
+        //this->CalEvent()->SetMomentumPh2();
         //std::cout<<this->CalEvent()->EventNo()<<std::endl;
 
         auto ent=gapHC->entries();
@@ -224,7 +247,7 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
                 }
                 if(i == ent-1) {
                         this->CalEvent()->SetGapEnergy(tHit->GetEdep());
-                        G4cout<<tHit->GetEdep()<<G4endl;
+                        //G4cout<<tHit->GetEdep()<<G4endl;
                 }
 
         }
@@ -232,14 +255,16 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
         //if (rootFile)
         //	{
         eventTree->Fill();
-        calEvent->Clear();
+        //std::cout<<"Gapthickness: "<<this->CalEvent()->GapThickness()<<std::endl;
 
+        calEvent->Clear();
+        //std::cout<<"Gapthickness: "<<this->CalEvent()->GapThickness()<<std::endl;
         //	}
         //if(event->GetEventID()==G4RunManager::GetCurrentRun()->GetNumberOfEventToBeProcessed()){
         //rootFile->Write();
         //rootFile->Close();
         //std::cout<<"Event done"<<std::endl;
-        std::cout<<"Tree has now "<<eventTree->GetEntries()<<" entries"<<std::endl;
+        //std::cout<<"Tree has now "<<eventTree->GetEntries()<<" entries"<<std::endl;
         //eventTree->Print();
         //}
 

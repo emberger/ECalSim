@@ -903,6 +903,16 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o
  /opt/root/5.34/include/TIterator.h
  /opt/root/5.34/include/TMath.h
  /opt/root/5.34/include/TMathBase.h
+ /opt/root/5.34/include/TMatrix.h
+ /opt/root/5.34/include/TMatrixDBasefwd.h
+ /opt/root/5.34/include/TMatrixF.h
+ /opt/root/5.34/include/TMatrixFBasefwd.h
+ /opt/root/5.34/include/TMatrixFUtils.h
+ /opt/root/5.34/include/TMatrixFUtilsfwd.h
+ /opt/root/5.34/include/TMatrixFfwd.h
+ /opt/root/5.34/include/TMatrixT.h
+ /opt/root/5.34/include/TMatrixTBase.h
+ /opt/root/5.34/include/TMatrixTUtils.h
  /opt/root/5.34/include/TNamed.h
  /opt/root/5.34/include/TObjArray.h
  /opt/root/5.34/include/TObject.h
@@ -913,6 +923,8 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4ROOTEvent.cc.o
  /opt/root/5.34/include/TSeqCollection.h
  /opt/root/5.34/include/TStorage.h
  /opt/root/5.34/include/TString.h
+ /opt/root/5.34/include/TVector2.h
+ /opt/root/5.34/include/TVector3.h
  /opt/root/5.34/include/TVectorDfwd.h
  /opt/root/5.34/include/TVectorFfwd.h
  /opt/root/5.34/include/TVersionCheck.h
@@ -1417,6 +1429,16 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o
  /opt/root/5.34/include/TMap.h
  /opt/root/5.34/include/TMath.h
  /opt/root/5.34/include/TMathBase.h
+ /opt/root/5.34/include/TMatrix.h
+ /opt/root/5.34/include/TMatrixDBasefwd.h
+ /opt/root/5.34/include/TMatrixF.h
+ /opt/root/5.34/include/TMatrixFBasefwd.h
+ /opt/root/5.34/include/TMatrixFUtils.h
+ /opt/root/5.34/include/TMatrixFUtilsfwd.h
+ /opt/root/5.34/include/TMatrixFfwd.h
+ /opt/root/5.34/include/TMatrixT.h
+ /opt/root/5.34/include/TMatrixTBase.h
+ /opt/root/5.34/include/TMatrixTUtils.h
  /opt/root/5.34/include/TNamed.h
  /opt/root/5.34/include/TNtuple.h
  /opt/root/5.34/include/TObjArray.h
@@ -1432,6 +1454,8 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cActionInitialization.cc.o
  /opt/root/5.34/include/TTree.h
  /opt/root/5.34/include/TUUID.h
  /opt/root/5.34/include/TUrl.h
+ /opt/root/5.34/include/TVector2.h
+ /opt/root/5.34/include/TVector3.h
  /opt/root/5.34/include/TVectorDfwd.h
  /opt/root/5.34/include/TVectorFfwd.h
  /opt/root/5.34/include/TVersionCheck.h
@@ -2270,6 +2294,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cCalorimeterSD.hh
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cDetParams.hh
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cEventAction.hh
+ /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cPionManager.hh
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cEventAction.cc
  /opt/root/5.34/include/DllImport.h
  /opt/root/5.34/include/ESTLType.h
@@ -2313,6 +2338,16 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o
  /opt/root/5.34/include/TMap.h
  /opt/root/5.34/include/TMath.h
  /opt/root/5.34/include/TMathBase.h
+ /opt/root/5.34/include/TMatrix.h
+ /opt/root/5.34/include/TMatrixDBasefwd.h
+ /opt/root/5.34/include/TMatrixF.h
+ /opt/root/5.34/include/TMatrixFBasefwd.h
+ /opt/root/5.34/include/TMatrixFUtils.h
+ /opt/root/5.34/include/TMatrixFUtilsfwd.h
+ /opt/root/5.34/include/TMatrixFfwd.h
+ /opt/root/5.34/include/TMatrixT.h
+ /opt/root/5.34/include/TMatrixTBase.h
+ /opt/root/5.34/include/TMatrixTUtils.h
  /opt/root/5.34/include/TNamed.h
  /opt/root/5.34/include/TNtuple.h
  /opt/root/5.34/include/TObjArray.h
@@ -2328,6 +2363,8 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o
  /opt/root/5.34/include/TTree.h
  /opt/root/5.34/include/TUUID.h
  /opt/root/5.34/include/TUrl.h
+ /opt/root/5.34/include/TVector2.h
+ /opt/root/5.34/include/TVector3.h
  /opt/root/5.34/include/TVectorDfwd.h
  /opt/root/5.34/include/TVectorFfwd.h
  /opt/root/5.34/include/TVersionCheck.h
@@ -2724,6 +2761,21 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cEventAction.cc.o
  /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/trajectoryControl.hh
  /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/trkdefs.hh
  /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/windefs.hh
+B4c/CMakeFiles/exampleB4c.dir/src/B4cPionManager.cc.o
+ /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cPionManager.hh
+ /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cPionManager.cc
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/CLHEP/Utility/defs.h
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/CLHEP/Vector/ThreeVector.h
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/CLHEP/Vector/ThreeVector.icc
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4ExceptionSeverity.hh
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4String.hh
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4String.icc
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4ThreeVector.hh
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4Types.hh
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/G4ios.hh
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/globals.hh
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/templates.hh
+ /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/tls.hh
 B4c/CMakeFiles/exampleB4c.dir/src/B4cReadoutGeometry.cc.o
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cCalorHit.hh
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cCalorimeterSD.hh
@@ -2967,6 +3019,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackInformation.cc.o
  /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/trkdefs.hh
  /remote/pcilc7/software/Geant4/geant4.10.03.p01-install/include/Geant4/windefs.hh
 B4c/CMakeFiles/exampleB4c.dir/src/B4cTrackingAction.cc.o
+ /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cPionManager.hh
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cTrackInformation.hh
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cTrackingAction.hh
  /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackingAction.cc
@@ -3344,6 +3397,16 @@ B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o
  /opt/root/5.34/include/TIterator.h
  /opt/root/5.34/include/TMath.h
  /opt/root/5.34/include/TMathBase.h
+ /opt/root/5.34/include/TMatrix.h
+ /opt/root/5.34/include/TMatrixDBasefwd.h
+ /opt/root/5.34/include/TMatrixF.h
+ /opt/root/5.34/include/TMatrixFBasefwd.h
+ /opt/root/5.34/include/TMatrixFUtils.h
+ /opt/root/5.34/include/TMatrixFUtilsfwd.h
+ /opt/root/5.34/include/TMatrixFfwd.h
+ /opt/root/5.34/include/TMatrixT.h
+ /opt/root/5.34/include/TMatrixTBase.h
+ /opt/root/5.34/include/TMatrixTUtils.h
  /opt/root/5.34/include/TMemberInspector.h
  /opt/root/5.34/include/TNamed.h
  /opt/root/5.34/include/TObjArray.h
@@ -3356,6 +3419,8 @@ B4c/CMakeFiles/exampleB4c.dir/src/RootClasses_dict.cc.o
  /opt/root/5.34/include/TSeqCollection.h
  /opt/root/5.34/include/TStorage.h
  /opt/root/5.34/include/TString.h
+ /opt/root/5.34/include/TVector2.h
+ /opt/root/5.34/include/TVector3.h
  /opt/root/5.34/include/TVectorDfwd.h
  /opt/root/5.34/include/TVectorFfwd.h
  /opt/root/5.34/include/TVersionCheck.h
@@ -3513,11 +3578,20 @@ B4c/CMakeFiles/exampleB4c.dir/src/TROOTAnalysis.cc.o
  /opt/root/5.34/include/TImage.h
  /opt/root/5.34/include/TIterator.h
  /opt/root/5.34/include/TList.h
+ /opt/root/5.34/include/TLorentzVector.h
  /opt/root/5.34/include/TMap.h
  /opt/root/5.34/include/TMath.h
  /opt/root/5.34/include/TMathBase.h
+ /opt/root/5.34/include/TMatrix.h
  /opt/root/5.34/include/TMatrixDBasefwd.h
+ /opt/root/5.34/include/TMatrixF.h
  /opt/root/5.34/include/TMatrixFBasefwd.h
+ /opt/root/5.34/include/TMatrixFUtils.h
+ /opt/root/5.34/include/TMatrixFUtilsfwd.h
+ /opt/root/5.34/include/TMatrixFfwd.h
+ /opt/root/5.34/include/TMatrixT.h
+ /opt/root/5.34/include/TMatrixTBase.h
+ /opt/root/5.34/include/TMatrixTUtils.h
  /opt/root/5.34/include/TNamed.h
  /opt/root/5.34/include/TObjArray.h
  /opt/root/5.34/include/TObjString.h
@@ -3528,6 +3602,7 @@ B4c/CMakeFiles/exampleB4c.dir/src/TROOTAnalysis.cc.o
  /opt/root/5.34/include/TQObject.h
  /opt/root/5.34/include/TRef.h
  /opt/root/5.34/include/TRefArray.h
+ /opt/root/5.34/include/TRotation.h
  /opt/root/5.34/include/TSchemaHelper.h
  /opt/root/5.34/include/TSeqCollection.h
  /opt/root/5.34/include/TStorage.h
@@ -3536,6 +3611,8 @@ B4c/CMakeFiles/exampleB4c.dir/src/TROOTAnalysis.cc.o
  /opt/root/5.34/include/TTree.h
  /opt/root/5.34/include/TUUID.h
  /opt/root/5.34/include/TUrl.h
+ /opt/root/5.34/include/TVector2.h
+ /opt/root/5.34/include/TVector3.h
  /opt/root/5.34/include/TVectorDfwd.h
  /opt/root/5.34/include/TVectorFfwd.h
  /opt/root/5.34/include/TVersionCheck.h

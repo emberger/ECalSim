@@ -10,6 +10,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Analysis.dir/src/B4cDetectorConstruction.cc.o"
   "CMakeFiles/Analysis.dir/src/B4cDummySD.cc.o"
   "CMakeFiles/Analysis.dir/src/B4cEventAction.cc.o"
+  "CMakeFiles/Analysis.dir/src/B4cPionManager.cc.o"
   "CMakeFiles/Analysis.dir/src/B4cReadoutGeometry.cc.o"
   "CMakeFiles/Analysis.dir/src/B4cTrackInformation.cc.o"
   "CMakeFiles/Analysis.dir/src/B4cTrackingAction.cc.o"

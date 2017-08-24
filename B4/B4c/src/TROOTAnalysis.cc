@@ -10,18 +10,54 @@ TROOTAnalysis::TROOTAnalysis(TChain* ch){
         std::cout<<nofEntries<<std::endl;
         FitParamsPions.resize(nofEntries);
 
+
         Cevent = new B4ROOTEvent();
         EcalTree->SetBranchAddress("EventBranch", &Cevent);
 
-        // for(Int_t i=0; i<nofEntries; i++) {                                              //energySmearing
-        //         EcalTree->GetEntry(i);
-        //         Int_t hitnr = Cevent->NHits();
-        //         for(Int_t j=0; j<hitnr; j++) {
-        //                 std::cout<<Cevent->Hit(j)->PhotNr()<<std::endl;
-        //         }
-        // }
+
+        for(Int_t i=0; i<nofEntries; i++) {
+                EcalTree->GetEntry(i);
+                if(i==0) {
+                        GapThickness=Cevent->GapThickness();
+                        AbsoThickness=Cevent->AbsoThickness();
+                        tiledimX=Cevent->TilesizeX();
+                        tiledimY=Cevent->TilesizeY();
+                        calsizeXY=Cevent->calsizeXY();
+                        nofLayers=Cevent->NumberOfLayers();
+                }
+                Int_t hitnr = Cevent->NHits();
+                Double_t tmpE1=0;
+                Double_t tmpE2=0;
+                for(Int_t j=0; j<hitnr; j++) {
+
+                        if(Cevent->Hit(j)->PhotNr()==1) {
+                                tmpE1+=Cevent->Hit(j)->EnergyDeposit();
+                        }
+                        else if(Cevent->Hit(j)->PhotNr()==2) {
+                                tmpE2+=Cevent->Hit(j)->EnergyDeposit();
+                        }
+
+                }
+                EnergyPhoton1.push_back(tmpE1);
+                EnergyPhoton2.push_back(tmpE2);
+
+        }
+
+        histsizeX=calsizeXY/tiledimX;
+        histsizeY=calsizeXY/tiledimY;
+        histsizeZ=nofLayers;
+
+        h = new TH3D("ECalEvent","ECalEvent",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);
 
 
+        hA = new TH3D("ECalEvent1","ECalEvent1",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);
+        hB = new TH3D("ECalEvent2","ECalEvent2",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);
+        h1 = new TH2D("h1", "h1", histsizeX+1,-0.5,histsizeX+0.5,histsizeY+1,-0.5,histsizeY+0.5);
+        h2 = new TH2D("h2", "h2", histsizeX+1,-0.5,histsizeX+0.5,histsizeY+1,-0.5,histsizeY+0.5);
+        h3 = new TH3D("h3", "h3",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);
+
+        std::cout<<"GT: "<<GapThickness<<"AT: "<<AbsoThickness<<"TDX: "<<tiledimX<<"TDY: "<<tiledimY<<"CXY: "<<calsizeXY <<"NL: "<<nofLayers<<std::endl;
+        std::cout<<"HX: "<<histsizeX<<"HY: "<<histsizeY<<"HZ: "<<histsizeZ<<std::endl;
         //EcalTree->Print();
 }
 
@@ -115,7 +151,7 @@ void TROOTAnalysis::plotEventPion(Int_t pev){     //plot 3DHisto of selected eve
         hB->GetZaxis()->SetTitle("Z");
         hB->Draw("SAME");
 
-        std::string Path="/home/iwsatlas1/emberger/FuerFrank/PionEventDisplay/Event";
+        std::string Path="/home/iwsatlas1/emberger/PionPlots/Event";
         std::string nr = std::to_string(pev);
 
         std::string extension = ".C";
@@ -389,7 +425,9 @@ void TROOTAnalysis::CalcCOGPion(Int_t minlayer, Int_t maxlayer, Int_t minevent, 
                 Eges = Cevent->GapEnergy();
                 Int_t cnh = Cevent->NHits();
                 Double_t integral;
+
                 for(Int_t i=minlayer; i<maxlayer; i++) { //loop over all layers in event
+
                         for(Int_t j =0; j<cnh; j++) { //loop over all hits in laver i
                                 //std::cout<<Cevent->Hit(j)->PhotNr()<<std::endl;
                                 if(Cevent->Hit(j)->Z()==i && Cevent->Hit(j)->PhotNr()==photonNR) {
@@ -482,6 +520,10 @@ void TROOTAnalysis::CalcCOGPion(Int_t minlayer, Int_t maxlayer, Int_t minevent, 
                         h2->Reset();
 
                 }
+
+
+
+
                 COGCollection.push_back(coglist);
                 coglist.clear();
 
@@ -491,20 +533,224 @@ void TROOTAnalysis::CalcCOGPion(Int_t minlayer, Int_t maxlayer, Int_t minevent, 
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------
+void TROOTAnalysis::FitCOGsPion( Int_t minevent, Int_t maxevent, Bool_t isPion, Int_t photonNr){
+        //histograms for correlation
+        TCanvas * corr1 = new TCanvas("Correlations");
+        corr1->Divide(3,2,0.01,0.01);
 
+        TH1D * co1 = new TH1D("MxTx correllation", "MxTx correllation",100, -1,1 );
+        co1->GetXaxis()->SetTitle("corellation of X slope and X intercept");
+        TH1D * co2 = new TH1D("MxMy correllation", "MxMy correllation",100, -1,1 );
+        co2->GetXaxis()->SetTitle("corellation of X slope and Y slope");
+        TH1D * co3 = new TH1D("MxTy correllation", "MxTy correllation",100, -1,1 );
+        co3->GetXaxis()->SetTitle("correlation of X slope and Y intercept");
+        TH1D * co4 = new TH1D("TxMy correllation", "TxMy correllation",100, -1,1 );
+        co4->GetXaxis()->SetTitle("correlation of X intercept and Y slope");
+        TH1D * co5 = new TH1D("TxTy correllation", "TxTy correllation",100, -1,1 );
+        co5->GetXaxis()->SetTitle("correlation of X intercapt an Y intercept");
+        TH1D * co6 = new TH1D("MyTy correllation", "MyTy correllation",100, -1,1 );
+        co6->GetXaxis()->SetTitle("correlation of Y slope and Y intercept");
+
+
+
+
+        //transform from copynumber coordinates to geant4 coordinates
+        std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > Transcoglist;
+        std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > > TransfomedCOGs;
+
+
+//----------------------------------------------------------------1.8mm abso-----------------------------------------------------------------------------------------
+
+
+        // for(Int_t i = 0; i<nofEntries; i++) {                                 //transformation to geant4 coordinate system
+        //         for(Int_t j = 0; j<COGCollection[i].size(); j++) {
+        //
+        //                 auto tc = std::make_tuple(((-500+tileLen/2) + std::get<0>(COGCollection[i][j]) * tileLen),
+        //                                           ((-500+tileLen/2) + std::get<1>(COGCollection[i][j]) * tileLen),
+        //                                           -288.2 + std::get<2>(COGCollection[i][j]) * 11.8,
+        //                                           std::get<3>(COGCollection[i][j]),
+        //                                           std::get<4>(COGCollection[i][j]),
+        //                                           std::get<5>(COGCollection[i][j])  );
+        //                 Transcoglist.push_back(tc);
+        //
+        //         }
+        //         TransfomedCOGs.push_back(Transcoglist);
+        //         Transcoglist.clear();
+        // }
+
+//----------------------------------------------------------------1mm Abso-----------------------------------------------------------------------------------------
+        Double_t offsetX=((-1*calsizeXY/2)+tiledimX/2);
+        Double_t offsetY=((-1*calsizeXY/2)+tiledimY/2);
+        Double_t offsetZ=((((AbsoThickness+GapThickness)*(-1)*nofLayers)/2)+(AbsoThickness+GapThickness/2));
+        std::cout<<"X: "<<offsetX<<"Y:"<<offsetY<<"Z: "<<offsetZ<<std::endl;
+
+        for(Int_t i = 0; i<nofEntries; i++) {                                         //transformation to geant4 coordinate system
+                for(Int_t j = 0; j<COGCollection[i].size(); j++) {
+
+                        auto tc = std::make_tuple((offsetX + std::get<0>(COGCollection[i][j]) * tiledimX),                // X
+                                                  (offsetY + std::get<1>(COGCollection[i][j]) * tiledimY),                 // Y
+                                                  (offsetZ + std::get<2>(COGCollection[i][j]) * (AbsoThickness+GapThickness)),                               // Z
+                                                  std::get<3>(COGCollection[i][j]),
+                                                  std::get<4>(COGCollection[i][j]),
+                                                  std::get<5>(COGCollection[i][j])  );
+
+                        Transcoglist.push_back(tc);
+
+                }
+                TransfomedCOGs.push_back(Transcoglist);
+                Transcoglist.clear();
+        }
+
+
+
+
+
+
+
+        // for(Int_t i = 0; i<nofEntries;i++){
+        //   for(Int_t j =0;j<TransfomedCOGs[i].size();j++){
+        //     std::cout<<std::get<0>(TransfomedCOGs[i][j])<<":"<<std::get<1>(TransfomedCOGs[i][j])<<":"<<std::get<2>(TransfomedCOGs[i][j])<<"-----"
+        //     <<std::get<0>(COGCollection[i][j])<<":"<<std::get<1>(COGCollection[i][j])<<":"<<std::get<2>(COGCollection[i][j])<<std::endl;;
+        //   }
+        // }
+
+
+        Fcn myfcn;
+        myfcn.SetCOGs(TransfomedCOGs);
+        //myfcn.PrintCOGs();
+        MnUserParameters upar;
+        double error_minimizer_parameters = 1e-4;
+
+        upar.Add("mx", 0., error_minimizer_parameters);
+        upar.Add("tx", 1., error_minimizer_parameters);
+        upar.Add("my", 0., error_minimizer_parameters);
+        upar.Add("ty", 1., error_minimizer_parameters);
+
+        cout << upar << endl;
+
+        MnMigrad migrad(myfcn, upar, 2);
+
+
+
+
+        for(int events = 0; events < maxevent-minevent; events++) {
+
+                upar.SetValue("mx", 0.);
+                upar.SetValue("tx", 0.);
+                upar.SetValue("my", 0.);
+                upar.SetValue("ty", 0.);
+
+                myfcn.SetCurrentEvent(events);
+
+                std::cout<<"event: "<<events<<std::endl;
+                FunctionMinimum min = migrad();
+
+                std::cout<<min<<std::endl;
+
+
+                MnUserCovariance cov = min.UserCovariance();
+
+                //std::cout<<cov(0 ,0)<<" "<<cov(1,1)<<" "<<cov(2,2)<<" "<<cov(3,3)<<std::endl;
+
+
+                MnUserParameterState userParameterState = min.UserState();
+
+
+
+
+                if(isPion==false) {
+                        auto tp = std::make_tuple(userParameterState.Value("mx"), userParameterState.Value("tx"),
+                                                  userParameterState.Value("my"), userParameterState.Value("ty"));
+
+                        FitParamsGamma.push_back(tp);
+                }
+                else if(isPion==true && photonNr==1) {
+                        //std::cout<<"attempt adding params for photon 1"<<std::endl;
+
+                        auto tp1 = std::make_tuple(userParameterState.Value("mx"), userParameterState.Value("tx"),
+                                                   userParameterState.Value("my"), userParameterState.Value("ty"));
+                        //std::cout<<"errga"<<std::endl;
+                        FitParamsPions[events].push_back(tp1);
+                        std::cout<<"adding params for photon 1"<<std::endl;
+                }
+                else if(isPion==true && photonNr==2) {
+                        //std::cout<<"attempt adding params for photon 2"<<std::endl;
+                        auto tp2 = std::make_tuple(userParameterState.Value("mx"), userParameterState.Value("tx"),
+                                                   userParameterState.Value("my"), userParameterState.Value("ty"));
+
+                        FitParamsPions[events].push_back(tp2);
+                        std::cout<<"adding params for photon 2"<<std::endl;
+                }
+
+                Double_t covar[4][4];
+                Double_t error[4];
+
+                error[0]= userParameterState.Error("mx");
+                error[1]= userParameterState.Error("tx");
+                error[2]= userParameterState.Error("my");
+                error[3]= userParameterState.Error("ty");
+
+                //Fill correlation Histograms
+                if(COGCollection[events].size() > 1) {
+
+
+                        for(Int_t row=0; row<4; row++) {
+                                for(Int_t col=0; col<4; col++) {
+                                        covar[row][col]=cov(row,col);
+
+                                }
+                        }
+
+                        co1->Fill(covar[0][1]/(error[0]*error[1]));
+                        co2->Fill(covar[0][2]/(error[0]*error[2]));
+                        co3->Fill(covar[0][3]/(error[0]*error[3]));
+                        co4->Fill(covar[1][2]/(error[1]*error[2]));
+                        co5->Fill(covar[1][3]/(error[1]*error[3]));
+                        co6->Fill(covar[2][3]/(error[2]*error[3]));
+                }
+
+        }
+
+
+
+        corr1->cd(1);
+        co1->Draw("");
+
+        corr1->cd(2);
+        co2->Draw("");
+
+        corr1->cd(3);
+        co3->Draw("");
+
+        corr1->cd(4);
+        co4->Draw("");
+
+        corr1->cd(5);
+        co5->Draw("");
+
+        corr1->cd(6);
+        co6->Draw("");
+
+        TransfomedCOGs.clear();
+}
+
+//--------------------------------------------------------------------------------------------------------------------
 
 void TROOTAnalysis::AnalyzePions(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent){
 
         Bool_t pion=true;
+
+
+
         CalcCOGPion(minlayer, maxlayer, minevent, maxevent, 1);
-        plotCOGs();
-        FitCOGsPion(minevent, maxevent, 10, pion, 1);
+        //plotCOGs();
+        FitCOGsPion(minevent, maxevent, pion, 1);
 
         COGCollection.clear();
         coglist.clear();
 
         CalcCOGPion(minlayer, maxlayer, minevent, maxevent, 2);
-        FitCOGsPion(minevent, maxevent, 10, pion, 2);
+        FitCOGsPion(minevent, maxevent, pion, 2);
         //
         // for(Int_t i=0; i<nofEntries; i++) {
         //         std::cout<<"Photon1: "<<std::endl;
@@ -517,30 +763,17 @@ void TROOTAnalysis::AnalyzePions(Int_t minlayer, Int_t maxlayer, Int_t minevent,
         // }
 
         FindClosestApproach();
-        TCanvas * Delta1 = new TCanvas("Delta1");
-        Delta1->Divide(2,2,0.01,0.01);
-        gStyle->SetOptStat(2222);
-        TH1D * appdist1=new TH1D("Closest Approach", "ClosestApproach", 500,0,500);
 
-        for(Int_t j = 0; j<nofEntries; j++) {
-                //std::cout<<"ClosestApproach at: "<<std::get<0>(ClosestApproach[j]) <<"With distance: "<<std::get<1>(ClosestApproach[j])<<std::endl;
-                appdist1->Fill(std::get<1>(ClosestApproach[j]));
-        }
-        appdist1->GetXaxis()->SetTitle("Distance of closest Approach [mm]");
-        appdist1->GetYaxis()->SetTitle("Entries");
+
+
 
 
         CalculateDeviation();
 
-        Delta1->cd(1);
-        delx->Draw();
-        Delta1->cd(2);
-        dely->Draw();
-        Delta1->cd(3);
-        delz->Draw();
+        GetInvariantMass();
 
-        Delta1->cd(4);
-        appdist1->Draw();
+
+
 
 
         FitParamsPions.clear();
@@ -557,7 +790,7 @@ void TROOTAnalysis::CalculateDeviation(){
 
         Double_t GunX=0.;
         Double_t GunY=0.;
-        Double_t GunZ=-495.;
+        Double_t GunZ=-275.;
 
         for(Int_t i=0; i<nofEntries; i++) {
 
@@ -580,24 +813,34 @@ void TROOTAnalysis::CalculateDeviation(){
                 delz->Fill(DeltaZ);
         }
 
+        TCanvas * Delta1 = new TCanvas("Delta1");
+        Delta1->Divide(2,2,0.01,0.01);
+        gStyle->SetOptStat(2222);
+
+
         delx->GetXaxis()->SetTitle("DeltaX[mm]");
         dely->GetXaxis()->SetTitle("DeltaY[mm]");
         delz->GetXaxis()->SetTitle("DeltaZ[mm]");
 
-        delx->GetXaxis()->SetTitle("Entries");
+        delx->GetYaxis()->SetTitle("Entries");
         dely->GetYaxis()->SetTitle("Entries");
-        delz->GetZaxis()->SetTitle("Entries");
+        delz->GetYaxis()->SetTitle("Entries");
 
-        // Delta1->cd(1);
-        // delx->Draw();
-        //
-        // Delta1->cd(2);
-        // dely->Draw();
-        //
-        // Delta1->cd(3);
-        // delz->Draw();
+        Delta1->cd(1);
+        delx->Draw();
+        Delta1->cd(2);
+        dely->Draw();
+        Delta1->cd(3);
+        delz->Draw();
 
-
+        for(Int_t j = 0; j<nofEntries; j++) {
+                //std::cout<<"ClosestApproach at: "<<std::get<0>(ClosestApproach[j]) <<"With distance: "<<std::get<1>(ClosestApproach[j])<<std::endl;
+                appdist1->Fill(std::get<1>(ClosestApproach[j]));
+        }
+        appdist1->GetXaxis()->SetTitle("Distance of closest Approach [mm]");
+        appdist1->GetYaxis()->SetTitle("Entries");
+        Delta1->cd(4);
+        appdist1->Draw();
 
 
 
@@ -644,6 +887,67 @@ Double_t TROOTAnalysis::FindClosestApproach(){
 
 
         }
+
+}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------
+void TROOTAnalysis::GetInvariantMass(){
+
+        //get unit vector of photons
+        TVector3 V_ph1;
+        TVector3 V_ph2;
+
+        TVector3 Ph1_direction;
+        TVector3 Ph2_direction;
+
+        TLorentzVector L_ph1;
+        TLorentzVector L_ph2;
+        TLorentzVector L_pi;
+
+        TCanvas * IM1 = new TCanvas("InvariantMass");
+        TH1D * InvMass = new TH1D("InvariantMass", "InvariantMass",500, 0,500);
+        InvMass->GetXaxis()->SetTitle("InvariantMass[MeV]");
+        InvMass->GetYaxis()->SetTitle("Entries");
+        gStyle->SetOptStat(2222);
+
+        for(Int_t i=0; i<nofEntries; i++) {
+
+                V_ph1.SetX(std::get<0>(FitParamsPions[i][0]) * 1 + std::get<1>(FitParamsPions[i][0]));
+                V_ph1.SetY(std::get<2>(FitParamsPions[i][0]) * 1 + std::get<3>(FitParamsPions[i][0]));
+                V_ph1.SetZ(1);
+
+                V_ph2.SetX(std::get<0>(FitParamsPions[i][1]) * 1 + std::get<1>(FitParamsPions[i][1]));
+                V_ph2.SetY(std::get<2>(FitParamsPions[i][1]) * 1 + std::get<3>(FitParamsPions[i][1]));
+                V_ph2.SetZ(1);
+
+
+                std::cout<<"EnergyPhoton1: "<<EnergyPhoton1[i]<<" EnergyPhoton2: "<<EnergyPhoton2[i]<<" Sum: "<<EnergyPhoton1[i]+EnergyPhoton2[i]<<std::endl;
+
+                std::cout<<"Photon1 X: "<<V_ph1.X()<<" Y: "<<V_ph1.Y()<<" Z: "<<V_ph1.Z()<<std::endl;
+                std::cout<<"Photon2 X: "<<V_ph2.X()<<" Y: "<<V_ph2.Y()<<" Z: "<<V_ph2.Z()<<std::endl;
+
+                TVector3 Ph1_direction = V_ph1.Unit();
+                TVector3 Ph2_direction = V_ph2.Unit();
+
+                std::cout<<"Photon1direction X: "<<Ph1_direction.X()<<" Y: "<<Ph1_direction.Y()<<" Z: "<<Ph1_direction.Z()<<std::endl;
+                std::cout<<"Photon2direction X: "<<Ph2_direction.X()<<" Y: "<<Ph2_direction.Y()<<" Z: "<<Ph2_direction.Z()<<std::endl;
+
+
+                L_ph1.SetPxPyPzE(Ph1_direction.X() * EnergyPhoton1[i], Ph1_direction.Y() * EnergyPhoton1[i], Ph1_direction.Z() * EnergyPhoton1[i], EnergyPhoton1[i]);
+                L_ph2.SetPxPyPzE(Ph2_direction.X() * EnergyPhoton2[i], Ph2_direction.Y() * EnergyPhoton2[i], Ph2_direction.Z() * EnergyPhoton2[i], EnergyPhoton2[i]);
+
+                L_pi=L_ph1 + L_ph2;
+                Double_t invMassPion=L_pi.M();
+                InvMass->Fill(invMassPion);
+                InvariantMass.push_back(invMassPion);
+
+
+        }
+
+        InvMass->Draw();
+
+
+
 
 }
 
@@ -1010,173 +1314,7 @@ void TROOTAnalysis::CalcCOGwithFit(Int_t minevent, Int_t maxevent){
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-void TROOTAnalysis::FitCOGsPion( Int_t minevent, Int_t maxevent, Double_t tileLen, Bool_t isPion, Int_t photonNr){
-        //histograms for correlation
-        TCanvas * corr1 = new TCanvas("Correlations");
-        corr1->Divide(3,2,0.01,0.01);
 
-        TH1D * co1 = new TH1D("MxTx correllation", "MxTx correllation",100, -1,1 );
-        co1->GetXaxis()->SetTitle("corellation of X slope and X intercept");
-        TH1D * co2 = new TH1D("MxMy correllation", "MxMy correllation",100, -1,1 );
-        co2->GetXaxis()->SetTitle("corellation of X slope and Y slope");
-        TH1D * co3 = new TH1D("MxTy correllation", "MxTy correllation",100, -1,1 );
-        co3->GetXaxis()->SetTitle("correlation of X slope and Y intercept");
-        TH1D * co4 = new TH1D("TxMy correllation", "TxMy correllation",100, -1,1 );
-        co4->GetXaxis()->SetTitle("correlation of X intercept and Y slope");
-        TH1D * co5 = new TH1D("TxTy correllation", "TxTy correllation",100, -1,1 );
-        co5->GetXaxis()->SetTitle("correlation of X intercapt an Y intercept");
-        TH1D * co6 = new TH1D("MyTy correllation", "MyTy correllation",100, -1,1 );
-        co6->GetXaxis()->SetTitle("correlation of Y slope and Y intercept");
-
-
-
-
-        //transform from copynumber coordinates to geant4 coordinates
-        std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > Transcoglist;
-        std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > > TransfomedCOGs;
-
-        for(Int_t i = 0; i<nofEntries; i++) {                                 //transformation to geant4 coordinate system
-                for(Int_t j = 0; j<COGCollection[i].size(); j++) {
-
-                        auto tc = std::make_tuple(((-500+tileLen/2) + std::get<0>(COGCollection[i][j]) * tileLen),
-                                                  ((-500+tileLen/2) + std::get<1>(COGCollection[i][j]) * tileLen),
-                                                  -288.2 + std::get<2>(COGCollection[i][j]) * 11.8,
-                                                  std::get<3>(COGCollection[i][j]),
-                                                  std::get<4>(COGCollection[i][j]),
-                                                  std::get<5>(COGCollection[i][j])  );
-                        Transcoglist.push_back(tc);
-
-                }
-                TransfomedCOGs.push_back(Transcoglist);
-                Transcoglist.clear();
-        }
-
-        // for(Int_t i = 0; i<nofEntries;i++){
-        //   for(Int_t j =0;j<TransfomedCOGs[i].size();j++){
-        //     std::cout<<std::get<0>(TransfomedCOGs[i][j])<<":"<<std::get<1>(TransfomedCOGs[i][j])<<":"<<std::get<2>(TransfomedCOGs[i][j])<<"-----"
-        //     <<std::get<0>(COGCollection[i][j])<<":"<<std::get<1>(COGCollection[i][j])<<":"<<std::get<2>(COGCollection[i][j])<<std::endl;;
-        //   }
-        // }
-
-
-        Fcn myfcn;
-        myfcn.SetCOGs(TransfomedCOGs);
-        //myfcn.PrintCOGs();
-        MnUserParameters upar;
-        double error_minimizer_parameters = 1e-4;
-
-        upar.Add("mx", 0., error_minimizer_parameters);
-        upar.Add("tx", 1., error_minimizer_parameters);
-        upar.Add("my", 0., error_minimizer_parameters);
-        upar.Add("ty", 1., error_minimizer_parameters);
-
-        cout << upar << endl;
-
-        MnMigrad migrad(myfcn, upar, 2);
-
-
-
-
-        for(int events = 0; events < maxevent-minevent; events++) {
-
-                upar.SetValue("mx", 0.);
-                upar.SetValue("tx", 0.);
-                upar.SetValue("my", 0.);
-                upar.SetValue("ty", 0.);
-
-                myfcn.SetCurrentEvent(events);
-
-                std::cout<<"event: "<<events<<std::endl;
-                FunctionMinimum min = migrad();
-
-                std::cout<<min<<std::endl;
-
-
-                MnUserCovariance cov = min.UserCovariance();
-
-                //std::cout<<cov(0 ,0)<<" "<<cov(1,1)<<" "<<cov(2,2)<<" "<<cov(3,3)<<std::endl;
-
-
-                MnUserParameterState userParameterState = min.UserState();
-
-
-
-
-                if(isPion==false) {
-                        auto tp = std::make_tuple(userParameterState.Value("mx"), userParameterState.Value("tx"),
-                                                  userParameterState.Value("my"), userParameterState.Value("ty"));
-
-                        FitParamsGamma.push_back(tp);
-                }
-                else if(isPion==true && photonNr==1) {
-                        //std::cout<<"attempt adding params for photon 1"<<std::endl;
-
-                        auto tp1 = std::make_tuple(userParameterState.Value("mx"), userParameterState.Value("tx"),
-                                                   userParameterState.Value("my"), userParameterState.Value("ty"));
-                        //std::cout<<"errga"<<std::endl;
-                        FitParamsPions[events].push_back(tp1);
-                        std::cout<<"adding params for photon 1"<<std::endl;
-                }
-                else if(isPion==true && photonNr==2) {
-                        //std::cout<<"attempt adding params for photon 2"<<std::endl;
-                        auto tp2 = std::make_tuple(userParameterState.Value("mx"), userParameterState.Value("tx"),
-                                                   userParameterState.Value("my"), userParameterState.Value("ty"));
-
-                        FitParamsPions[events].push_back(tp2);
-                        std::cout<<"adding params for photon 2"<<std::endl;
-                }
-
-                Double_t covar[4][4];
-                Double_t error[4];
-
-                error[0]= userParameterState.Error("mx");
-                error[1]= userParameterState.Error("tx");
-                error[2]= userParameterState.Error("my");
-                error[3]= userParameterState.Error("ty");
-
-                //Fill correlation Histograms
-                if(COGCollection[events].size() > 1) {
-
-
-                        for(Int_t row=0; row<4; row++) {
-                                for(Int_t col=0; col<4; col++) {
-                                        covar[row][col]=cov(row,col);
-
-                                }
-                        }
-
-                        co1->Fill(covar[0][1]/(error[0]*error[1]));
-                        co2->Fill(covar[0][2]/(error[0]*error[2]));
-                        co3->Fill(covar[0][3]/(error[0]*error[3]));
-                        co4->Fill(covar[1][2]/(error[1]*error[2]));
-                        co5->Fill(covar[1][3]/(error[1]*error[3]));
-                        co6->Fill(covar[2][3]/(error[2]*error[3]));
-                }
-
-        }
-
-
-
-        corr1->cd(1);
-        co1->Draw("");
-
-        corr1->cd(2);
-        co2->Draw("");
-
-        corr1->cd(3);
-        co3->Draw("");
-
-        corr1->cd(4);
-        co4->Draw("");
-
-        corr1->cd(5);
-        co5->Draw("");
-
-        corr1->cd(6);
-        co6->Draw("");
-
-        TransfomedCOGs.clear();
-}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1186,7 +1324,7 @@ void TROOTAnalysis::PrintFitHists(Int_t minevent, Int_t maxevent){
         Int_t ent=maxevent-minevent;
         TCanvas * c1 = new TCanvas("Fit", "Fit", 1500,1300);
 
-        c1->Divide(2,3,0.01, 0.01);
+        c1->Divide(2,2,0.01, 0.01);
 
         //gStyle->SetOptFit(111111111111);
 
@@ -1210,7 +1348,7 @@ void TROOTAnalysis::PrintFitHists(Int_t minevent, Int_t maxevent){
         c1->cd(1);
         fitX->GetXaxis()->SetTitle("X[mm]");
         fitX->GetYaxis()->SetTitle("Counts");
-        gStyle->SetOptStat(1111);
+        gStyle->SetOptStat(2222);
         // Set stat options
         gStyle->SetStatY(0.9);
         // Set y-position (fraction of pad size)
@@ -1237,21 +1375,27 @@ void TROOTAnalysis::PrintFitHists(Int_t minevent, Int_t maxevent){
         fitSY->GetYaxis()->SetTitle("Counts");
         fitSY->Draw();
 
-        c1->cd(5);
-        er1->Draw();
+        //c1->cd(5);
+        //er1->Draw();
 
-        c1->cd(6);
-        er2->Draw();
+        //c1->cd(6);
+        //er2->Draw();
 
         if(pathset) {
-
+                //
                 std::string imgname= "Fit.png";
                 std::string imgpath = savepath + '/' + imgname;
-                TImage * img2 =TImage::Create();
-                img2->FromPad(c1);
-                img2->WriteImage(imgpath.c_str());
-                delete img2;
+                // TImage * img2 =TImage::Create();
+                // img2->FromPad(c1);
+                // img2->WriteImage(imgpath.c_str());
+                // delete img2;
 
+                c1->Print(imgpath.c_str());
+
+                imgname= "Fit.C";
+                imgpath = savepath + '/' + imgname;
+
+                c1->Print(imgpath.c_str());
         }
 //  er1->Reset();
 //  er2->Reset();
@@ -1459,7 +1603,7 @@ void TROOTAnalysis::CalcCOG(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_
 }
 
 
-void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent, Double_t tileLen){
+void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent){
         //histograms for correlation
         TCanvas * corr1 = new TCanvas("Correlations");
         corr1->Divide(3,2,0.01,0.01);
@@ -1484,15 +1628,39 @@ void TROOTAnalysis::FitCOGs( Int_t minevent, Int_t maxevent, Double_t tileLen){
         std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > Transcoglist;
         std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > > TransfomedCOGs;
 
-        for(Int_t i = 0; i<nofEntries; i++) {                                 //transformation to geant4 coordinate system
+        //----------------------------------------------------------------1.8mm abso-----------------------------------------------------------------------------------------
+
+
+        // for(Int_t i = 0; i<nofEntries; i++) {                                 //transformation to geant4 coordinate system
+        //         for(Int_t j = 0; j<COGCollection[i].size(); j++) {
+        //
+        //                 auto tc = std::make_tuple(((-500+tileLen/2) + std::get<0>(COGCollection[i][j]) * tileLen),
+        //                                           ((-500+tileLen/2) + std::get<1>(COGCollection[i][j]) * tileLen),
+        //                                           -288.2 + std::get<2>(COGCollection[i][j]) * 11.8,
+        //                                           std::get<3>(COGCollection[i][j]),
+        //                                           std::get<4>(COGCollection[i][j]),
+        //                                           std::get<5>(COGCollection[i][j])  );
+        //                 Transcoglist.push_back(tc);
+        //
+        //         }
+        //         TransfomedCOGs.push_back(Transcoglist);
+        //         Transcoglist.clear();
+        // }
+
+        //----------------------------------------------------------------1mm Abso-----------------------------------------------------------------------------------------
+
+        Double_t offset=((((AbsoThickness+GapThickness)*(-1)*nofLayers)/2)+(AbsoThickness+GapThickness/2));
+
+        for(Int_t i = 0; i<nofEntries; i++) {                                                 //transformation to geant4 coordinate system
                 for(Int_t j = 0; j<COGCollection[i].size(); j++) {
 
-                        auto tc = std::make_tuple(((-500+tileLen/2) + std::get<0>(COGCollection[i][j]) * tileLen),
-                                                  ((-500+tileLen/2) + std::get<1>(COGCollection[i][j]) * tileLen),
-                                                  -288.2 + std::get<2>(COGCollection[i][j]) * 11.8,
+                        auto tc = std::make_tuple(((-500+tiledimX/2) + std::get<0>(COGCollection[i][j]) * tiledimX),                        // X
+                                                  ((-500+tiledimY/2) + std::get<1>(COGCollection[i][j]) * tiledimY),                        // Y
+                                                  offset + std::get<2>(COGCollection[i][j]) * (AbsoThickness+GapThickness),                                       // Z
                                                   std::get<3>(COGCollection[i][j]),
                                                   std::get<4>(COGCollection[i][j]),
                                                   std::get<5>(COGCollection[i][j])  );
+
                         Transcoglist.push_back(tc);
 
                 }

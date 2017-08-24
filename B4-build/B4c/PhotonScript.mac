@@ -1,6 +1,6 @@
 /run/initialize
-/gun/position 0 0 -395 mm
+/gun/position 0 0 -1000 mm
 /gun/direction 0.0 0.0 1.0
 /gun/particle gamma
-/gun/energy 1000 MeV
-/run/beamOn 100
+/gun/energy 500 MeV
+/run/beamOn 20

@@ -22,6 +22,8 @@
 #include "TF1.h"
 #include "TMath.h"
 #include "TImage.h"
+#include "TVector3.h"
+#include "TLorentzVector.h"
 
 #include "Minuit2/MnUserParameters.h"
 #include "Minuit2/MnUserCovariance.h"
@@ -54,19 +56,20 @@ void PlotProjection(Int_t distance);
 void findShowercenter(Int_t minevent, Int_t maxevent);
 Double_t FindClosestApproach();
 void CalculateDeviation();
+void GetInvariantMass();
 
 void CalcCOGPion(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent, Int_t photonNR=1);
 
 void CalcCOG(Int_t minevent, Int_t maxevent);
 /////////////////////////////////////////////////////////////////////////////////////////////
-void FitCOGs( Int_t minevent, Int_t maxevent, Double_t tileLen);
+void FitCOGs( Int_t minevent, Int_t maxevent);
 
 void CalcCOG(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent);
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 void CalcCOGwithFit(Int_t minevent, Int_t maxevent);
 
-void FitCOGsPion( Int_t minevent, Int_t maxevent, Double_t tileLen, Bool_t isPion=false, Int_t photonNR=1);
+void FitCOGsPion( Int_t minevent, Int_t maxevent, Bool_t isPion=false, Int_t photonNR=1);
 
 void AnalyzePions(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent);
 //  void CalcCOGwithFit(Int_t minlayer, Int_t maxlayer);
@@ -85,12 +88,24 @@ void SetPath(std::string path){
 
 private:
 Int_t nofEntries;     // number of events in Tree
-Double_t Eges;        //Energy in event
+
+Double_t Eges;  //Energy in event
+
+Double_t EPhot1;
+Double_t EPhot2;
+
 Int_t showerstart;
 
-Double_t histsizeX=100;
-Double_t histsizeY=100;
-Double_t histsizeZ=50;
+Double_t tiledimX;
+Double_t tiledimY;
+Double_t calsizeXY;
+Double_t AbsoThickness;
+Double_t GapThickness;
+Double_t nofLayers;
+
+Double_t histsizeX;
+Double_t histsizeY;
+Double_t histsizeZ;
 
 std::string savepath;
 
@@ -98,9 +113,15 @@ Bool_t pathset=false;
 
 std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > coglist;
 std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > > COGCollection;
+
 std::vector<std::tuple<Double_t, Double_t, Double_t, Double_t> > FitParamsGamma;
 std::vector<std::tuple<Double_t, Double_t, Double_t, Double_t> > FitParams;//to be deleted, needed for old analysis
 std::vector<std::vector<std::tuple<Double_t, Double_t, Double_t, Double_t> > > FitParamsPions;
+
+std::vector<Double_t > EnergyPhoton1;
+std::vector<Double_t > EnergyPhoton2;
+std::vector<Double_t> InvariantMass;
+
 std::vector<std::tuple<Double_t, Double_t> > ClosestApproach;
 
 std::vector<std::tuple<Double_t, Double_t, Double_t> > DeviationFromGun;
@@ -123,20 +144,21 @@ TH1D * fitSY = new TH1D("Y Slope Fit","Y Slope Fit", 800,-2,2);
 TH1D * er1= new TH1D("errx", "errx", 50,0,50);
 TH1D * er2= new TH1D("erry", "erry", 50,0,50);
 
-TH3D * h = new TH3D("ECalEvent","ECalEvent",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);
+TH3D * h;
 
-TH3D * hA = new TH3D("ECalEvent1","ECalEvent1",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);
-TH3D * hB = new TH3D("ECalEvent2","ECalEvent2",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);                                //plot Event
+TH3D * hA;
+TH3D * hB;
 
-TH2D * h1 = new TH2D("h1", "h1", histsizeX+1,-0.5,histsizeX+0.5,histsizeY+1,-0.5,histsizeY+0.5);
+TH2D * h1;
 //  clustering
-TH2D * h2 = new TH2D("h2", "h2", histsizeX+1,-0.5,histsizeX+0.5,histsizeY+1,-0.5,histsizeY+0.5);                                 //  clustering
+TH2D * h2;
 
-TH3D * h3 = new TH3D("h3", "h3",histsizeX,0,histsizeX,histsizeY,0,histsizeY,histsizeZ,0,histsizeZ);           //  plot cogs
+TH3D * h3;
 
 TH1D * delx = new TH1D("DeltaX", "DeltaX", 1000,-500,500);
 TH1D * dely = new TH1D("DeltaY", "DeltaY", 1000,-500,500);
-TH1D * delz = new TH1D("DeltaZ", "DeltaZ", 800,-500,1500);
+TH1D * delz = new TH1D("DeltaZ", "DeltaZ", 800,-1000,1000);
+TH1D * appdist1=new TH1D("Closest Approach", "ClosestApproach", 500,0,500);
 
 
 

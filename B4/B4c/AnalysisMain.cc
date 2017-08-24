@@ -62,11 +62,11 @@ int main(int argc, char * argv[]) {
                 //A.plotEvent(100);
                 //A.findShowercenter(104, 105);
                 A.CalcCOG(minl-1, maxl, minevt, maxevt);
-                A.FitCOGs(minevt, maxevt, 10 );
+                A.FitCOGs(minevt, maxevt);
 
                 A.PlotProjection(100);
                 //A.PrintFitParams();
-                //A.PrintFitHists(minevt, maxevt);
+                A.PrintFitHists(minevt, maxevt);
 
                 //A.CleanCOGs(minl, maxl, minevt, maxevt);
         }
@@ -86,20 +86,20 @@ int main(int argc, char * argv[]) {
                 TROOTAnalysis A(ch1);
 
                 //A.PrintERes();
-                A.PlotRMSx();
+                //A.PlotRMSx();
 
                 // std::cout << "Created Analysis Class" << std::endl;
-                // for(Int_t i=0; i<30; i++) {
+                // for(Int_t i=0; i<5; i++) {
                 //         A.plotEventPion(i);
                 // }
 
                 // for(Int_t i=0; i<100; i++) {
                 //         A.plotEvent(i);
                 // }
-                //A.AnalyzePions( minl-1, maxl, minevt, maxevt);
+                A.AnalyzePions( minl-1, maxl, minevt, maxevt);
                 //A.findShowercenter(104, 105);
                 //  A.CalcCOG(minl-1, maxl, minevt, maxevt);
-                //  A.FitCOGs(minevt, maxevt, 10 );
+                //  A.FitCOGs(minevt, maxevt);
 
                 //  A.PlotProjection(100);
                 //A.PrintFitParams();

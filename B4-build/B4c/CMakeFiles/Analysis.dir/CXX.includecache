@@ -43,6 +43,8 @@ TH1.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TH1.h
 TMath.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TMath.h
+TVector3.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TVector3.h
 iostream
 -
 
@@ -146,6 +148,12 @@ TMath.h
 TFile.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TFile.h
 
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cPionManager.hh
+globals.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/globals.hh
+G4ThreeVector.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4ThreeVector.hh
+
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4cReadoutGeometry.hh
 G4VReadOutGeometry.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/G4VReadOutGeometry.hh
@@ -233,6 +241,10 @@ TMath.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TMath.h
 TImage.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TImage.h
+TVector3.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TVector3.h
+TLorentzVector.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TLorentzVector.h
 Minuit2/MnUserParameters.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minuit2/MnUserParameters.h
 Minuit2/MnUserCovariance.h
@@ -407,10 +419,16 @@ string
 -
 B4cDetParams.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cDetParams.hh
+B4cPionManager.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cPionManager.hh
 Randomize.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/Randomize.hh
 iomanip
 -
+
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cPionManager.cc
+B4cPionManager.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cPionManager.hh
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cReadoutGeometry.cc
 B4cReadoutGeometry.hh
@@ -465,6 +483,8 @@ G4TrackVector.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/G4TrackVector.hh
 B4cTrackInformation.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cTrackInformation.hh
+B4cPionManager.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cPionManager.hh
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/Minimizer.cc
 Minimizer.hh
@@ -515,8 +535,8 @@ TObject.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/TObject.h
 TMemberInspector.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/TMemberInspector.h
-../include/B4ROOTEvent.hh
-/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/B4ROOTEvent.hh
+include/B4ROOTEvent.hh
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/include/B4ROOTEvent.hh
 algorithm
 -
 
@@ -1632,6 +1652,14 @@ TString.h
 iterator
 -
 
+/opt/root/5.34/include/TLorentzVector.h
+TMath.h
+/opt/root/5.34/include/TMath.h
+TVector3.h
+/opt/root/5.34/include/TVector3.h
+TRotation.h
+/opt/root/5.34/include/TRotation.h
+
 /opt/root/5.34/include/TMap.h
 TCollection.h
 /opt/root/5.34/include/TCollection.h
@@ -1666,13 +1694,67 @@ cstdlib
 cmath
 -
 
+/opt/root/5.34/include/TMatrix.h
+TMatrixF.h
+/opt/root/5.34/include/TMatrixF.h
+
 /opt/root/5.34/include/TMatrixDBasefwd.h
 Rtypes.h
 /opt/root/5.34/include/Rtypes.h
 
+/opt/root/5.34/include/TMatrixF.h
+TMatrixT.h
+/opt/root/5.34/include/TMatrixT.h
+TMatrixFfwd.h
+/opt/root/5.34/include/TMatrixFfwd.h
+TMatrixFUtils.h
+/opt/root/5.34/include/TMatrixFUtils.h
+
 /opt/root/5.34/include/TMatrixFBasefwd.h
 Rtypes.h
 /opt/root/5.34/include/Rtypes.h
+
+/opt/root/5.34/include/TMatrixFUtils.h
+TMatrixTUtils.h
+/opt/root/5.34/include/TMatrixTUtils.h
+TMatrixFUtilsfwd.h
+/opt/root/5.34/include/TMatrixFUtilsfwd.h
+
+/opt/root/5.34/include/TMatrixFUtilsfwd.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
+
+/opt/root/5.34/include/TMatrixFfwd.h
+Rtypes.h
+/opt/root/5.34/include/Rtypes.h
+
+/opt/root/5.34/include/TMatrixT.h
+TMatrixTBase.h
+/opt/root/5.34/include/TMatrixTBase.h
+TMatrixTUtils.h
+/opt/root/5.34/include/TMatrixTUtils.h
+vecLib/vBLAS.h
+-
+
+/opt/root/5.34/include/TMatrixTBase.h
+limits
+-
+TNamed.h
+/opt/root/5.34/include/TNamed.h
+TMatrixFBasefwd.h
+/opt/root/5.34/include/TMatrixFBasefwd.h
+TMatrixDBasefwd.h
+/opt/root/5.34/include/TMatrixDBasefwd.h
+TVectorFfwd.h
+/opt/root/5.34/include/TVectorFfwd.h
+TVectorDfwd.h
+/opt/root/5.34/include/TVectorDfwd.h
+TError.h
+/opt/root/5.34/include/TError.h
+
+/opt/root/5.34/include/TMatrixTUtils.h
+TMatrixTBase.h
+/opt/root/5.34/include/TMatrixTBase.h
 
 /opt/root/5.34/include/TMemberInspector.h
 Rtypes.h
@@ -1752,6 +1834,12 @@ TProcessID.h
 iterator
 -
 
+/opt/root/5.34/include/TRotation.h
+TObject.h
+/opt/root/5.34/include/TObject.h
+TVector3.h
+/opt/root/5.34/include/TVector3.h
+
 /opt/root/5.34/include/TSchemaHelper.h
 Rtypes.h
 /opt/root/5.34/include/Rtypes.h
@@ -1829,6 +1917,18 @@ TString.h
 /opt/root/5.34/include/TString.h
 TMap.h
 /opt/root/5.34/include/TMap.h
+
+/opt/root/5.34/include/TVector2.h
+TObject.h
+/opt/root/5.34/include/TObject.h
+
+/opt/root/5.34/include/TVector3.h
+TError.h
+/opt/root/5.34/include/TError.h
+TVector2.h
+/opt/root/5.34/include/TVector2.h
+TMatrix.h
+/opt/root/5.34/include/TMatrix.h
 
 /opt/root/5.34/include/TVectorDfwd.h
 Rtypes.h
