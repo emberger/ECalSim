@@ -7,22 +7,22 @@ AngCOUNTER=0
 
 
 Sen=100          #starting energy
-EnIterations=5
+EnIterations=10
 increment=100
 eventsPerEnergy=1000
 
-Xangle=-1.0      #starting angles
-Yangle=-1.0
+Xangle=0.2     #starting angles
+Yangle=0.2
 Zangle=1.0
 XAngIncrement=0.2
 YAngIncrement=0.2
-AngIiterations=10
+AngIiterations=2
 
 
 
 
 
-foldername=MuonEnergyandSlopeScan_5x5mmTile_1mmLead   #folder containing .root files
+foldername=rmsx_over_E   #folder containing .root files
 
 
 
@@ -51,7 +51,7 @@ sed -i "19 s%^/run/beamOn.*%/run/beamOn $eventsPerEnergy%" GeantSim.mac
 
             ./exampleB4c -m GeantSim.mac
 
-            s+=/Muon
+            s+=/gamma
             s+=$en
             s+=MeV
             s+=_$Xangle

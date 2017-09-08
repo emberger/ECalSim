@@ -21,11 +21,32 @@ void B4cTrackingAction::PreUserTrackingAction(const G4Track* aTrack)
 
 
 
-        if(aTrack->GetDefinition()->GetParticleName()=="pi0") {
+        if(aTrack->GetTrackID()==1 && aTrack->GetDefinition()->GetParticleName()=="pi0") {
                 isPion=true;
                 isdecayed=false;
                 std::cout<<"Pion"<<std::endl;
         }
+
+
+        if(aTrack->GetTrackID()==1 && isPion==false) {
+                isdecayed=true;
+                //G4cout<<"TrackID2: "<<aTrack->GetTrackID()<<G4endl;
+                //G4cout<<"true1"<<G4endl;
+                //G4cout<<aTrack->GetVolume()->GetName()<<G4endl;
+
+                B4cTrackInformation* anInfo = new B4cTrackInformation(aTrack);
+                anInfo->SetOriginalPhotonNumber(1);
+                //G4cout<<anInfo->GetOriginalPhotonNumber()<<G4endl;
+
+                //G4cout<<"anInfo:"<<G4endl;
+                //anInfo->Print();
+                G4Track* theTrack = (G4Track*)aTrack;
+                theTrack->SetUserInformation(anInfo);
+
+        }
+
+
+
 
 
         if(aTrack->GetTrackID()==2&& isPion==true)
@@ -70,23 +91,7 @@ void B4cTrackingAction::PreUserTrackingAction(const G4Track* aTrack)
 
         }
 
-        if(isPion==false) {
-                isdecayed=true;
-                //G4cout<<"TrackID2: "<<aTrack->GetTrackID()<<G4endl;
-                //G4cout<<"true1"<<G4endl;
-                //G4cout<<aTrack->GetVolume()->GetName()<<G4endl;
 
-                B4cTrackInformation* anInfo = new B4cTrackInformation(aTrack);
-                anInfo->SetOriginalPhotonNumber(1);
-                //G4cout<<anInfo->GetOriginalPhotonNumber()<<G4endl;
-
-                //G4cout<<"anInfo:"<<G4endl;
-                //anInfo->Print();
-                G4Track* theTrack = (G4Track*)aTrack;
-                theTrack->SetUserInformation(anInfo);
-
-
-        }
 
 }
 
@@ -104,6 +109,7 @@ void B4cTrackingAction::PostUserTrackingAction(const G4Track* aTrack)
                         }
                         else{
                                 info= new B4cTrackInformation();
+                                GetEInst().SetTD();
 
                         }
                         //G4cout<<"true4.1"<<G4endl;

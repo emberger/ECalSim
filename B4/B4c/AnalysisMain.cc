@@ -42,6 +42,7 @@ int main(int argc, char * argv[]) {
         Int_t maxl = std::stoi(argv[2]);
         Int_t minevt = std::stoi(argv[3]);
         Int_t maxevt = std::stoi(argv[4]);
+        //Int_t dist = std::stoi(argv[8]);
 
 
         std::cout << "Adding tree to the Chain"<< std::endl;
@@ -64,7 +65,7 @@ int main(int argc, char * argv[]) {
                 A.CalcCOG(minl-1, maxl, minevt, maxevt);
                 A.FitCOGs(minevt, maxevt);
 
-                A.PlotProjection(100);
+                //  A.PlotProjection(dist);
                 //A.PrintFitParams();
                 A.PrintFitHists(minevt, maxevt);
 
@@ -86,7 +87,7 @@ int main(int argc, char * argv[]) {
                 TROOTAnalysis A(ch1);
 
                 //A.PrintERes();
-                //A.PlotRMSx();
+                A.PlotRMSx();
 
                 // std::cout << "Created Analysis Class" << std::endl;
                 // for(Int_t i=0; i<5; i++) {
@@ -96,7 +97,7 @@ int main(int argc, char * argv[]) {
                 // for(Int_t i=0; i<100; i++) {
                 //         A.plotEvent(i);
                 // }
-                A.AnalyzePions( minl-1, maxl, minevt, maxevt);
+                //A.AnalyzePions( minl-1, maxl, minevt, maxevt);
                 //A.findShowercenter(104, 105);
                 //  A.CalcCOG(minl-1, maxl, minevt, maxevt);
                 //  A.FitCOGs(minevt, maxevt);

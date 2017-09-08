@@ -45,6 +45,7 @@
 #include "B4cPionManager.hh"
 #include "Randomize.hh"
 #include <iomanip>
+#include "TVector3.h"
 
 
 
@@ -147,6 +148,7 @@ void B4cEventAction::PrintEventStatistics(
 
 void B4cEventAction::BeginOfEventAction(const G4Event* /*event*/)
 {
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -228,43 +230,49 @@ void B4cEventAction::EndOfEventAction(const G4Event* event)
         this->CalEvent()->SetcalsizeXY(GetInst().GetcalorSizeXY());
         this->CalEvent()->SetEnergyPhoton1(GetEInst().GetEnergyPh1());
         this->CalEvent()->SetEnergyPhoton2(GetEInst().GetEnergyPh2());
+        TVector3 vertpos(event->GetPrimaryVertex()->GetPosition().getX(),event->GetPrimaryVertex()->GetPosition().getY(),event->GetPrimaryVertex()->GetPosition().getZ());
+        this->CalEvent()->SetGunPos(vertpos);
 
         G4ThreeVector mom1=GetEInst().GetMomPh1();
         this->CalEvent()->SetMomentumPh1(mom1.getX(), mom1.getY(),mom1.getZ());
 
         G4ThreeVector mom2=GetEInst().GetMomPh2();
         this->CalEvent()->SetMomentumPh2(mom2.getX(), mom2.getY(),mom2.getZ());
+
         //this->CalEvent()->SetMomentumPh2();
         //std::cout<<this->CalEvent()->EventNo()<<std::endl;
+        if(GetEInst().GetTD()==false) {
+                auto ent=gapHC->entries();
 
-        auto ent=gapHC->entries();
+                for (int i=0; i<ent; i++) {
 
-        for (int i=0; i<ent; i++) {
+                        auto tHit=(*gapHC)[i];
+                        if (tHit->GetTouch()==true && tHit->GetCellInfo()==true) {
+                                this->SetStepHit(tHit->GetX(), tHit->GetY(), tHit->GetZ(), tHit->GetEdep(), tHit->GetPhotonNumber());
+                        }
+                        if(i == ent-1) {
+                                this->CalEvent()->SetGapEnergy(tHit->GetEdep());
+                                //G4cout<<tHit->GetEdep()<<G4endl;
+                        }
 
-                auto tHit=(*gapHC)[i];
-                if (tHit->GetTouch()==true && tHit->GetCellInfo()==true) {
-                        this->SetStepHit(tHit->GetX(), tHit->GetY(), tHit->GetZ(), tHit->GetEdep(), tHit->GetPhotonNumber());
                 }
-                if(i == ent-1) {
-                        this->CalEvent()->SetGapEnergy(tHit->GetEdep());
-                        //G4cout<<tHit->GetEdep()<<G4endl;
-                }
 
+                //if (rootFile)
+                //	{
+                eventTree->Fill();
         }
-
-        //if (rootFile)
-        //	{
-        eventTree->Fill();
         //std::cout<<"Gapthickness: "<<this->CalEvent()->GapThickness()<<std::endl;
 
         calEvent->Clear();
+
+        GetEInst().ReSetTD();
         //std::cout<<"Gapthickness: "<<this->CalEvent()->GapThickness()<<std::endl;
         //	}
         //if(event->GetEventID()==G4RunManager::GetCurrentRun()->GetNumberOfEventToBeProcessed()){
         //rootFile->Write();
         //rootFile->Close();
         //std::cout<<"Event done"<<std::endl;
-        //std::cout<<"Tree has now "<<eventTree->GetEntries()<<" entries"<<std::endl;
+        std::cout<<"Tree has now "<<eventTree->GetEntries()<<" entries"<<std::endl;
         //eventTree->Print();
         //}
 

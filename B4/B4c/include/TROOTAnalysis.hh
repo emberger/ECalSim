@@ -26,6 +26,7 @@
 #include "TLorentzVector.h"
 
 #include "Minuit2/MnUserParameters.h"
+#include "Minuit2/MinimumParameters.h"
 #include "Minuit2/MnUserCovariance.h"
 #include "Minimizer.hh"
 #include "Minuit2/Minuit2Minimizer.h"
@@ -52,11 +53,14 @@ void plotEvent(Int_t pev);
 void plotEventPion(Int_t pev);
 void plotCOGs();
 void PlotProjection(Int_t distance);
+void PlotChimap(Int_t event);
 
-void findShowercenter(Int_t minevent, Int_t maxevent);
+
 Double_t FindClosestApproach();
 void CalculateDeviation();
 void GetInvariantMass();
+//void MinimizeClosestApproach();
+void PionLocator();
 
 void CalcCOGPion(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent, Int_t photonNR=1);
 
@@ -67,7 +71,7 @@ void FitCOGs( Int_t minevent, Int_t maxevent);
 void CalcCOG(Int_t minlayer, Int_t maxlayer, Int_t minevent, Int_t maxevent);
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-void CalcCOGwithFit(Int_t minevent, Int_t maxevent);
+
 
 void FitCOGsPion( Int_t minevent, Int_t maxevent, Bool_t isPion=false, Int_t photonNR=1);
 
@@ -94,7 +98,7 @@ Double_t Eges;  //Energy in event
 Double_t EPhot1;
 Double_t EPhot2;
 
-Int_t showerstart;
+
 
 Double_t tiledimX;
 Double_t tiledimY;
@@ -114,6 +118,10 @@ Bool_t pathset=false;
 std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > coglist;
 std::vector<std::vector<std::tuple<Double_t,Double_t, Double_t, Double_t, Double_t, Double_t> > > COGCollection;
 
+std::vector<std::tuple<Double_t, Double_t, Double_t> > showerCOGPhoton1;
+std::vector<std::tuple<Double_t, Double_t, Double_t> > showerCOGPhoton2;
+
+
 std::vector<std::tuple<Double_t, Double_t, Double_t, Double_t> > FitParamsGamma;
 std::vector<std::tuple<Double_t, Double_t, Double_t, Double_t> > FitParams;//to be deleted, needed for old analysis
 std::vector<std::vector<std::tuple<Double_t, Double_t, Double_t, Double_t> > > FitParamsPions;
@@ -122,7 +130,7 @@ std::vector<Double_t > EnergyPhoton1;
 std::vector<Double_t > EnergyPhoton2;
 std::vector<Double_t> InvariantMass;
 
-std::vector<std::tuple<Double_t, Double_t> > ClosestApproach;
+std::vector<std::tuple<Double_t,Double_t,Double_t, Double_t> > ClosestApproach;
 
 std::vector<std::tuple<Double_t, Double_t, Double_t> > DeviationFromGun;
 

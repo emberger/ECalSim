@@ -191,6 +191,10 @@ TF1.h
 -
 TMath.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TMath.h
+TVector3.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TVector3.h
+TLorentzVector.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TLorentzVector.h
 Minuit2/FunctionMinimum.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minuit2/FunctionMinimum.h
 Minuit2/MnMigrad.h
@@ -247,6 +251,8 @@ TLorentzVector.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/TLorentzVector.h
 Minuit2/MnUserParameters.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minuit2/MnUserParameters.h
+Minuit2/MinimumParameters.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minuit2/MinimumParameters.h
 Minuit2/MnUserCovariance.h
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/include/Minuit2/MnUserCovariance.h
 Minimizer.hh
@@ -425,6 +431,8 @@ Randomize.hh
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/Randomize.hh
 iomanip
 -
+TVector3.h
+/home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/TVector3.h
 
 /home/iwsatlas1/emberger/Geant4/Current/SensitiveDetector/B4/B4c/src/B4cPionManager.cc
 B4cPionManager.hh

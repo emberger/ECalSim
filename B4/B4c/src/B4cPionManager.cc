@@ -31,3 +31,16 @@ void PionManager::SetMomPh2(G4ThreeVector mp2){
 G4ThreeVector PionManager::GetMomPh2(){
         return MomPh2;
 }
+
+void PionManager::SetTD(){
+        td=true;
+}
+
+void PionManager::ReSetTD(){
+        td=false;
+}
+
+
+bool PionManager::GetTD(){
+        return td;
+}

@@ -28,6 +28,7 @@ B4ROOTEvent::B4ROOTEvent() {
 								m_EnergyPhoton2=0;
 								m_MomentumPh1.SetXYZ(0.,0.,0.);
 								m_MomentumPh2.SetXYZ(0.,0.,0.);
+								m_GunPos.SetXYZ(0.,0.,0.);
 
 }
 
@@ -50,6 +51,7 @@ void B4ROOTEvent::Clear(const Option_t*) {
 								m_EnergyPhoton2=0;
 								m_MomentumPh1.SetXYZ(0.,0.,0.);
 								m_MomentumPh2.SetXYZ(0.,0.,0.);
+								m_GunPos.SetXYZ(0.,0.,0.);
 								m_Hits->Clear();
 								//std::cout << "Clear done!" << std::endl;
 }

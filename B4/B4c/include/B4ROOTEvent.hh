@@ -23,6 +23,7 @@ Double_t m_X;
 Double_t m_Y;
 Double_t m_Z;
 Double_t m_EnergyDeposit;
+Bool_t threedecay;
 
 Int_t m_PhotonNr;
 
@@ -49,6 +50,9 @@ Double_t EnergyDeposit() const {
 Int_t PhotNr(){
 								return m_PhotonNr;
 }
+void SetThreeDecay(){
+								threedecay=true;
+}
 
 // Setters:
 void SetPhotNr(Int_t nr){
@@ -60,6 +64,9 @@ void SetCoordinates(Double_t x, Double_t y, Double_t z) {
 }
 void SetEnergyDeposit(Double_t dep) {
 								m_EnergyDeposit = dep;
+}
+Bool_t IsThreeDecay(){
+								return threedecay;
 }
 
 ClassDef(B4ROOTHit,1)
@@ -89,6 +96,7 @@ Double_t m_EnergyPhoton2;
 
 TVector3 m_MomentumPh1;
 TVector3 m_MomentumPh2;
+TVector3 m_GunPos;
 
 
 TClonesArray *m_Hits;  //->
@@ -142,6 +150,10 @@ TVector3 MomentumPh1(){
 
 TVector3 MomentumPh2(){
 								return m_MomentumPh2;
+}
+
+TVector3 GunPos(){
+								return m_GunPos;
 }
 
 
@@ -199,6 +211,10 @@ void SetMomentumPh1(Double_t mx1, Double_t my1, Double_t mz1){
 
 void SetMomentumPh2(Double_t mx2, Double_t my2, Double_t mz2){
 								m_MomentumPh2.SetXYZ(mx2, my2, mz2);
+}
+
+void SetGunPos(TVector3 gp){
+								m_GunPos=gp;
 }
 
 B4ROOTHit* AddHit(B4ROOTHit& cand);

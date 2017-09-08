@@ -32,6 +32,9 @@ G4ThreeVector GetMomPh1();
 void SetMomPh2(G4ThreeVector mp2);
 G4ThreeVector GetMomPh2();
 
+void SetTD();
+void ReSetTD();
+bool GetTD();
 
 
 private:
@@ -44,6 +47,8 @@ G4double EnergyPh2;
 
 G4ThreeVector MomPh1;
 G4ThreeVector MomPh2;
+
+bool td;
 
 };
 
